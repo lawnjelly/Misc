@@ -1,0 +1,132 @@
+{
+    dri
+    Memcheck:Value1
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Value2
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Value4
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Value8
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Value16
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Cond
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Addr1
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Addr1
+    fun:*memcmp*
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Addr2
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Addr2
+    fun:*memcpy*
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Addr4
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Addr8
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Addr8
+    fun:*memcmp*
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Addr8
+    fun:*memcpy*
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Addr8
+    fun:*memset*
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Addr16
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Jump
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+#{
+#    dri
+#    Memcheck:Param
+#    ...
+#    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+#    ...
+#}
+
+{
+    dri
+    Memcheck:Free
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Overlap
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+{
+    dri
+    Memcheck:Leak
+    obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
