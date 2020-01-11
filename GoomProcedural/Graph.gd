@@ -4,93 +4,138 @@ var id_counter : int = 0
 var iteration_counter : int = 0
 var m_ImmGeom : ImmediateGeometry
 
+var m_File
+var m_Line
+
 enum eCellType {
 	CT_GENERIC,
 	CT_CORRIDOR,
 	CT_POLY,
 }
 
+func ex_vec2(var v):
+	ex_f(v.x, " ")
+	ex_f(v.y)
+
+func ex_vec3(var v):
+	ex_f(v.x, " ")
+	ex_f(v.y, " ")
+	ex_f(v.z)
+	
+func ex_plane(var pl):
+	ex_f(pl.x, " ")
+	ex_f(pl.y, " ")
+	ex_f(pl.z, " ")
+	ex_f(pl.d)
+	
+
+func ex_f(var f, var spacer = ""):
+	ex("%.2f" % f)
+	ex(spacer)
 
 
-#class GWall:
-#	var id : int = 0
-#	var ptLeft_local : Vector2 = Vector2()
-#	var ptRight_local : Vector2 = Vector2()
-#	var ptLeft_world : Vector2 = Vector2()
-#	var ptRight_world : Vector2 = Vector2()
-#
-#	var ptCentre_local : Vector2 = Vector2()
-#	var ptCentre_world : Vector2 = Vector2()
-#	var size : float = 1.0
-#
-#	var bPortal = false
-#	var linked_id : int = -1
-#	var linked_dist : float = 1000000.0
-#
-#	func ptLeft_local3():
-#		return Vector3(ptLeft_local.x, 0, ptLeft_local.y)
-#	func ptRight_local3():
-#		return Vector3(ptRight_local.x, 0, ptRight_local.y)
-#	func ptTop_local3():
-#		return Vector3(ptLeft_local.x, 1, ptLeft_local.y)
-#
-#
-#	func ptBotLeft():
-#		return Vector3(ptLeft_local.x, 0, ptLeft_local.y)
-#	func ptBotRight():
-#		return Vector3(ptRight_local.x, 0, ptRight_local.y)
-#	func ptTopLeft():
-#		return Vector3(ptLeft_local.x, 2, ptLeft_local.y)
-#	func ptTopRight():
-#		return Vector3(ptRight_local.x, 2, ptRight_local.y)
-#
-#	func update_world_pos(var cell : GCell):
-#		ptCentre_world = cell.xform_point(ptCentre_local)
-#		ptLeft_world = cell.xform_point(ptLeft_local)
-#		ptRight_world = cell.xform_point(ptRight_local)
-#
-#		calculate_world_plane()
-#
-#		if bPortal:
-#			cell.indicator.translation = Vector3(ptCentre_world.x, 0, ptCentre_world.y)
-#
-#	func calculate_world_plane():
-#		plane_world = Plane(GHelp.Vec2ToVec3(ptRight_world), GHelp.Vec2ToVec3(ptRight_world, 1.0), GHelp.Vec2ToVec3(ptLeft_world))
-#
-#
-#	func calculate_local_plane():
-#		plane_local = Plane(ptRight_local3(), ptTop_local3(), ptLeft_local3())
-#
-#	func debug_string():
-#		var sz = ""
-#		sz += "from " + str(ptLeft_local)
-#		sz += "\tto " + str(ptRight_local)
-#		sz += "\tangle " + str(rad2deg(angle))
-#		sz += "\tplane " + str(plane_local)
-#		return sz
-#
-#	var angle : float # from north in local space
-#	var plane_local : Plane = Plane()
-#	var plane_world : Plane = Plane()
+func ex(var st):
+	m_Line += st
+	
+func ex_line(var l):
+	m_Line = l
+	ex_newline()
+	
+func ex_newline():
+	m_File.store_line(m_Line)
+	print(m_Line)
+	m_Line = ""
+
+
+func Export_Level(var level : GLevel, var filename = "../test.lev"):
+	var fi = File.new()
+	m_File = fi
+	if fi.open(filename, File.WRITE) != OK:
+		return
+
+	ex_line("# Lawnjelly Sector Level exporter 0.1")
+	ex_line("num_sectors " + str(level.m_Cells.size()))
+	ex_newline()
+	
+	for s in range (level.m_Cells.size()):
+		Export_Sector(level, s)
+	
+	fi.close()
+
+func Export_Sector(var level : GLevel, var sect_id : int):
+	var cell : GCell = level.m_Cells[sect_id]
+	ex_line("sector " + str(sect_id))
+	ex_line("\tnum_walls " + str(cell.get_num_walls()))
+	
+	ex_line("\tpoints")
+	ex("\t\t")
+	for p in range (cell.m_Pts.size()):
+		ex_vec2(cell.m_Pts[p])
+		ex(", ")
+	ex_newline()
+
+	ex_line("\tplanes")
+	ex("\t\t")
+	for p in range (cell.m_Planes.size()):
+		ex_plane(cell.m_Planes[p])
+		ex(", ")
+	ex_newline()
+
+	ex_line("\tlinks")
+	ex("\t\t")
+	for p in range (cell.m_LinkedCells.size()):
+		ex(str(cell.m_LinkedCells[p]))
+		ex(", ")
+	ex_newline()
+	
+
+	ex("\tfloor ")
+	ex_plane(cell.m_Plane_Floor)
+	ex_newline()
+	ex("\tceil ")
+	ex_plane(cell.m_Plane_Ceiling)
+	ex_newline()
+	
 
 class GCell:
+	var m_ID : int
 	var m_ptCentre : Vector2 = Vector2()
 	var m_Pts = []
-	var m_Heights = []
 	var m_Planes = []
 	var m_Angles = []
 	var m_LinkedCells = []
+	var m_LinkedWalls = []
 	var m_bLinkAllowed = []
+
+	var m_hFloor = []
+	var m_hCeil = []
+	var m_Plane_Floor : Plane = Plane(Vector3(0, 1, 0), 0)
+	var m_Plane_Ceiling : Plane = Plane(Vector3(0, -1, 0), -2)
 	
 	var type : int # eCellType
 	var node : Spatial
-	var aabb : Rect2
+	var aabb : AABB
 	
 	func is_wall_portal(var i : int)->bool:
 		return m_LinkedCells[i] != -1
 	
 	func get_num_walls()->int:
 		return m_Pts.size()
+		
+	func get_linked_wall_heights(var level : GLevel, var w : int)->Quat:
+		var nc : int = m_LinkedCells[w]
+		var nw : int = m_LinkedWalls[w]
+		assert (nc != -1)
+		assert (nw != -1)
+		var ncell : GCell = level.m_Cells[nc]
+		var nw2 : int = (nw+1) % ncell.get_num_walls()
+		var fh0 : float = ncell.m_hFloor[nw]
+		var fh1 : float = ncell.m_hFloor[nw2]
+		var ch0 : float = ncell.m_hCeil[nw]
+		var ch1 : float = ncell.m_hCeil[nw2]
+		return Quat(fh1, fh0, ch1, ch0) # reversed because neighbour cell will have opposite polarity
+		
+
 	
 class GLevel:
 	var m_Cells = []
@@ -116,8 +161,11 @@ func Cell_TestCollisions(var cell : GCell, var ignore_cell_id : int = -1)->bool:
 	for c in nCells:
 		if c == ignore_cell_id:
 			continue
-		
+			
 		var ncell : GCell = Graph.m_Level.m_Cells[c]
+		
+		if ncell.aabb.intersects(cell.aabb) == false:
+			continue
 		
 		for p in ncell.m_Pts.size():
 			# point in cell?
