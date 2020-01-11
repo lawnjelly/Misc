@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Levels/myrooms.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Root.gd" type="Script" id=3]
+
+[sub_resource type="PrismMesh" id=1]
+
+[sub_resource type="Environment" id=2]
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_energy = 0.1
+
+[sub_resource type="CubeMesh" id=3]
+
+[node name="Root" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="Controller" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.91636, 2.21648, 7.10505 )
+
+[node name="Camera_First" type="Camera" parent="Controller"]
+current = true
+
+[node name="MeshInstance" type="MeshInstance" parent="Controller/Camera_First"]
+transform = Transform( 0.5, 0, 0, 0, -8.14603e-08, -0.1, 0, 0.5, -1.62921e-08, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="Camera_Third" type="Camera" parent="Controller"]
+transform = Transform( 1, 0, 0, 0, 0.751483, 0.659752, 0, -0.659752, 0.751483, 0, 5.0791, 7.4347 )
+
+[node name="LRoomManager" type="LRoomManager" parent="."]
+rooms = NodePath("../Level")
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.805525, 0.592562, 7.41574e-09, 0.359176, -0.488262, 0.795357, 0.471298, -0.64068, -0.606141, -0.964977, 12.6247, 0 )
+
+[node name="UI" type="Node2D" parent="."]
+
+[node name="Info" type="Label" parent="UI"]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="Cube" type="MeshInstance" parent="."]
+visible = false
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Level" parent="." instance=ExtResource( 1 )]
