@@ -42,7 +42,7 @@ func Create(var parent):
 		
 #	for c in range (nCells):
 #		Cell_Link(c, (c+1) % nCells)
-	Graph.Export_Level(Graph.m_Level, "../test.lev")
+	Graph.Export_Level(Graph.m_Level, "../myrooms.lev")
 	
 	
 	for c in range (Graph.m_Level.m_Cells.size()):
@@ -360,13 +360,13 @@ func Cell_CreateFloorAndCeiling(var cell : Graph.GCell, var parent_cell_id : int
 	
 	# calc planes
 	cell.m_Plane_Floor = Plane(GHelp.Vec2ToVec3(p0, f0), GHelp.Vec2ToVec3(p1, f1), GHelp.Vec2ToVec3(p2, f2))
-	cell.m_Plane_Ceiling = Plane(GHelp.Vec2ToVec3(p0, c0), GHelp.Vec2ToVec3(p1, c1), GHelp.Vec2ToVec3(p2, c2))
+	cell.m_Plane_Ceiling = Plane(GHelp.Vec2ToVec3(p0, c0 + f0), GHelp.Vec2ToVec3(p1, c1 + f1), GHelp.Vec2ToVec3(p2, c2 + f2))
 	
 	for w in range (cell.get_num_walls()):
 		var floor_h = CalcPlaneHeight(cell.m_Plane_Floor, cell.m_Pts[w])
 		cell.m_hFloor.push_back(floor_h)
 		var ceil_h = CalcPlaneHeight(cell.m_Plane_Ceiling, cell.m_Pts[w])
-		cell.m_hCeil.push_back(ceil_h)
+		cell.m_hCeil.push_back(ceil_h - floor_h)
 	
 	pass
 

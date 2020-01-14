@@ -23,14 +23,18 @@ func ex_vec3(var v):
 	ex_f(v.z)
 	
 func ex_plane(var pl):
-	ex_f(pl.x, " ")
-	ex_f(pl.y, " ")
-	ex_f(pl.z, " ")
-	ex_f(pl.d)
+	ex_d(pl.x, " ")
+	ex_d(pl.y, " ")
+	ex_d(pl.z, " ")
+	ex_d(pl.d)
 	
 
 func ex_f(var f, var spacer = ""):
 	ex("%.2f" % f)
+	ex(spacer)
+
+func ex_d(var f, var spacer = ""):
+	ex("%.3f" % f)
 	ex(spacer)
 
 
@@ -57,14 +61,29 @@ func Export_Level(var level : GLevel, var filename = "../test.lev"):
 	ex_line("num_sectors " + str(level.m_Cells.size()))
 	ex_newline()
 	
+	var wall_count = 0
+	for s in range (level.m_Cells.size()):
+		wall_count = Export_Count_Walls(level, s, wall_count)
+
+	
 	for s in range (level.m_Cells.size()):
 		Export_Sector(level, s)
 	
+	
 	fi.close()
+
+# do 2 passes, find the first wall in the bigger list
+func Export_Count_Walls(var level : GLevel, var sect_id : int, var wall_count : int):
+	var cell : GCell = level.m_Cells[sect_id]
+	cell.m_FirstWall = wall_count
+	wall_count += cell.m_Pts.size()
+	return wall_count
+
 
 func Export_Sector(var level : GLevel, var sect_id : int):
 	var cell : GCell = level.m_Cells[sect_id]
 	ex_line("sector " + str(sect_id))
+	
 	ex_line("\tnum_walls " + str(cell.get_num_walls()))
 	
 	ex_line("\tpoints")
@@ -77,7 +96,7 @@ func Export_Sector(var level : GLevel, var sect_id : int):
 	ex_line("\tplanes")
 	ex("\t\t")
 	for p in range (cell.m_Planes.size()):
-		ex_plane(cell.m_Planes[p])
+		ex_plane(-cell.m_Planes[p]) # point inward on export
 		ex(", ")
 	ex_newline()
 
@@ -88,12 +107,43 @@ func Export_Sector(var level : GLevel, var sect_id : int):
 		ex(", ")
 	ex_newline()
 	
+	ex_line("\tlinked_walls")
+	ex("\t\t")
+	for p in range (cell.m_LinkedWalls.size()):
+		var link_wall_id = cell.m_LinkedWalls[p]
+		
+		# sync to first wall
+		if link_wall_id != -1:
+			# find linked sector
+			var linked_sector_id = cell.m_LinkedCells[p]
+			assert (linked_sector_id != -1)
+			var ncell : GCell = level.m_Cells[linked_sector_id]
+			link_wall_id += ncell.m_FirstWall
+		
+		ex(str(link_wall_id))
+		ex(", ")
+	ex_newline()
+	
 
-	ex("\tfloor ")
+	ex("\tfloor_plane ")
 	ex_plane(cell.m_Plane_Floor)
 	ex_newline()
-	ex("\tceil ")
-	ex_plane(cell.m_Plane_Ceiling)
+	ex("\tceil_plane ")
+	ex_plane(-cell.m_Plane_Ceiling) # point down on export
+	ex_newline()
+
+	ex_line("\tfloors")
+	ex("\t\t")
+	for p in range (cell.m_hFloor.size()):
+		ex_f(cell.m_hFloor[p])
+		ex(", ")
+	ex_newline()
+
+	ex_line("\tceils")
+	ex("\t\t")
+	for p in range (cell.m_hCeil.size()):
+		ex_f(cell.m_hCeil[p])
+		ex(", ")
 	ex_newline()
 	
 
@@ -115,6 +165,8 @@ class GCell:
 	var type : int # eCellType
 	var node : Spatial
 	var aabb : AABB
+	
+	var m_FirstWall : int # used at export
 	
 	func is_wall_portal(var i : int)->bool:
 		return m_LinkedCells[i] != -1
