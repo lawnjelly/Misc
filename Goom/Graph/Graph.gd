@@ -10,8 +10,13 @@ var m_Sectors = []
 var m_Pts = []
 var m_Planes = []
 var m_LinkedSectors = []
+var m_LinkedWalls = []
 var m_FloorPlanes = []
 var m_CeilPlanes = []
+var m_FloorH = []
+var m_CeilH = []
+# wall heights is just an average of the floor and ceiling 2 points as vector2
+var m_WallHeights = []
 var m_SectorCentres = []
 
 func clear():
@@ -19,8 +24,14 @@ func clear():
 	m_Pts.clear()
 	m_Planes.clear()
 	m_LinkedSectors.clear()
+	m_LinkedWalls.clear()
 	m_FloorPlanes.clear()
 	m_CeilPlanes.clear()
+	m_FloorH.clear()
+	m_CeilH.clear()
+	m_WallHeights.clear()
+	
+	
 	m_SectorCentres.clear()
 
 # naive, slow

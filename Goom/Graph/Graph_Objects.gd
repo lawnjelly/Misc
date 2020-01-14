@@ -148,7 +148,8 @@ func slide_move(var o : GObject, var count : int = 0):
 			var nsid : int = Graph.m_LinkedSectors[wid]
 			if nsid != -1:
 				# what is the height of the opening
-				var heights : Vector2 = get_sector_floor_ceiling_heights(nsid, Vector2(pt.x, pt.z))
+				var nwid : int = Graph.m_LinkedWalls[wid]
+				var heights : Vector2 = Graph.m_WallHeights[nwid]
 				
 				# within the opening?
 				if (pt.y >= heights.x) and (pt.y <= heights.y):
@@ -189,12 +190,13 @@ func slide_move(var o : GObject, var count : int = 0):
 	o.m_ptPos = pt
 
 # return floor and ceiling in vector2
-func get_sector_floor_ceiling_heights(var sid : int, var pos : Vector2)->Vector2:
-	var res : Vector2 = Vector2()
-	var inter_floor = Graph.m_FloorPlanes[sid].intersects_ray(Vector3(pos.x, 1000.0, pos.y), Vector3(0, -1, 0))
-	res.x = inter_floor.y
-	
-	var inter_ceil = Graph.m_CeilPlanes[sid].intersects_ray(Vector3(pos.x, -1000.0, pos.y), Vector3(0, 1, 0))
-	res.y = inter_ceil.y
-	
-	return res
+func get_linked_wall_heights(var wid : int)->Vector2:
+	return Graph.m_WallHeights[wid]
+#	var res : Vector2 = Vector2()
+#	var inter_floor = Graph.m_FloorPlanes[sid].intersects_ray(Vector3(pos.x, 1000.0, pos.y), Vector3(0, -1, 0))
+#	res.x = inter_floor.y
+#
+#	var inter_ceil = Graph.m_CeilPlanes[sid].intersects_ray(Vector3(pos.x, -1000.0, pos.y), Vector3(0, 1, 0))
+#	res.y = inter_ceil.y
+#
+#	return res

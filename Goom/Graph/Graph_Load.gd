@@ -5,6 +5,9 @@ enum eExpecting {
 	EX_POINTS,
 	EX_PLANES,
 	EX_LINKS,
+	EX_LINKED_WALLS,
+	EX_FLOORS,
+	EX_CEILINGS,
 }
 
 var m_File
@@ -104,6 +107,24 @@ func import(var filename):
 	
 	m_File.close()
 	
+	# calc wall heights (averages)
+	assert (Graph.m_FloorH.size() == Graph.m_CeilH.size())
+	for s in range (Graph.m_NumSectors):
+		var sec : Graph.GSector = Graph.m_Sectors[s]
+		for w in range (sec.m_NumWalls):
+			var wid = w + sec.m_FirstWall
+			var wid2 = ((w+1) % sec.m_NumWalls) + sec.m_FirstWall
+			
+			var f = (Graph.m_FloorH[wid] + Graph.m_FloorH[wid2]) / 2
+			var c = (Graph.m_CeilH[wid] + Graph.m_CeilH[wid2]) / 2
+			
+			# ceiling is the ceiling PLUS the floor height
+			c += f
+			
+			Graph.m_WallHeights.push_back(Vector2(f, c))
+		
+		
+	
 	# calc sector centres
 	for s in range (Graph.m_NumSectors):
 		var sec : Graph.GSector = Graph.m_Sectors[s]
@@ -151,6 +172,15 @@ func process_line():
 		eExpecting.EX_LINKS:
 			process_links()
 			m_Expecting = eExpecting.EX_DEFAULT
+		eExpecting.EX_LINKED_WALLS:
+			process_linked_walls()
+			m_Expecting = eExpecting.EX_DEFAULT
+		eExpecting.EX_FLOORS:
+			process_floors()
+			m_Expecting = eExpecting.EX_DEFAULT
+		eExpecting.EX_CEILINGS:
+			process_ceilings()
+			m_Expecting = eExpecting.EX_DEFAULT
 	
 	
 func process_links():
@@ -160,11 +190,18 @@ func process_links():
 		Graph.m_LinkedSectors.push_back(link_id)
 		debug_print("linked_sector " + str(link_id))
 
+func process_linked_walls():
+	var num_walls = get_curr_sector().m_NumWalls
+	for w in range (num_walls):
+		var link_wall_id : int = read_i()
+		Graph.m_LinkedWalls.push_back(link_wall_id)
+		debug_print("linked_wall " + str(link_wall_id))
+
 func process_planes():
 	var num_walls = get_curr_sector().m_NumWalls
 	for w in range (num_walls):
 		var pl : Plane = read_plane()
-		pl = -pl # reverse plane so same as floor polarity
+		#pl = -pl # reverse plane so same as floor polarity
 		Graph.m_Planes.push_back(pl)
 		debug_print("plane " + str(pl))
 
@@ -175,6 +212,19 @@ func process_points():
 		Graph.m_Pts.push_back(pt)
 		debug_print("point " + str(pt))
 		
+func process_floors():
+	var num_walls = get_curr_sector().m_NumWalls
+	for w in range (num_walls):
+		var h = read_f()
+		Graph.m_FloorH.push_back(h)
+		debug_print("floor " + str(h))
+
+func process_ceilings():
+	var num_walls = get_curr_sector().m_NumWalls
+	for w in range (num_walls):
+		var h = read_f()
+		Graph.m_CeilH.push_back(h)
+		debug_print("ceil " + str(h))
 
 func process_default():
 	var sz = read_token()
@@ -212,15 +262,27 @@ func process_default():
 		m_Expecting = eExpecting.EX_LINKS
 		return
 
-	if sz == "floor":
+	if sz == "linked_walls":
+		m_Expecting = eExpecting.EX_LINKED_WALLS
+		return
+
+	if sz == "floors":
+		m_Expecting = eExpecting.EX_FLOORS
+		return
+
+	if sz == "ceils":
+		m_Expecting = eExpecting.EX_CEILINGS
+		return
+
+	if sz == "floor_plane":
 		var pl = read_plane()
 		debug_print("floorplane " + str(pl))
 		Graph.m_FloorPlanes.push_back(pl)
 		return
 
-	if sz == "ceil":
+	if sz == "ceil_plane":
 		var pl = read_plane()
-		pl = -pl
+		#pl = -pl
 		debug_print("ceilplane " + str(pl))
 		Graph.m_CeilPlanes.push_back(pl)
 		return
