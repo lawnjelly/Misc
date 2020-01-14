@@ -103,6 +103,25 @@ func import(var filename):
 		process_line()
 	
 	m_File.close()
+	
+	# calc sector centres
+	for s in range (Graph.m_NumSectors):
+		var sec : Graph.GSector = Graph.m_Sectors[s]
+		
+		var pt = Vector2()
+		
+		for w in range (sec.m_NumWalls):
+			var wid = w + sec.m_FirstWall
+			var pos2 = Graph.m_Pts[wid]
+			pt += pos2
+			
+		pt /= sec.m_NumWalls
+		var pt3 = Vector3(pt.x, 0.0, pt.y)
+		var plane : Plane = Graph.m_FloorPlanes[s]
+		pt3.y = plane.intersects_ray(Vector3(pt.x, 1000.0, pt.y), Vector3(0, -1, 0)).y
+		
+		Graph.m_SectorCentres.push_back(pt3)
+	
 	return true
 
 func process_line():
@@ -145,6 +164,7 @@ func process_planes():
 	var num_walls = get_curr_sector().m_NumWalls
 	for w in range (num_walls):
 		var pl : Plane = read_plane()
+		pl = -pl # reverse plane so same as floor polarity
 		Graph.m_Planes.push_back(pl)
 		debug_print("plane " + str(pl))
 
@@ -200,6 +220,7 @@ func process_default():
 
 	if sz == "ceil":
 		var pl = read_plane()
+		pl = -pl
 		debug_print("ceilplane " + str(pl))
 		Graph.m_CeilPlanes.push_back(pl)
 		return
