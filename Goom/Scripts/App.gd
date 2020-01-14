@@ -13,6 +13,7 @@ var m_bMouseCaptured = false
 var m_WhichCam = 0
 var m_bLPortalActive = true
 var m_bFirstRun = true
+var m_LRoomID : int = -1
 
 
 # timing
@@ -109,11 +110,15 @@ func _process(delta):
 	
 	#Game.move_firstperson(delta)
 	
-	var room_id = Scene.m_RoomManager.dob_update(Scene.m_node_Cam_First)
+	#var room_id = Scene.m_RoomManager.dob_update(Scene.m_node_Cam_First)
 	
-	if room_id != -1:
-		var ptRoomCentre = Scene.m_RoomManager.rooms_get_room_centre(room_id)
-		Scene.m_node_Root.get_node("Cube").translation = ptRoomCentre
+	#if room_id != m_LRoomID:
+	#	print("new lroomid " + str(room_id))
+	#	m_LRoomID = room_id
+	
+	#if room_id != -1:
+	#	var ptRoomCentre = Scene.m_RoomManager.rooms_get_room_centre(room_id)
+	#	Scene.m_node_Root.get_node("Cube").translation = ptRoomCentre
 	
 	#DisplayMessage(m_RoomManager.rooms_get_debug_frame_string())
 		
@@ -156,14 +161,28 @@ func LoadLevelAndRun():
 	
 	Scene.m_RoomManager.rooms_set_portal_plane_convention(true)
 	#m_RoomManager.rooms_set_hide_method_detach(false)
-	Scene.m_RoomManager.rooms_convert(true, true)
+	Scene.m_RoomManager.rooms_convert(false, true)
 	#m_RoomManager.rooms_set_debug_planes(true)
 	#m_RoomManager.rooms_set_debug_bounds(true)
+
+	Scene.m_RoomManager.dob_register(Scene.m_node_Cam_First, 0)
+	print ("registering camfirst in room " + str(Scene.m_RoomManager.dob_get_room_id(Scene.m_node_Cam_First)))
 	
-	Scene.m_RoomManager.rooms_set_camera(Scene.m_node_Cam_Third)
+	print("camfirst ID is " + str(Scene.m_node_Cam_First.get_instance_id()))
+	
+	#Scene.m_RoomManager.dob_register(Scene.m_node_Cam_Third, 0)
+
+	#print ("registering camthird in room " + #str(Scene.m_RoomManager.dob_get_room_id(Scene.m_node_Cam_Third)))
+	#print ("camfirst is still in room " + str(Scene.m_RoomManager.dob_get_room_id(Scene.m_node_Cam_First)))
+
+	
+	#Scene.m_RoomManager.rooms_set_camera(Scene.m_node_Cam_Third)
 	Scene.m_RoomManager.rooms_set_camera(Scene.m_node_Cam_First)
 
-	Scene.m_RoomManager.dob_register(Scene.m_node_Cam_First, 0)	
+	var lroom_id = Scene.m_RoomManager.dob_get_room_id(Scene.m_node_Cam_First)
+	#print ("dob_register lroom_id " + str(lroom_id))
+	m_LRoomID = lroom_id
+	
 	#m_RoomManager.dob_register_hint(cam_first, 0, m_node_StartRoom)	
 
 	#m_RoomManager.light_register($DirectionalLight, "default")
