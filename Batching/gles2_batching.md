@@ -8,7 +8,7 @@ One of the most eagerly awaited 2D features has been batching of drawcalls, and 
 
 ## How it works
 
-Up until now, the 3.x branch has been drawing primitives (such as rectangles) on an individual basis. Each rectangle / polyon / line etc has been causing a drawcall to OpenGL. While GPUs can cope with this method, they don't work at top efficiency because they are optimized to handle larger numbers of primitives in each drawcall.
+Up until now, the 3.x branch has been drawing primitives (such as rectangles) on an individual basis. Each rectangle / polygon / line etc has been causing a drawcall to OpenGL. While GPUs can cope with this method, they don't work at top efficiency because they are optimized to handle larger numbers of primitives in each drawcall.
 
 In order to take better take advantage of GPU horsepower, we set about organising (on each frame) these primitives into batches, each as large as possible, so that we could reduce the number of drawcalls, and the number of state changes between drawcalls, which are also expensive in performance terms.
 
