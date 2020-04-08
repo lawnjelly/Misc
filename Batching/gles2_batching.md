@@ -33,4 +33,4 @@ Please try these out yourself, they are linked from the PR with many more detail
 
 https://github.com/godotengine/godot/pull/37349
 
-Let us know if it worked okay for your project, and if you discover any problems so we get onto fixing them. :)
+Let us know if it worked okay for your project, and also let us know if you discover any problems so we get onto fixing them. :)
