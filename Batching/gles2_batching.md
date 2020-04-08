@@ -14,7 +14,7 @@ _*The penalties for drawcalls and state changes are significantly lower in Vulka
 
 ## Solution
 
-Inside the renderer, each primitive is effectively stored in a 'command', and one or several commands are stored in an 'item' (which in many cases equates to a node). Items can contain different transforms (where the primitives should be drawn on the screen), but commands all are placed using the transform of their container item:
+Inside the renderer, each primitive is effectively stored in a 'command', and one or several commands are stored in an 'item' (which in many cases equates to a node). Items can contain different transforms (whereabouts the primitives should be drawn on the screen), but commands all are placed using the transform of their container item:
 
 PIC
 
