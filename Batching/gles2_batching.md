@@ -76,7 +76,7 @@ In tests limited by a large number of items, each with a single command (e.g. la
 ### Real World
 The above benchmarks are designed to test batching gains in isolation. In real world games you are likely to see less extreme improvements.
 
-In particular for sprite nodes, the costs within other parts of Godot increase dramatically once you start calling _process or _physics_process on them, so realistically you are unlikely to gain more than around 2.5x speed improvement for single primitive nodes, best case.
+In particular for sprite nodes, the costs within other parts of Godot increase dramatically once you start calling `_process` or `_physics_process` on them, so realistically you are unlikely to gain more than around 2.5x speed improvement for single primitive nodes, best case.
 
 #### Realistic cases - How do bottlenecks work?
 
