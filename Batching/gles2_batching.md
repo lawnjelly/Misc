@@ -4,7 +4,7 @@ In terms of rendering, while reduz has been busily working on Vulkan, the rest o
 
 Soon we will be migrating this work to the 4.x branch, but for now at least some of the improvements will be available in 3.x.
 
-One of the most eagerly awaited 2D features has been batching of drawcalls, and it is something me and clayjohn have spent several weeks researching and coming up with a reasonable implementation, that should hopefully significantly increase performance in a lot of 2D games.
+One of the most eagerly awaited 2D features has been batching of drawcalls, and it is something myself and clayjohn have spent several weeks researching and coming up with a reasonable implementation, that should hopefully significantly increase performance in a lot of 2D games.
 
 ## The problem
 
