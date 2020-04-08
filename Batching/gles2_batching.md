@@ -8,7 +8,7 @@ One of the most eagerly awaited 2D features has been batching of drawcalls, and 
 
 ## The problem
 
-GPUs are very good at drawing large numbers of primitives (quads, triangles etc) in large batches, but when primitives are submitted one a time, causing a large number of drawcalls, the GPU efficiency drastically drops. On top of this, state changes (such as changing texture, material etc) in between drawcalls can also be very expensive in terms of performance. As it happens the existing 2D renderer does just this, it submits primitives one by one.
+GPUs are very good at drawing large numbers of primitives (quads, triangles etc) in large batches, but when primitives are submitted one a time, causing a large number of drawcalls, GPU efficiency drastically drops. On top of this, state changes (such as changing texture, material etc) in between drawcalls can also be very expensive in terms of performance. As it happens the existing 2D renderer does just this, it submits primitives one by one.
 
 _*The penalties for drawcalls and state changes are significantly lower in Vulkan. For these reasons different approaches are used in the Vulkan renderer._
 
