@@ -48,10 +48,12 @@ It should be apparent that there is a certain amount of leeway in your scene des
 ### A trick
 And now a sleight of hand. Although the idea of painter's order is that objects are rendered from back to front, consider 3 objects A, B and C, that contain 2 different textures, metal and wood.
 
+![overlap1](pics/overlap1.png)
+
 In painter's order they are ordered:
 ```
 A - wood
-B - metal
+B - grass
 C - wood
 ```
 
@@ -59,10 +61,12 @@ Because the texture changes, they cannot be batched, and will be rendered in 3 d
 
 However, painter's order is needed on the assumption that they will be drawn ON TOP of each other. If we relax that assumption, i.e. if none of these 3 objects are overlapping, there is NO NEED to preserve painter's order. The rendered result will be the same. What if we could take advantage of this?
 
+![overlap2](pics/overlap2.png)
+
 ```
 A - wood
 C - wood
-B - metal
+B - grass
 _(2 drawcalls)_
 ```
 
