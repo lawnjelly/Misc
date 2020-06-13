@@ -112,6 +112,19 @@ However, as with the item reordering, things are not that simple, we must first 
 
 Also consider that depending on the arrangement of primitives in the viewport, the overlap test will sometimes fail (because the primitives overlap and thus should not be joined). So in practice the decrease in drawcalls may be less dramatic than the perfect situation of no overlap. However performance is usually far higher than without the overlap tests.
 
+## Vertex baking
+The GPU shader receives instructions on what to draw in 2 main ways:
+* Uniforms (e.g. final_modulate color, item transform)
+* Vertex attributes (vertex color, local transform)
+
+However, within a single drawcall (batch) we cannot change uniforms. This means that naively, we would not be able to batch together items or commands that change final_modulate, or item transform. Unfortunately that is an awful lot of cases. Sprites for instance typically are individual nodes with their own item transform, and they may have their own color modulate.
+
+To get around this problem, the batching can 'bake' some of the uniforms into the vertex attributes.
+
+* The item transform can be combined with the local transform and sent in a vertex attribute.
+* The final_modulate color can be combined with the vertex colors, and sent in a vertex attribute.
+
+
 
 ## Parameters
 In order to fine tune batching, a number of project settings are available. You can usually leave these at default during development, but it is a good idea to experiment to ensure you are getting maximum performance. Spending a little time tweaking parameters can often give considerable performance gain, for very little effort. See the tooltips in the project settings for more info.
@@ -124,6 +137,8 @@ single_rect_fallback - this is a faster way of drawing unbatchable rectangles, h
 ### rendering/batching/parameters/
 #### max_join_item_commands
 One of the most important ways of achieving batching is to join suitable adjacent items (nodes) together, however they can only be joined if the commands they contain are compatible. The system must therefore do a lookahead through the commands in an item to determine whether it can be joined. This has a small cost per command, and items with a large number of commands are not worth joining, so the best value may be project dependent.
+#### colored_vertex_format_threshold
+
 
 
 
