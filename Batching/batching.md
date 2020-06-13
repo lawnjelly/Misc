@@ -135,38 +135,28 @@ As a result certain operations in custom shaders will prevent baking, and thus d
 ## Parameters
 In order to fine tune batching, a number of project settings are available. You can usually leave these at default during development, but it is a good idea to experiment to ensure you are getting maximum performance. Spending a little time tweaking parameters can often give considerable performance gain, for very little effort. See the tooltips in the project settings for more info.
 
-### rendering/batching/options/
+### rendering/batching/options
 * **use_batching** - Turns batching on and off
 * **use_batching_in_editor**
 * **single_rect_fallback** - This is a faster way of drawing unbatchable rectangles, however it may lead to flicker on some hardware so is not recommended
 
-### rendering/batching/parameters/
-#### max_join_item_commands
-One of the most important ways of achieving batching is to join suitable adjacent items (nodes) together, however they can only be joined if the commands they contain are compatible. The system must therefore do a lookahead through the commands in an item to determine whether it can be joined. This has a small cost per command, and items with a large number of commands are not worth joining, so the best value may be project dependent.
-#### colored_vertex_format_threshold
-Baking colors into vertices results in a larger vertex format. This is not necessarily worth doing unless there are a lot of color changes going on within a joined item. This parameter represents the proportion of commands containing color changes / the total commands, above which it switches to baked colors.
-#### batch_buffer_size
-This determines the maximum size of a batch, it doesn't have a huge effect on performance but can be worth decreasing for mobile if RAM is at a premium.
-#### item_reordering_lookahead
-Item reordering can help especially with interleaved sprites using different textures. The lookahead for the overlap test has a small cost, so the best value may change per project.
+### rendering/batching/parameters
+* **max_join_item_commands** - One of the most important ways of achieving batching is to join suitable adjacent items (nodes) together, however they can only be joined if the commands they contain are compatible. The system must therefore do a lookahead through the commands in an item to determine whether it can be joined. This has a small cost per command, and items with a large number of commands are not worth joining, so the best value may be project dependent.
+* **colored_vertex_format_threshold** - Baking colors into vertices results in a larger vertex format. This is not necessarily worth doing unless there are a lot of color changes going on within a joined item. This parameter represents the proportion of commands containing color changes / the total commands, above which it switches to baked colors.
+* **batch_buffer_size** - This determines the maximum size of a batch, it doesn't have a huge effect on performance but can be worth decreasing for mobile if RAM is at a premium.
+* **item_reordering_lookahead** - Item reordering can help especially with interleaved sprites using different textures. The lookahead for the overlap test has a small cost, so the best value may change per project.
 
 ### rendering/batching/lights
-#### scissor_area_threshold
-See light scissoring.
-#### max_join_items
-Joining items before lighting can significantly increase performance. This requires an overlap test, which has a small cost, so the costs and benefits may be project dependent, and hence the best value to use here.
+* **scissor_area_threshold** - See light scissoring.
+* **max_join_items** - Joining items before lighting can significantly increase performance. This requires an overlap test, which has a small cost, so the costs and benefits may be project dependent, and hence the best value to use here.
 
 ### rendering/batching/debug
-#### flash_batching
-This is purely a debugging feature to identify regressions between the batching and legacy renderer. When it is switched on, the batching and legacy renderer are used alternately on each frame. This will decrease performance, and should not be used for your final export, only for testing.
-#### diagnose_frame
-This will periodically print a diagnostic batching log to the Godot IDE / console.
+* **flash_batching** - This is purely a debugging feature to identify regressions between the batching and legacy renderer. When it is switched on, the batching and legacy renderer are used alternately on each frame. This will decrease performance, and should not be used for your final export, only for testing.
+* **diagnose_frame** - This will periodically print a diagnostic batching log to the Godot IDE / console.
 
 ### rendering/batching/precision
-#### uv_contract
-On some hardware (notably some Android devices) there have been reports of tilemap tiles drawing slightly outside their UV range, leading to edge artifacts such as lines around tiles. If you see this problem, try enabling uv contract. This makes a small contraction in the UV coordinates to compensate for precision errors on devices.
-#### uv_contract_amount
-Hopefully the default amount should cure artifacts on most devices, but just in case, this value is editable.
+* **uv_contract** - On some hardware (notably some Android devices) there have been reports of tilemap tiles drawing slightly outside their UV range, leading to edge artifacts such as lines around tiles. If you see this problem, try enabling uv contract. This makes a small contraction in the UV coordinates to compensate for precision errors on devices.
+* **uv_contract_amount** - Hopefully the default amount should cure artifacts on most devices, but just in case, this value is editable.
 
 ## Diagnostics
 Although you can change parameters and examine the effect on frame rate, this can feel like working blindly, with no idea of what is going on under the hood. To help with this, batching offers a diagnostic mode, which will periodically print out (to the IDE or console) a list of the batches that are being processed. This can help pin point situations where batching is not occurring as intended, and help you to fix them, in order to get the best possible performance.
