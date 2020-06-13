@@ -144,7 +144,11 @@ single_rect_fallback - this is a faster way of drawing unbatchable rectangles, h
 #### max_join_item_commands
 One of the most important ways of achieving batching is to join suitable adjacent items (nodes) together, however they can only be joined if the commands they contain are compatible. The system must therefore do a lookahead through the commands in an item to determine whether it can be joined. This has a small cost per command, and items with a large number of commands are not worth joining, so the best value may be project dependent.
 #### colored_vertex_format_threshold
-
+Baking colors into vertices results in a larger vertex format. This is not necessarily worth doing unless there are a lot of color changes going on within a joined item. This parameter represents the proportion of commands containing color changes / the total commands, above which it switches to baked colors.
+#### batch_buffer_size
+This determines the maximum size of a batch, it doesn't have a huge effect on performance but can be worth decreasing for mobile if RAM is at a premium.
+#### item_reordering_lookahead
+Item reordering can help especially with interleaved sprites using different textures. The lookahead for the overlap test has a small cost, so the best value may change per project.
 
 
 
