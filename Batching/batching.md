@@ -61,6 +61,8 @@ Because the texture changes, they cannot be batched, and will be rendered in 3 d
 
 However, painter's order is needed on the assumption that they will be drawn ON TOP of each other. If we relax that assumption, i.e. if none of these 3 objects are overlapping, there is NO NEED to preserve painter's order. The rendered result will be the same. What if we could take advantage of this?
 
+### Item reordering
+
 ![overlap2](pics/overlap2.png)
 
 ```
@@ -69,9 +71,6 @@ C - wood
 B - grass
 _(2 drawcalls)_
 ```
-
-### Item reordering
-
 It turns out that we can reorder items. However, we can only do this if the items satisfy the conditions of an overlap test, to ensure that the end result will be the same as if they were not reordered. The overlap test is very cheap in performance terms, but not absolutely free, so there is a slight cost to looking ahead to decide whether items can be reordered. The number of items to lookahead for reordering can be set in project settings (see below), in order to balance the costs and benefits in your project.
 
 ## Lights
