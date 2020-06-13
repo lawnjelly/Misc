@@ -125,7 +125,25 @@ As a result of batching lit objects, a side effect can be that it can make it mo
 
 In order to counter this problem, (and also speedup lighting in general), batching introduces light scissoring. This enables the use of the OpenGL command 'glScissor', which identifies an area, outside of which, the GPU will not render any pixels. We can thus greatly optimize fill rate by identifying the intersection area between a light and a primitive, and limit rendering the light to _this area only_.
 
-Light scissoring is controlled with the '
+Light scissoring is controlled with the `scissor_area_threshold` project setting. This value is between 1.0 and 0.0, with 1.0 being off (no scissoring), and 0.0 being scissoring in every circumstance. The reason for the setting is that there may be some small cost to scissoring on some hardware. Generally though, when you are using lighting, it should result in some performance gains.
+
+The relationship between the threshold and whether a scissor operation takes place is not altogether straight forward, but generally it represents the pixel area that is potentially 'saved' by a scissor operation (i.e. the fill rate saved). At 1.0, the entire screens pixels would need to be saved, which rarely if ever happens, so it is switched off. In practice the useful values are bunched towards zero, as only a small percentage of pixels need to be saved for the operation to be useful.
+
+#### The exact relationship
+The exact relationship is probably not necessary for users to worry about, but out of interest, the actual proportion of screen pixel area used as the threshold is the setting value to the power of 4.
+
+e.g. On a screen size 1920 x 1080 there are 2073600 pixels.
+
+At a threshold of 1000 pixels, the proportion would be 1000/2073600 = 0.00048225
+0.00048225 ^ 0.25 = 0.14819
+(the power of 0.25 is the opposite of power of 4).
+So a `scissor_area_threshold` of 0.15 would be a reasonable value to try.
+
+Going the other way, for instance a `scissor_area_threshold` of 0.5:
+0.5 ^ 4 = 0.0625
+0.0625 * 2073600 = 129600 pixels.
+
+If the number of pixels saved is more than this threshold, the scissor is activated.
 
 ## Vertex baking
 The GPU shader receives instructions on what to draw in 2 main ways:
