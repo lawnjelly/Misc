@@ -127,30 +127,30 @@ Batching has been primarily designed to accelerate the common cases found in pro
 
 ## Performance Tuning
 
-### Bottlenecks
+## Bottlenecks & Optimization
 While batching is a specific optimization to reduce drawcalls (and state changes) and make better use of the GPU, in terms of overall performance benefit it can only be looked at in the context of where the bottlenecks are in your game or project.
 
 The proverb 'a chain is only as strong as its weakest link' applies directly to performance optimization. If your project is spending 90% of the time in e.g. API housekeeping due to drawcalls / state changes, then reducing this by applying batching can have a massive effect on performance.
 
-API housekeeping 9 ms
-Everything else 1 ms
-Total : 10 ms
+API housekeeping 9 ms\
+Everything else 1 ms\
+_Total : 10 ms_
 
-API housekeeping 1 ms
-Everything else 1ms
-Total : 2 ms
+API housekeeping 1 ms\
+Everything else 1ms\
+_Total : 2 ms_
 
 So in this example batching improving this bottleneck by a factor of 9x, decreases overall frame time by 5x, and increases frames per second by 5x.
 
 If however, something else is running slowly and also bottlenecking your project, then the same improvement to batching can lead to less dramatic gains:
 
-API housekeeping 9 ms
-Everything else 50 ms
-Total : 59 ms
+API housekeeping 9 ms\
+Everything else 50 ms\
+_Total : 59 ms_
 
-API housekeeping 1 ms
-Everything else 50 ms
-Total : 51 ms
+API housekeeping 1 ms\
+Everything else 50 ms\
+_Total : 51 ms_
 
 So in this example, even though we have hugely optimized the batching, the actual gain in terms of frame rate is quite small.
 
@@ -158,9 +158,9 @@ The takehome message is that while batching improves the performance of a certai
 
 Optimization is thus a continuous process:
 
-* Identify the bottlenecks
-* Optimize the slowest bottleneck (low hanging fruit)
-* Repeat
+1) Identify the bottlenecks
+2) Optimize the slowest bottleneck (low hanging fruit)
+3) Repeat
 
 Other areas highly likely to be bottlenecks:
 * Scripts
