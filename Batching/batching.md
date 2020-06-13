@@ -120,6 +120,13 @@ However, as with the item reordering, things are not that simple, we must first 
 
 Also consider that depending on the arrangement of primitives in the viewport, the overlap test will sometimes fail (because the primitives overlap and thus should not be joined). So in practice the decrease in drawcalls may be less dramatic than the perfect situation of no overlap. However performance is usually far higher than without this lighting optimization.
 
+## Light Scissoring
+As a result of batching lit objects, a side effect can be that it can make it more difficult to cull out objects that are not affected or partially affected by a light. This can result in a downside - the fill rate requirements can, in some circumstances, increase quite a bit, and slow rendering.
+
+In order to counter this problem, (and also speedup lighting in general), batching introduces light scissoring. This enables the use of the OpenGL command 'glScissor', which identifies an area, outside of which, the GPU will not render any pixels. We can thus greatly optimize fill rate by identifying the intersection area between a light and a primitive, and limit rendering the light to _this area only_.
+
+Light scissoring is controlled with the '
+
 ## Vertex baking
 The GPU shader receives instructions on what to draw in 2 main ways:
 * Uniforms (e.g. final_modulate color, item transform)
@@ -261,6 +268,7 @@ Optimization is thus a continuous process:
 Other areas highly likely to be bottlenecks:
 * Scripts
 * Node updates (large number of nodes)
+* Physics
 * GPU fill rate (lots of pixels being shaded and blended can slow the GPU, especially on mobile)
 
 ## FAQ
