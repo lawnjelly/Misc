@@ -161,10 +161,14 @@ Joining items before lighting can significantly increase performance. This requi
 ### rendering/batching/debug
 #### flash_batching
 This is purely a debugging feature to identify regressions between the batching and legacy renderer. When it is switched on, the batching and legacy renderer are used alternately on each frame. This will decrease performance, and should not be used for your final export, only for testing.
+#### diagnose_frame
+This will periodically print a diagnostic batching log to the Godot IDE / console.
 
-
-
-
+### rendering/batching/precision
+#### uv_contract
+On some hardware (notably some Android devices) there have been reports of tilemap tiles drawing slightly outside their UV range, leading to edge artifacts such as lines around tiles. If you see this problem, try enabling uv contract. This makes a small contraction in the UV coordinates to compensate for precision errors on devices.
+#### uv_contract_amount
+Hopefully the default amount should cure artifacts on most devices, but just in case, this value is editable.
 
 ## Diagnostics
 Although you can change parameters and examine the effect on frame rate, this can feel like working blindly, with no idea of what is going on under the hood. To help with this, batching offers a diagnostic mode, which will periodically print out (to the IDE or console) a list of the batches that are being processed. This can help pin point situations where batching is not occurring as intended, and help you to fix them, in order to get the best possible performance.
