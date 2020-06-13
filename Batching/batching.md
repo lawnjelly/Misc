@@ -127,7 +127,7 @@ To get around this problem, the batching can 'bake' some of the uniforms into th
 In most cases this works fine, but this shortcut breaks down if a shader expects these values to be available individually, rather than combined. This can happen in custom shaders.
 
 ### Custom Shaders
-As a result certain operations in custom shaders will prevent baking, and thus decrease the potential for batching. While we are working to decrease this cases, currently the following conditions apply:
+As a result certain operations in custom shaders will prevent baking, and thus decrease the potential for batching. While we are working to decrease these cases, currently the following conditions apply:
 
 * Reading or writing COLOR or MODULATE - disables vertex color baking
 * Reading VERTEX - disables vertex position baking
@@ -150,7 +150,10 @@ One of the most important ways of achieving batching is to join suitable adjacen
 
 
 ## Diagnostics
-Although you can change parameters and examine the effect on frame rate, this can feel like working blind, with no idea of what is going on under the hood. To help with this, batching offers a diagnostic mode, which will periodically print out a list of the batches that are being processed. This can help pin point situations where batching is not occurring as intended, and help you to fix them, in order to get the best possible performance.
+Although you can change parameters and examine the effect on frame rate, this can feel like working blindly, with no idea of what is going on under the hood. To help with this, batching offers a diagnostic mode, which will periodically print out (to the IDE or console) a list of the batches that are being processed. This can help pin point situations where batching is not occurring as intended, and help you to fix them, in order to get the best possible performance.
+
+### Reading a diagnostic
+
 
 ## Performance Tuning
 
