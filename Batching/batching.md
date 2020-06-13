@@ -49,18 +49,22 @@ It should be apparent that there is a certain amount of leeway in your scene des
 And now a sleight of hand. Although the idea of painter's order is that objects are rendered from back to front, consider 3 objects A, B and C, that contain 2 different textures, metal and wood.
 
 In painter's order they are ordered:
+```
 A - wood
 B - metal
 C - wood
+```
 
 Because the texture changes, they cannot be batched, and will be rendered in 3 drawcalls.
 
 However, painter's order is needed on the assumption that they will be drawn ON TOP of each other. If we relax that assumption, i.e. if none of these 3 objects are overlapping, there is NO NEED to preserve painter's order. The rendered result will be the same. What if we could take advantage of this?
 
+```
 A - wood
 C - wood
 B - metal
 _(2 drawcalls)_
+```
 
 ### Item reordering
 
@@ -70,6 +74,7 @@ It turns out that we can reorder items. However, we can only do this if the item
 
 Although the job for the batching system is normally quite straightforward, it becomes considerably more complex when 2D lights are used, because lights are drawn using multiple extra passes, one for each light affecting the primitive. Consider 2 sprites A and B, with identical texture and material. Without lights they would be batched together and drawn in one drawcall. But with 3 lights, they would be drawn as follows, each line a drawcall:
 
+```
 A
 A - light 1
 A - light 2
@@ -78,6 +83,7 @@ B
 B - light 1
 B - light 2
 B - light 3
+```
 
 That is a lot of drawcalls, 8 for only 2 sprites. Now consider we are drawing 1000 sprites, the number of drawcalls quickly becomes astronomical, and performance suffers. This is partly why lights has the potential to drastically slow down 2D.
 
@@ -85,10 +91,12 @@ However, if you remember our magician's trick from item reordering, it turns out
 
 If A and B are not overlapping, we can render them together in a batch, so the draw process is as follows:
 
+```
 AB
 AB - light 1
 AB - light 2
 AB - light 3
+```
 
 That is 4 drawcalls. Not bad, that is a 50% improvement. However consider that in a real game, you might be drawing closer to 1000 sprites.
 
@@ -132,25 +140,32 @@ While batching is a specific optimization to reduce drawcalls (and state changes
 
 The proverb 'a chain is only as strong as its weakest link' applies directly to performance optimization. If your project is spending 90% of the time in e.g. API housekeeping due to drawcalls / state changes, then reducing this by applying batching can have a massive effect on performance.
 
-API housekeeping 9 ms\
-Everything else 1 ms\
+```
+API housekeeping 9 ms
+Everything else 1 ms
 _Total : 10 ms_
+```
 
-API housekeeping 1 ms\
-Everything else 1ms\
+```
+API housekeeping 1 ms
+Everything else 1ms
 _Total : 2 ms_
-
+```
 So in this example batching improving this bottleneck by a factor of 9x, decreases overall frame time by 5x, and increases frames per second by 5x.
 
 If however, something else is running slowly and also bottlenecking your project, then the same improvement to batching can lead to less dramatic gains:
 
-API housekeeping 9 ms\
-Everything else 50 ms\
+```
+API housekeeping 9 ms
+Everything else 50 ms
 _Total : 59 ms_
+```
 
-API housekeeping 1 ms\
-Everything else 50 ms\
+```
+API housekeeping 1 ms
+Everything else 50 ms
 _Total : 51 ms_
+```
 
 So in this example, even though we have hugely optimized the batching, the actual gain in terms of frame rate is quite small.
 
