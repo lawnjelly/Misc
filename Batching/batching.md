@@ -205,13 +205,13 @@ While batching is a specific optimization to reduce drawcalls (and state changes
 The proverb 'a chain is only as strong as its weakest link' applies directly to performance optimization. If your project is spending 90% of the time in e.g. API housekeeping due to drawcalls / state changes, then reducing this by applying batching can have a massive effect on performance.
 
 ```
-API housekeeping 9 ms
+Drawcalls 9 ms
 Everything else 1 ms
 _Total : 10 ms_
 ```
 
 ```
-API housekeeping 1 ms
+Drawcalls 1 ms
 Everything else 1ms
 _Total : 2 ms_
 ```
@@ -220,13 +220,13 @@ So in this example batching improving this bottleneck by a factor of 9x, decreas
 If however, something else is running slowly and also bottlenecking your project, then the same improvement to batching can lead to less dramatic gains:
 
 ```
-API housekeeping 9 ms
+Drawcalls 9 ms
 Everything else 50 ms
 _Total : 59 ms_
 ```
 
 ```
-API housekeeping 1 ms
+Drawcalls 1 ms
 Everything else 50 ms
 _Total : 51 ms_
 ```
