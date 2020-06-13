@@ -46,7 +46,7 @@ In Godot this back to front order is determined by:
 It should be apparent that there is a certain amount of leeway in your scene design for you to order objects in such a way that similar objects will be grouped together for easier batching. Note that this is not a requirement on your part, think of it as an optional approach that can improve performance in some cases. See the diagnostics section in order to help you make this decision.
 
 ### A trick
-And now a sleight of hand. Although the idea of painter's order is that objects are rendered from back to front, consider 3 objects A, B and C, that contain 2 different textures, metal and wood.
+And now a sleight of hand. Although the idea of painter's order is that objects are rendered from back to front, consider 3 objects A, B and C, that contain 2 different textures, grass and wood.
 
 ![overlap1](pics/overlap1.png)
 
