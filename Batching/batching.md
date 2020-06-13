@@ -124,7 +124,13 @@ To get around this problem, the batching can 'bake' some of the uniforms into th
 * The item transform can be combined with the local transform and sent in a vertex attribute.
 * The final_modulate color can be combined with the vertex colors, and sent in a vertex attribute.
 
+In most cases this works fine, but this shortcut breaks down if a shader expects these values to be available individually, rather than combined. This can happen in custom shaders.
 
+### Custom Shaders
+As a result certain operations in custom shaders will prevent baking, and thus decrease the potential for batching. While we are working to decrease this cases, currently the following conditions apply:
+
+* Reading or writing COLOR or MODULATE - disables vertex color baking
+* Reading VERTEX - disables vertex position baking
 
 ## Parameters
 In order to fine tune batching, a number of project settings are available. You can usually leave these at default during development, but it is a good idea to experiment to ensure you are getting maximum performance. Spending a little time tweaking parameters can often give considerable performance gain, for very little effort. See the tooltips in the project settings for more info.
@@ -145,12 +151,6 @@ One of the most important ways of achieving batching is to join suitable adjacen
 
 ## Diagnostics
 Although you can change parameters and examine the effect on frame rate, this can feel like working blind, with no idea of what is going on under the hood. To help with this, batching offers a diagnostic mode, which will periodically print out a list of the batches that are being processed. This can help pin point situations where batching is not occurring as intended, and help you to fix them, in order to get the best possible performance.
-
-### Custom Shaders
-Batching has been primarily designed to accelerate the common cases found in projects, there are some features which will unexpectedly break, or decrease batching. Many of these are in the use of custom shaders. While we will work to increase the number of cases that can be batched, currently some of following in custom shaders will prevent some batching optimizations:
-
-* Reading or writing COLOR or MODULATE - disables vertex color baking
-* Reading VERTEX - disables vertex position baking
 
 ## Performance Tuning
 
