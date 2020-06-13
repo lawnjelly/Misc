@@ -110,7 +110,7 @@ That is 1000x decrease in drawcalls, and will usually give a huge increase in pe
 ### Overlap test
 However, as with the item reordering, things are not that simple, we must first perform the overlap test to determine whether we can join these primitives, and the overlap test has a small cost. So again you can choose the number of primitives to lookahead in the overlap test to balance the benefits against the cost. Usually with lights the benefits far outweigh the costs.
 
-Also consider that depending on the arrangement of primitives in the viewport, the overlap test will sometimes fail (because the primitives overlap and thus should not be joined). So in practice the decrease in drawcalls may be less dramatic than the perfect situation of no overlap. However performance is usually far higher than without the overlap tests.
+Also consider that depending on the arrangement of primitives in the viewport, the overlap test will sometimes fail (because the primitives overlap and thus should not be joined). So in practice the decrease in drawcalls may be less dramatic than the perfect situation of no overlap. However performance is usually far higher than without this lighting optimization.
 
 ## Vertex baking
 The GPU shader receives instructions on what to draw in 2 main ways:
