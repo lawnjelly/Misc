@@ -158,6 +158,7 @@ canvas_begin FRAME 2604
 items
 	joined_item 1 refs
 			batch D 0-0 
+			batch D 0-2 n n
 			batch R 0-1 [0 - 0] {255 255 255 255 }
 	joined_item 1 refs
 			batch D 0-0 
@@ -176,10 +177,25 @@ canvas_end
 This is a typical simple diagnostic.
 * joined_item - A joined item can contain 1 or more references to items (nodes). Generally joined_items containing many references is preferable to many joined_items containing a single reference. Whether items can be joined will be determined by their contents and compatibility with the previous item.
 * batch R - a batch containing rectangles. The second number is the number of rects. The second number in square brackets is the Godot texture ID, and the numbers in curly braces is the color. If the batch contains more than one rect, MULTI is added to the line to make it easy to identify. Seeing MULTI is good, because this indicates successful batching.
-* batch D - a default batch, containing everything else that is not currently batched. You may see 'dummy' default batches containing no primitives, you can ignore these.
+* batch D - a default batch, containing everything else that is not currently batched.
 
 #### Default Batches
-
+The second number is the number of commands in the batch, and it is followed by a brief summary of the contents:
+```
+l - line
+PL - polyline
+r - rect
+n - ninepatch
+PR - primitive
+p - polygon
+m - mesh
+MM - multimesh
+PA - particles
+c - circle
+t - transform
+CI - clip_ignore
+```
+You may see 'dummy' default batches containing no primitives, you can ignore these.
 
 ## Performance Tuning
 
