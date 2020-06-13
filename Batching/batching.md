@@ -21,9 +21,9 @@ The batcher uses two main techniques to group together primitives:
 * Consecutive commands within an item can be joined to form a batch
 
 ### Breaking batching
-These can only take place if the items or commands are similar enough to be rendered in one drawcall. Certain changes (or techniques) by necessity prevent the formation of a contiguous batch, this is referred to as 'breaking batching'.
+These can only take place if the items or commands are similar enough to be rendered in one drawcall. Certain changes (or techniques), by necessity, prevent the formation of a contiguous batch, this is referred to as 'breaking batching'.
 
-Batching will be broken by (among other things):
+Batching will be broken by (amongst other things):
 * Change of texture
 * Change of material
 * Change of primitive type (say going from rectangles to lines)
@@ -181,3 +181,6 @@ Other areas highly likely to be bottlenecks:
 
 ### I use custom shaders and the items are not batching
 * Custom shaders can be problematic for batching, see the custom shaders section
+
+### I use a large number of textures, so few items are being batched
+* Consider the use of texture atlases. As well as allowing batching these reduce the need for state changes associated with changing texture.
