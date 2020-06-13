@@ -10,7 +10,7 @@ It turns out that while this is conceptually simple from the engine side, GPUs o
 
 And it turns out that they don't just work a bit faster when used in this manner, they work A LOT faster.
 
-As Godot is designed to be a general purpose engine, the primitives coming into the Godot renderer can be in any order, sometimes related, and sometimes unrelated. In order to match the general purpose nature of Godot with the batching preferences of GPUs, Godot features an intermediate layer which can automatically group together similar primitives wherever possible, and send these batches on to the GPU. This can give an increase in rendering performance while requiring few, if any, changes to your Godot project.
+As Godot is designed to be a general purpose engine, the primitives coming into the Godot renderer can be in any order, sometimes similar, and sometimes dissimilar. In order to match the general purpose nature of Godot with the batching preferences of GPUs, Godot features an intermediate layer which can automatically group together primitives wherever possible, and send these batches on to the GPU. This can give an increase in rendering performance while requiring few, if any, changes to your Godot project.
 
 ## How it works
 
