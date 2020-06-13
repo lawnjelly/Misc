@@ -195,7 +195,7 @@ c - circle
 t - transform
 CI - clip_ignore
 ```
-You may see 'dummy' default batches containing no primitives, you can ignore these.
+You may see 'dummy' default batches containing no commands, you can ignore these.
 
 ## Performance Tuning
 
