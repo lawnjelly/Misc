@@ -136,11 +136,9 @@ As a result certain operations in custom shaders will prevent baking, and thus d
 In order to fine tune batching, a number of project settings are available. You can usually leave these at default during development, but it is a good idea to experiment to ensure you are getting maximum performance. Spending a little time tweaking parameters can often give considerable performance gain, for very little effort. See the tooltips in the project settings for more info.
 
 ### rendering/batching/options/
-#### use_batching
-Turns batching on and off
-#### use_batching_in_editor
-#### single_rect_fallback
-This is a faster way of drawing unbatchable rectangles, however it may lead to flicker on some hardware so is not recommended
+* **use_batching** - Turns batching on and off
+* **use_batching_in_editor**
+* **single_rect_fallback** - This is a faster way of drawing unbatchable rectangles, however it may lead to flicker on some hardware so is not recommended
 
 ### rendering/batching/parameters/
 #### max_join_item_commands
