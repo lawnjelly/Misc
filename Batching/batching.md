@@ -153,6 +153,32 @@ One of the most important ways of achieving batching is to join suitable adjacen
 Although you can change parameters and examine the effect on frame rate, this can feel like working blindly, with no idea of what is going on under the hood. To help with this, batching offers a diagnostic mode, which will periodically print out (to the IDE or console) a list of the batches that are being processed. This can help pin point situations where batching is not occurring as intended, and help you to fix them, in order to get the best possible performance.
 
 ### Reading a diagnostic
+```
+canvas_begin FRAME 2604
+items
+	joined_item 1 refs
+			batch D 0-0 
+			batch R 0-1 [0 - 0] {255 255 255 255 }
+	joined_item 1 refs
+			batch D 0-0 
+			batch R 0-1 [0 - 146] {255 255 255 255 }
+			batch D 0-0 
+			batch R 0-1 [0 - 146] {255 255 255 255 }
+	joined_item 1 refs
+			batch D 0-0 
+			batch R 0-2560 [0 - 144] {158 193 0 104 } MULTI
+			batch D 0-0 
+			batch R 0-2560 [0 - 144] {158 193 0 104 } MULTI
+			batch D 0-0 
+			batch R 0-2560 [0 - 144] {158 193 0 104 } MULTI
+canvas_end
+```
+This is a typical simple diagnostic.
+* joined_item - A joined item can contain 1 or more references to items (nodes). Generally joined_items containing many references is preferable to many joined_items containing a single reference. Whether items can be joined will be determined by their contents and compatibility with the previous item.
+* batch R - a batch containing rectangles. The second number is the number of rects. The second number in square brackets is the Godot texture ID, and the numbers in curly braces is the color. If the batch contains more than one rect, MULTI is added to the line to make it easy to identify. Seeing MULTI is good, because this indicates successful batching.
+* batch D - a default batch, containing everything else that is not currently batched. You may see 'dummy' default batches containing no primitives, you can ignore these.
+
+#### Default Batches
 
 
 ## Performance Tuning
