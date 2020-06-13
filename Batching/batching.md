@@ -1,4 +1,4 @@
-# 2D Dynamic Batching
+# 2D Batching
 
 ## Introduction
 In order to tell the GPU what to draw, and where, game engines have to send a set of instructions to the GPU in order to draw a frame. These instructions are sent in common languages, called APIs (application programming interfaces), examples of which are OpenGL, OpenGL ES 2, OpenGL ES3 and Vulkan.
