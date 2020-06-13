@@ -78,6 +78,8 @@ It turns out that we can reorder items. However, we can only do this if the item
 
 Although the job for the batching system is normally quite straightforward, it becomes considerably more complex when 2D lights are used, because lights are drawn using multiple extra passes, one for each light affecting the primitive. Consider 2 sprites A and B, with identical texture and material. Without lights they would be batched together and drawn in one drawcall. But with 3 lights, they would be drawn as follows, each line a drawcall:
 
+![lights_overlap](pics/lights_overlap.png)
+
 ```
 A
 A - light 1
@@ -94,6 +96,8 @@ That is a lot of drawcalls, 8 for only 2 sprites. Now consider we are drawing 10
 However, if you remember our magician's trick from item reordering, it turns out we can use the same trick to get around painter's order for lights!
 
 If A and B are not overlapping, we can render them together in a batch, so the draw process is as follows:
+
+![lights_separate](pics/lights_separate.png)
 
 ```
 AB
