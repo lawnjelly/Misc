@@ -136,9 +136,11 @@ As a result certain operations in custom shaders will prevent baking, and thus d
 In order to fine tune batching, a number of project settings are available. You can usually leave these at default during development, but it is a good idea to experiment to ensure you are getting maximum performance. Spending a little time tweaking parameters can often give considerable performance gain, for very little effort. See the tooltips in the project settings for more info.
 
 ### rendering/batching/options/
-use_batching - turns batching on and off
-use_batching_in_editor
-single_rect_fallback - this is a faster way of drawing unbatchable rectangles, however it may lead to flicker on some hardware so is not recommended
+#### use_batching
+Turns batching on and off
+#### use_batching_in_editor
+#### single_rect_fallback
+This is a faster way of drawing unbatchable rectangles, however it may lead to flicker on some hardware so is not recommended
 
 ### rendering/batching/parameters/
 #### max_join_item_commands
@@ -149,6 +151,17 @@ Baking colors into vertices results in a larger vertex format. This is not neces
 This determines the maximum size of a batch, it doesn't have a huge effect on performance but can be worth decreasing for mobile if RAM is at a premium.
 #### item_reordering_lookahead
 Item reordering can help especially with interleaved sprites using different textures. The lookahead for the overlap test has a small cost, so the best value may change per project.
+
+### rendering/batching/lights
+#### scissor_area_threshold
+See light scissoring.
+#### max_join_items
+Joining items before lighting can significantly increase performance. This requires an overlap test, which has a small cost, so the costs and benefits may be project dependent, and hence the best value to use here.
+
+### rendering/batching/debug
+#### flash_batching
+This is purely a debugging feature to identify regressions between the batching and legacy renderer. When it is switched on, the batching and legacy renderer are used alternately on each frame. This will decrease performance, and should not be used for your final export, only for testing.
+
 
 
 
