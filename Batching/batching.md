@@ -114,14 +114,18 @@ Also consider that depending on the arrangement of primitives in the viewport, t
 
 
 ## Parameters
-In order to fine tune batching, a number of project settings are available. You can usually leave these at default during development, but it is a good idea to experiment to ensure you are getting maximum performance. Spending a little time tweaking parameters can often give considerable performance gain, for very little effort.
+In order to fine tune batching, a number of project settings are available. You can usually leave these at default during development, but it is a good idea to experiment to ensure you are getting maximum performance. Spending a little time tweaking parameters can often give considerable performance gain, for very little effort. See the tooltips in the project settings for more info.
 
-### Options (in rendering/batching/options/)
+### rendering/batching/options/
 use_batching - turns batching on and off
 use_batching_in_editor
-### Parameters (in rendering/batching/parameters/)
+single_rect_fallback - this is a faster way of drawing unbatchable rectangles, however it may lead to flicker on some hardware so is not recommended
+
+### rendering/batching/parameters/
 #### max_join_item_commands
-One of the most important ways of achieving batching is to join suitable adjacent items (nodes) together, however they can only be joined if the commands they contain are compatible and there is 
+One of the most important ways of achieving batching is to join suitable adjacent items (nodes) together, however they can only be joined if the commands they contain are compatible. The system must therefore do a lookahead through the commands in an item to determine whether it can be joined. This has a small cost per command, and items with a large number of commands are not worth joining, so the best value may be project dependent.
+
+
 
 
 ## Diagnostics
