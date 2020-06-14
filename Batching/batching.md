@@ -128,6 +128,10 @@ Light scissoring is controlled with the `scissor_area_threshold` project setting
 
 The relationship between the threshold and whether a scissor operation takes place is not altogether straight forward, but generally it represents the pixel area that is potentially 'saved' by a scissor operation (i.e. the fill rate saved). At 1.0, the entire screens pixels would need to be saved, which rarely if ever happens, so it is switched off. In practice the useful values are bunched towards zero, as only a small percentage of pixels need to be saved for the operation to be useful.
 
+![light_scissoring](pics/scissoring.png)
+
+_Bottom right is a light, the red area is the pixels saved by the scissoring operation_
+
 #### The exact relationship
 The exact relationship is probably not necessary for users to worry about, but out of interest, the actual proportion of screen pixel area used as the threshold is the setting value to the power of 4.
 
