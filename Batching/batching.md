@@ -130,7 +130,7 @@ The relationship between the threshold and whether a scissor operation takes pla
 
 ![light_scissoring](pics/scissoring.png)
 
-_Bottom right is a light, the red area is the pixels saved by the scissoring operation_
+_Bottom right is a light, the red area is the pixels saved by the scissoring operation. Only the intersection needs to be rendered._
 
 #### The exact relationship
 The exact relationship is probably not necessary for users to worry about, but out of interest, the actual proportion of screen pixel area used as the threshold is the setting value to the power of 4.
