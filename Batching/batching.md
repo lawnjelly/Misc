@@ -302,7 +302,7 @@ Other areas highly likely to be bottlenecks:
 ### I get a decrease in performance with batching
 * Try steps to increase batching given above
 * Try switching 'single_rect_fallback' to on
-* The single rect fallback method is the default used without batching, however it can result in flicker on some hardware, so is discouraged
+* The single rect fallback method is the default used without batching, and it is approximately twice as fast, however it can result in flicker on some hardware, so its use is discouraged
 
 ### I use custom shaders and the items are not batching
 * Custom shaders can be problematic for batching, see the custom shaders section
