@@ -137,14 +137,14 @@ The exact relationship is probably not necessary for users to worry about, but o
 
 e.g. On a screen size 1920 x 1080 there are 2073600 pixels.
 
-At a threshold of 1000 pixels, the proportion would be 1000/2073600 = 0.00048225
-0.00048225 ^ 0.25 = 0.14819
-(the power of 0.25 is the opposite of power of 4).
+At a threshold of 1000 pixels, the proportion would be `1000/2073600 = 0.00048225`\
+`0.00048225 ^ 0.25 = 0.14819`\
+(the power of 0.25 is the opposite of power of 4).\
 So a `scissor_area_threshold` of 0.15 would be a reasonable value to try.
 
-Going the other way, for instance a `scissor_area_threshold` of 0.5:
-0.5 ^ 4 = 0.0625
-0.0625 * 2073600 = 129600 pixels.
+Going the other way, for instance a `scissor_area_threshold` of 0.5:\
+`0.5 ^ 4 = 0.0625`\
+`0.0625 * 2073600 = 129600 pixels`.
 
 If the number of pixels saved is more than this threshold, the scissor is activated.
 
