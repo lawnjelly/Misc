@@ -299,11 +299,11 @@ Other areas highly likely to be bottlenecks:
 ### I use custom shaders and the items are not batching
 * Custom shaders can be problematic for batching, see the custom shaders section
 
-### I use a large number of textures, so few items are being batched
-* Consider the use of texture atlases. As well as allowing batching, these reduce the need for state changes associated with changing texture.
-
 ### I am seeing line artifacts appear on certain hardware
 * See the `uv_contract` project setting which can be used to solve this problem.
+
+### I use a large number of textures, so few items are being batched
+* Consider the use of texture atlases. As well as allowing batching, these reduce the need for state changes associated with changing texture.
 
 ## Appendix
 #### Light scissoring threshold calculation
