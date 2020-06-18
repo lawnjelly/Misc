@@ -135,21 +135,7 @@ The relationship between the threshold and whether a scissor operation takes pla
 
 *Bottom right is a light, the red area is the pixels saved by the scissoring operation. Only the intersection needs to be rendered.*
 
-#### The exact relationship
-The exact relationship is probably not necessary for users to worry about, but out of interest, the actual proportion of screen pixel area used as the threshold is the setting value to the power of 4.
-
-e.g. On a screen size 1920 x 1080 there are 2073600 pixels.
-
-At a threshold of 1000 pixels, the proportion would be `1000/2073600 = 0.00048225`\
-`0.00048225 ^ 0.25 = 0.14819`\
-(the power of 0.25 is the opposite of power of 4).\
-So a `scissor_area_threshold` of 0.15 would be a reasonable value to try.
-
-Going the other way, for instance a `scissor_area_threshold` of 0.5:\
-`0.5 ^ 4 = 0.0625`\
-`0.0625 * 2073600 = 129600 pixels`.
-
-If the number of pixels saved is more than this threshold, the scissor is activated.
+The exact relationship is probably not necessary for users to worry about, but out of interest is included in the appendix.
 
 ## Vertex baking
 The GPU shader receives instructions on what to draw in 2 main ways:
@@ -315,3 +301,20 @@ Other areas highly likely to be bottlenecks:
 
 ### I use a large number of textures, so few items are being batched
 * Consider the use of texture atlases. As well as allowing batching, these reduce the need for state changes associated with changing texture.
+
+## Appendix
+#### Light scissoring threshold calculation
+The actual proportion of screen pixel area used as the threshold is the `light_scissor_threshold` value to the power of 4.
+
+e.g. On a screen size 1920 x 1080 there are 2073600 pixels.
+
+At a threshold of 1000 pixels, the proportion would be `1000/2073600 = 0.00048225`\
+`0.00048225 ^ 0.25 = 0.14819`\
+(the power of 0.25 is the opposite of power of 4).\
+So a `scissor_area_threshold` of 0.15 would be a reasonable value to try.
+
+Going the other way, for instance a `scissor_area_threshold` of 0.5:\
+`0.5 ^ 4 = 0.0625`\
+`0.0625 * 2073600 = 129600 pixels`.
+
+If the number of pixels saved is more than this threshold, the scissor is activated.
