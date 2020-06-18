@@ -131,11 +131,11 @@ Light scissoring is controlled with the ``scissor_area_threshold`` project setti
 
 The relationship between the threshold and whether a scissor operation takes place is not altogether straight forward, but generally it represents the pixel area that is potentially 'saved' by a scissor operation (i.e. the fill rate saved). At 1.0, the entire screens pixels would need to be saved, which rarely if ever happens, so it is switched off. In practice the useful values are bunched towards zero, as only a small percentage of pixels need to be saved for the operation to be useful.
 
+The exact relationship is probably not necessary for users to worry about, but out of interest is included in the appendix.
+
 ![light_scissoring](pics/scissoring.png)
 
 *Bottom right is a light, the red area is the pixels saved by the scissoring operation. Only the intersection needs to be rendered.*
-
-The exact relationship is probably not necessary for users to worry about, but out of interest is included in the appendix.
 
 ## Vertex baking
 The GPU shader receives instructions on what to draw in 2 main ways:
@@ -301,6 +301,9 @@ Other areas highly likely to be bottlenecks:
 
 ### I use a large number of textures, so few items are being batched
 * Consider the use of texture atlases. As well as allowing batching, these reduce the need for state changes associated with changing texture.
+
+### I am seeing line artifacts appear on certain hardware
+* See the `uv_contract` project setting which can be used to solve this problem.
 
 ## Appendix
 #### Light scissoring threshold calculation
