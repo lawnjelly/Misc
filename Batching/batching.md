@@ -1,33 +1,35 @@
 # 2D Batching
 
 ## Introduction
-In order to tell the GPU what to draw, and where, game engines have to send a set of instructions to the GPU in order to draw a frame. These instructions are sent in common languages, called APIs (application programming interfaces), examples of which are OpenGL, OpenGL ES 2, OpenGL ES3 and Vulkan.
+Game engines have to send a set of instructions to the GPU in order to tell the GPU what and where to draw. These instructions are sent using common instructions, called APIs (Application Programming Interfaces), examples of which are OpenGL, OpenGL ES, and Vulkan.
 
-### Drawcalls
-In 2D, we need to tell the GPU to render a series of primitives (rectangles, lines, polygons etc). The most obvious technique is to tell the GPU to render one primitive at a time, telling it some information such as the texture used, the material, the position, size etc, then saying 'Draw!' (this is called a drawcall).
+Different APIs incur different costs when drawing objects. OpenGL handles a lot of work for the user in the GPU driver at the cost of more expensive draw calls. As a result, applications can often be sped up by reducing the number of draw calls.
 
-It turns out that while this is conceptually simple from the engine side, GPUs operate very slowly when used in this manner. GPUs work much more efficiently if, instead of telling them to draw a single primitive, you tell them to draw a number of similar primitives all in one drawcall, which we will call a 'batch'.
+### Draw calls
+In 2D, we need to tell the GPU to render a series of primitives (rectangles, lines, polygons etc). The most obvious technique is to tell the GPU to render one primitive at a time, telling it some information such as the texture used, the material, the position, size etc, then saying "Draw!" (this is called a draw call).
 
-And it turns out that they don't just work a bit faster when used in this manner, they work A LOT faster.
+It turns out that while this is conceptually simple from the engine side, GPUs operate very slowly when used in this manner. GPUs work much more efficiently if, instead of telling them to draw a single primitive, you tell them to draw a number of similar primitives all in one drawcall, which we will call a "batch".
+
+And it turns out that they don't just work a bit faster when used in this manner, they work a *lot* faster.
 
 As Godot is designed to be a general purpose engine, the primitives coming into the Godot renderer can be in any order, sometimes similar, and sometimes dissimilar. In order to match the general purpose nature of Godot with the batching preferences of GPUs, Godot features an intermediate layer which can automatically group together primitives wherever possible, and send these batches on to the GPU. This can give an increase in rendering performance while requiring few, if any, changes to your Godot project.
 
 ## How it works
-
-Inside the renderer instructions come in from your game in the form of a series of items, each of which can contain one or more commands. The items correspond to Nodes in the scene tree, and the commands correspond to primitives such as rectangles or polygons. Some items, such as tilemaps, and text, can contain a large number of commands (tiles and letters respectively). Others, such as sprites, may only contain a single command (rectangle).
+Instructions come into the renderer from your game in the form of a series of items, each of which can contain one or more commands. The items correspond to Nodes in the scene tree, and the commands correspond to primitives such as rectangles or polygons. Some items, such as tilemaps, and text, can contain a large number of commands (tiles and letters respectively). Others, such as sprites, may only contain a single command (rectangle).
 
 The batcher uses two main techniques to group together primitives:
 * Consecutive items can be joined together
 * Consecutive commands within an item can be joined to form a batch
 
 ### Breaking batching
-These can only take place if the items or commands are similar enough to be rendered in one drawcall. Certain changes (or techniques), by necessity, prevent the formation of a contiguous batch, this is referred to as 'breaking batching'.
+Batching can only take place if the items or commands are similar enough to be rendered in one drawcall. Certain changes (or techniques), by necessity, prevent the formation of a contiguous batch, this is referred to as 'breaking batching'.
 
 Batching will be broken by (amongst other things):
 * Change of texture
 * Change of material
 * Change of primitive type (say going from rectangles to lines)
 
+**NOTE:** (turn the below into sphinx-style note)
 If for example, you draw a series of sprites each with a different texture, there is no way they can be batched.
 
 ### Render order
@@ -35,7 +37,7 @@ The question arises, if only similar items can be drawn together in a batch, why
 
 In 3D, this is often exactly how engines work. However, in Godot 2D, items are drawn in 'painter's order', from back to front. This ensures that items at the front are drawn on top of earlier items, when they overlap.
 
-This also means that if we try and draw objects in order of, for example, texture, then this painter's order may be broken and the wrong objects end up being drawn at the front.
+This also means that if we try and draw objects in order of, for example, texture, then this painter's order may break and objects will be drawn in the wrong order.
 
 In Godot this back to front order is determined by:
 * The order of objects in the scene tree
@@ -43,7 +45,8 @@ In Godot this back to front order is determined by:
 * The canvas layer
 * Y sort nodes
 
-It should be apparent that there is a certain amount of leeway in your scene design for you to order objects in such a way that similar objects will be grouped together for easier batching. Note that this is not a requirement on your part, think of it as an optional approach that can improve performance in some cases. See the diagnostics section in order to help you make this decision.
+**NOTE:** (turn the below into sphinx-style note)
+You can group similar objects together for easier batching. While doing so is not a requirement on your part, think of it as an optional approach that can improve performance in some cases. See the diagnostics section in order to help you make this decision.
 
 ### A trick
 And now a sleight of hand. Although the idea of painter's order is that objects are rendered from back to front, consider 3 objects A, B and C, that contain 2 different textures, grass and wood.
@@ -59,7 +62,7 @@ C - wood
 
 Because the texture changes, they cannot be batched, and will be rendered in 3 drawcalls.
 
-However, painter's order is needed on the assumption that they will be drawn ON TOP of each other. If we relax that assumption, i.e. if none of these 3 objects are overlapping, there is NO NEED to preserve painter's order. The rendered result will be the same. What if we could take advantage of this?
+However, painter's order is only needed on the assumption that they will be drawn *on top* of each other. If we relax that assumption, i.e. if none of these 3 objects are overlapping, there is *no need* to preserve painter's order. The rendered result will be the same. What if we could take advantage of this?
 
 ### Item reordering
 
@@ -75,7 +78,7 @@ It turns out that we can reorder items. However, we can only do this if the item
 
 ## Lights
 
-Although the job for the batching system is normally quite straightforward, it becomes considerably more complex when 2D lights are used, because lights are drawn using multiple extra passes, one for each light affecting the primitive. Consider 2 sprites A and B, with identical texture and material. Without lights they would be batched together and drawn in one drawcall. But with 3 lights, they would be drawn as follows, each line a drawcall:
+Although the job for the batching system is normally quite straightforward, it becomes considerably more complex when 2D lights are used, because lights are drawn using extra passes, one for each light affecting the primitive. Consider 2 sprites A and B, with identical texture and material. Without lights they would be batched together and drawn in one drawcall. But with 3 lights, they would be drawn as follows, each line a drawcall:
 
 ![lights_overlap](pics/lights_overlap.png)
 
@@ -90,7 +93,7 @@ B - light 2
 B - light 3
 ```
 
-That is a lot of drawcalls, 8 for only 2 sprites. Now consider we are drawing 1000 sprites, the number of drawcalls quickly becomes astronomical, and performance suffers. This is partly why lights has the potential to drastically slow down 2D.
+That is a lot of drawcalls, 8 for only 2 sprites. Now consider we are drawing 1000 sprites, the number of drawcalls quickly becomes astronomical, and performance suffers. This is partly why lights have the potential to drastically slow down 2D.
 
 However, if you remember our magician's trick from item reordering, it turns out we can use the same trick to get around painter's order for lights!
 
@@ -120,17 +123,17 @@ However, as with the item reordering, things are not that simple, we must first 
 Also consider that depending on the arrangement of primitives in the viewport, the overlap test will sometimes fail (because the primitives overlap and thus should not be joined). So in practice the decrease in drawcalls may be less dramatic than the perfect situation of no overlap. However performance is usually far higher than without this lighting optimization.
 
 ## Light Scissoring
-As a result of batching lit objects, a side effect can be that it can make it more difficult to cull out objects that are not affected or partially affected by a light. This can result in a downside - the fill rate requirements can, in some circumstances, increase quite a bit, and slow rendering.
+Batching can make it more difficult to cull out objects that are not affected or partially affected by a light. This can increase the fill rate requirements quite a bit, and slow rendering. Fill rate is the rate at which pixels are colored, it is another potential bottleneck unrelated to draw calls.
 
-In order to counter this problem, (and also speedup lighting in general), batching introduces light scissoring. This enables the use of the OpenGL command 'glScissor', which identifies an area, outside of which, the GPU will not render any pixels. We can thus greatly optimize fill rate by identifying the intersection area between a light and a primitive, and limit rendering the light to _this area only_.
+In order to counter this problem, (and also speedup lighting in general), batching introduces light scissoring. This enables the use of the OpenGL command ``glScissor()``, which identifies an area, outside of which, the GPU will not render any pixels. We can thus greatly optimize fill rate by identifying the intersection area between a light and a primitive, and limit rendering the light to *that area only*.
 
-Light scissoring is controlled with the `scissor_area_threshold` project setting. This value is between 1.0 and 0.0, with 1.0 being off (no scissoring), and 0.0 being scissoring in every circumstance. The reason for the setting is that there may be some small cost to scissoring on some hardware. Generally though, when you are using lighting, it should result in some performance gains.
+Light scissoring is controlled with the ``scissor_area_threshold`` project setting. This value is between 1.0 and 0.0, with 1.0 being off (no scissoring), and 0.0 being scissoring in every circumstance. The reason for the setting is that there may be some small cost to scissoring on some hardware. Generally though, when you are using lighting, it should result in some performance gains.
 
 The relationship between the threshold and whether a scissor operation takes place is not altogether straight forward, but generally it represents the pixel area that is potentially 'saved' by a scissor operation (i.e. the fill rate saved). At 1.0, the entire screens pixels would need to be saved, which rarely if ever happens, so it is switched off. In practice the useful values are bunched towards zero, as only a small percentage of pixels need to be saved for the operation to be useful.
 
 ![light_scissoring](pics/scissoring.png)
 
-_Bottom right is a light, the red area is the pixels saved by the scissoring operation. Only the intersection needs to be rendered._
+*Bottom right is a light, the red area is the pixels saved by the scissoring operation. Only the intersection needs to be rendered.*
 
 #### The exact relationship
 The exact relationship is probably not necessary for users to worry about, but out of interest, the actual proportion of screen pixel area used as the threshold is the setting value to the power of 4.
@@ -150,12 +153,12 @@ If the number of pixels saved is more than this threshold, the scissor is activa
 
 ## Vertex baking
 The GPU shader receives instructions on what to draw in 2 main ways:
-* Uniforms (e.g. final_modulate color, item transform)
+* Shader uniforms (e.g. final_modulate color, item transform)
 * Vertex attributes (vertex color, local transform)
 
 However, within a single drawcall (batch) we cannot change uniforms. This means that naively, we would not be able to batch together items or commands that change final_modulate, or item transform. Unfortunately that is an awful lot of cases. Sprites for instance typically are individual nodes with their own item transform, and they may have their own color modulate.
 
-To get around this problem, the batching can 'bake' some of the uniforms into the vertex attributes.
+To get around this problem, the batching can "bake" some of the uniforms into the vertex attributes.
 
 * The item transform can be combined with the local transform and sent in a vertex attribute.
 * The final_modulate color can be combined with the vertex colors, and sent in a vertex attribute.
@@ -168,7 +171,7 @@ As a result certain operations in custom shaders will prevent baking, and thus d
 * Reading or writing COLOR or MODULATE - disables vertex color baking
 * Reading VERTEX - disables vertex position baking
 
-## Parameters
+## Project Settings
 In order to fine tune batching, a number of project settings are available. You can usually leave these at default during development, but it is a good idea to experiment to ensure you are getting maximum performance. Spending a little time tweaking parameters can often give considerable performance gain, for very little effort. See the tooltips in the project settings for more info.
 
 ### rendering/batching/options
@@ -219,13 +222,15 @@ items
 			batch R 0-2560 [0 - 144] {158 193 0 104 } MULTI
 canvas_end
 ```
-This is a typical simple diagnostic.
+
+This is a typical diagnostic.
 * joined_item - A joined item can contain 1 or more references to items (nodes). Generally joined_items containing many references is preferable to many joined_items containing a single reference. Whether items can be joined will be determined by their contents and compatibility with the previous item.
 * batch R - a batch containing rectangles. The second number is the number of rects. The second number in square brackets is the Godot texture ID, and the numbers in curly braces is the color. If the batch contains more than one rect, MULTI is added to the line to make it easy to identify. Seeing MULTI is good, because this indicates successful batching.
 * batch D - a default batch, containing everything else that is not currently batched.
 
 #### Default Batches
-The second number is the number of commands in the batch, and it is followed by a brief summary of the contents:
+The second number following default batches is the number of commands in the batch, and it is followed by a brief summary of the contents:
+
 ```
 l - line
 PL - polyline
@@ -245,9 +250,9 @@ You may see 'dummy' default batches containing no commands, you can ignore these
 ## Performance Tuning
 
 ## Bottlenecks & Optimization
-While batching is a specific optimization to reduce drawcalls (and state changes) and make better use of the GPU, in terms of overall performance benefit it can only be looked at in the context of where the bottlenecks are in your game or project.
+While batching is a specific optimization to reduce draw calls (and state changes) and make better use of the GPU, in terms of overall performance benefit it can only be looked at in the context of where the bottlenecks are in your game or project.
 
-The proverb 'a chain is only as strong as its weakest link' applies directly to performance optimization. If your project is spending 90% of the time in e.g. API housekeeping due to drawcalls / state changes, then reducing this by applying batching can have a massive effect on performance.
+The proverb "a chain is only as strong as its weakest link" applies directly to performance optimization. If your project is spending 90% of the time in e.g. API housekeeping due to draw calls / state changes, then reducing this by applying batching can have a massive effect on performance.
 
 ```
 Drawcalls 9 ms
@@ -303,9 +308,10 @@ Other areas highly likely to be bottlenecks:
 * Try steps to increase batching given above
 * Try switching 'single_rect_fallback' to on
 * The single rect fallback method is the default used without batching, and it is approximately twice as fast, however it can result in flicker on some hardware, so its use is discouraged
+* After trying the above, if your scene is still performaing worse, you may be fill-rate limited. In which case, consider turning off batching.
 
 ### I use custom shaders and the items are not batching
 * Custom shaders can be problematic for batching, see the custom shaders section
 
 ### I use a large number of textures, so few items are being batched
-* Consider the use of texture atlases. As well as allowing batching these reduce the need for state changes associated with changing texture.
+* Consider the use of texture atlases. As well as allowing batching, these reduce the need for state changes associated with changing texture.
