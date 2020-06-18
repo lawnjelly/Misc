@@ -233,8 +233,6 @@ CI - clip_ignore
 ```
 You may see 'dummy' default batches containing no commands, you can ignore these.
 
-## Performance Tuning
-
 ## Bottlenecks & Optimization
 While batching is a specific optimization to reduce draw calls (and state changes) and make better use of the GPU, in terms of overall performance benefit it can only be looked at in the context of where the bottlenecks are in your game or project.
 
