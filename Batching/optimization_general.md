@@ -141,7 +141,7 @@ _Total : 51 ms_
 So in this example, even though we have hugely optimized functionality A, the actual gain in terms of frame rate is quite small.
 
 ## CPU Specific
-Some techniques to look into to speed up CPU side code:
+Some options that may help:
 * Threads
 * GDNative / c++
 
