@@ -82,7 +82,7 @@ The messages are very important:
 Just because we _can_ optimize a particular bit of code, it doesn't necessarily mean that we should. Knowing when, and when not to optimize is a great skill to build up.
 
 The problematic bit, is that people tend to focus on the subquote `premature optimization is the root of all evil`. While _premature_ optimization is (by definition) undesirable, I would qualify this by pointing out an opposing point:
-> The root of performant software is performant design.
+* The root of performant software is performant design.
 
 ### Performant Design
 The danger with encouraging people to ignore optimization until necessary, is that it conveniently ignores that the most important time to consider performance is at the design stage, before a key has even hit a keyboard. If the design / algorithms of a program is inefficient, then no amount of polishing the details later will make it run fast. It may run _faster_, but it will never run as fast as a program designed for performance.
