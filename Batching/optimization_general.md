@@ -32,6 +32,7 @@ There are several methods of measuring performance, including :
 * Using the Godot profiler
 * Using external third party profilers
 * Using GPU profilers / debuggers
+* Frame rate
 
 You can also use detective work to find out where bottlenecks are.
 
