@@ -142,7 +142,8 @@ In general you should design your game for the _lowest common denominator_, then
 * 3D Optimization
 * 2D Batching
 
-### Appendix - Bottleneck math
+## Appendix
+### Bottleneck math
 The proverb "a chain is only as strong as its weakest link" applies directly to performance optimization. If your project is spending 90% of the time in function 'A', then reducing this time by optimizing A can have a massive effect on performance.
 
 ```
