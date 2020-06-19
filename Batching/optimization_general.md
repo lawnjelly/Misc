@@ -116,13 +116,13 @@ The proverb "a chain is only as strong as its weakest link" applies directly to 
 ```
 A 9 ms
 Everything else 1 ms
-_Total : 10 ms_
+_Total frame time : 10 ms_
 ```
 
 ```
 A 1 ms
 Everything else 1ms
-_Total : 2 ms_
+_Total frame time : 2 ms_
 ```
 So in this example improving this bottleneck A by a factor of 9x, decreases overall frame time by 5x, and increases frames per second by 5x.
 
@@ -131,13 +131,13 @@ If however, something else is running slowly and also bottlenecking your project
 ```
 A 9 ms
 Everything else 50 ms
-_Total : 59 ms_
+_Total frame time : 59 ms_
 ```
 
 ```
 A 1 ms
 Everything else 50 ms
-_Total : 51 ms_
+_Total frame time : 51 ms_
 ```
 
 So in this example, even though we have hugely optimized functionality A, the actual gain in terms of frame rate is quite small.
