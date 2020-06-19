@@ -34,12 +34,17 @@ There are several methods of measuring performance, including :
 * Using GPU profilers / debuggers
 * Frame rate
 
-You can also use detective work to find out where bottlenecks are.
+### Limitations
+CPU Profilers are often the 'go to' method for measuring performance, however they don't always tell the whole story.
+* Bottlenecks are often on the GPU, _as a result_ of instructions given by the CPU
+* Spikes can occur in the Operating System processes (outside of Godot) _as a result_ of instructions used in Godot (for example dynamic allocation)
+* You may not be able to profile e.g. a mobile phone
+* You may have to solve performance problems that occur on hardware you don't have access to
+
+As a result of these limitations, you often need to use detective work to find out where bottlenecks are.
 
 ### Detective work
 Detective work is a crucial skill for developers (both in terms of performance, and also in terms of bug fixing). This can include hypothesis testing, and binary search.
-
-While other techniques such as profiling are usually preferable, profiling may not always be available (for instance when the bottleneck is within the GPU, or on a mobile phone).
 
 #### Hypothesis testing
 Say for example you believe that sprites are slowing down your game. You can test this hypothesis for example by:
