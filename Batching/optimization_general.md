@@ -14,6 +14,7 @@
 ## Principles
 #### Knuth
 #### Low hanging fruit
+#### The process
 #### Algorithms
 #### Data structures
 #### Routines
