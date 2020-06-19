@@ -32,7 +32,7 @@ There are several methods of measuring performance, including :
 * Using the Godot profiler
 * Using external third party profilers
 * Using GPU profilers / debuggers
-* Frame rate
+* Frame rate (with vsync disabled)
 
 ### Limitations
 CPU Profilers are often the 'go to' method for measuring performance, however they don't always tell the whole story.
