@@ -34,6 +34,15 @@ There are several methods of measuring performance, including :
 * Using GPU profilers / debuggers
 * Detective work
 
+### Detective work
+Detective work is actually a crucial skill for developers (both in terms of performance, and also in terms of bug fixing). This can include hypothesis testing, and binary search.
+
+#### Hypothesis testing
+Say for example you believe that sprites are slowing down your game. You can test this hypothesis for example by:
+* Measuring the performance when you add more sprites, or take some away.
+
+This may lead to a further hypothesis - does the size of the sprite determine the performance drop?
+* You can test this by keeping everything the same, but changing the sprite size, and measuring performance
 
 
 
