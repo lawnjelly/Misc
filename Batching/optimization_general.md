@@ -104,7 +104,7 @@ The process is thus:
 ### Optimizing a Bottleneck
 Some profilers will even tell you which part of a function (which data accesses, calculations) are slowing things down.
 
-As with design you should concentrate your efforts first on making sure the algorithms and data structures are the best they can be. Data access should be local (to make best use of CPU cache), and it can often be better to use compact storage of data (again, always profile to test results).
+As with design you should concentrate your efforts first on making sure the algorithms and data structures are the best they can be. Data access should be local (to make best use of CPU cache), and it can often be better to use compact storage of data (again, always profile to test results). Often you can make use of precalculation to do heavy computation ahead of time (e.g. at level load, or loading precalculated data files).
 
 Once algorithms and data is good, you can often make small changes in routines which improve performance, things like moving calculations outside of loops.
 
