@@ -27,6 +27,9 @@
 #### Drawcalls / API
 #### Vertex processing
 #### Pixels / Fillrate
+#### Platform Specific
+#### Mobile / Tile renderers
+
 ### Links
 * 3D Optimization
 * 2D Batching
