@@ -75,18 +75,20 @@ This can be very useful both to identify bottlenecks and to measure the results 
 
 _Donald Knuth_
 
-This famous quote is a great one, because it does contain some important lessons, but in some ways it is misleading, as I will get to later.
+This famous quote is a great one, because it does contain some important lessons, but in some ways it is misleading.
 
-The message is very important: Programmer / Developer time is limited. Intead of blindly trying to speed up all aspects of a program we should concentrate our efforts on the aspects that really matter. The other point is equally valid - efforts at optimization often end up with code that is harder to read and debug than non-optimized code. It is in our interests to limit this to areas that will really benefit.
+The messages are very important:
+* Programmer / Developer time is limited. Intead of blindly trying to speed up all aspects of a program we should concentrate our efforts on the aspects that really matter.
+* Efforts at optimization often end up with code that is harder to read and debug than non-optimized code. It is in our interests to limit this to areas that will really benefit.
+
+Just because we _can_ optimize a particular bit of code, it doesn't necessarily mean that we should. Knowing when, and when not to optimize is a great skill to build up.
 
 The problematic bit, is that people tend to focus on the subquote `premature optimization is the root of all evil`. While _premature_ optimization is (by definition) undesirable, I would qualify this by pointing out an opposite point, that _the root of performant software is performant design_.
 
 ### Performant Design
-The problem with encouraging people to ignore optimization until necessary, is that the most important time to consider optimization is in the design stage, before a key has even hit a keyboard. If the design / algorithms of a program is inefficient, then no amount of polishing the details will make it run fast. It may run _faster_, but it will never run as fast as a program designed for performance.
+The danger with encouraging people to ignore optimization until necessary, is that it conveniently ignores that the most important time to consider performance is at the design stage, before a key has even hit a keyboard. If the design / algorithms of a program is inefficient, then no amount of polishing the details will make it run fast. It may run _faster_, but it will never run as fast as a program designed for performance.
 
-This is far more important in game / graphics programming than in more general programming. A performant design, even without low level optimization, will often run many times faster than a mediocre design with low level optimization.
-
-Bear in mind there is often a trade off between performant design, and design for ease of use. Knowing how to balance these two is a useful skill, it will vary depending on the area.
+This tends to be far more important in game / graphics programming than in general programming. A performant design, even without low level optimization, will often run many times faster than a mediocre design with low level optimization.
 
 Of course, in practice, unless you have prior knowledge, you are unlikely to come up with the best design first time. So you will often make a series of versions of a particular area of code, each taking a different approach to the problem, until you come to a satisfactory solution.
 
