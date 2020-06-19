@@ -18,4 +18,12 @@
 #### Data structures
 #### Routines
 
+## CPU
+#### Threads
+#### GDNative / c++
+
+## GPU
+#### Drawcalls / API
+#### Vertex processing
+#### Pixels / Fillrate
 
