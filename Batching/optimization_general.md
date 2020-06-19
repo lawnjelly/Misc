@@ -64,6 +64,7 @@ This can be very useful both to identify bottlenecks and to measure the results 
 
 ## Principles
 
+#### Knuth
 > Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%.
 
 _Donald Knuth_
@@ -72,9 +73,14 @@ This famous quote is a great one, because it does contain some important lessons
 
 The message is very important: Programmer / Developer time is limited. Intead of blindly trying to speed up all aspects of a program we should concentrate our efforts on the aspects that really matter. The other point is equally valid - efforts at optimization often end up with code that is harder to read and debug than non-optimized code. It is in our interests to limit this to areas that will really benefit.
 
-The problematic bit, is that people tend to focus on the subquote `premature optimization is the root of all evil`. While _premature_ optimization is (by definition) undesirable, I would qualify this by pointing out that _the root of performant software is performant design_.
+The problematic bit, is that people tend to focus on the subquote `premature optimization is the root of all evil`. While _premature_ optimization is (by definition) undesirable, I would qualify this by pointing out an opposite point, that _the root of performant software is performant design_.
 
+#### Performant Design
+The problem with encouraging people to ignore optimization until necessary, is that the most important time to consider optimization is in the design stage, before a key has even hit a keyboard. If the design / algorithms of a program is inefficient, then no amount of polishing the details will make it run fast. It may run _faster_, but it will never run as fast as a program designed for performance.
 
+This is far more important in game / graphics programming than in more general programming.
+
+Of course, in practice, unless you have prior knowledge, you are unlikely to come up with the best design first time. So you will often make a series of versions of a particular area of code, each taking a different approach to the problem, until you come to a satisfactory solution.
 
 #### Knuth
 #### Low hanging fruit
