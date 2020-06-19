@@ -4,9 +4,10 @@ In an ideal world, computers would run at infinite speed, and the only limit to 
 
 Designing games and other software is thus a compromise between what we would like to be possible, and what we can realistically achieve while maintaining good performance.
 
-To achieve the best results, we have two options:
+To achieve the best results, we have two approaches:
 * Work faster
 * Work smarter
+
 And preferably, we will use a blend of the two.
 
 ### Smoke and Mirrors
