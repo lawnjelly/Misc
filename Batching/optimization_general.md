@@ -150,6 +150,8 @@ Some options that may help:
 ## GPU Specific
 The GPU and / or communication with the GPU can often be bottlenecks. This is highly hardware specific, particularly mobile GPUs may struggle with scenes that are no problem for desktop.
 
+GPU bottlenecks are slightly different to CPU, because often you can only change performance indirectly, by changing the instructions you give to the GPU.
+
 #### Drawcalls / API
 Godot issues instructions to the GPU via a graphics API (OpenGL, GLES2, GLES3, Vulkan). The communication and driver activity involved can be quite costly, especially in OpenGL. Reducing the amount of drawcalls / state changes can greatly benefit performance. Using techniques such as 2D batching, and reducing the overall number of objects in a scene can help with this.
 
