@@ -92,7 +92,9 @@ Of course, in practice, unless you have prior knowledge, you are unlikely to com
 It is difficult to give general guidelines for performant design because this is so dependent on the problem space. One point worth mentioning though, in terms of CPU side design, is that modern CPUs are nearly always limited by memory bandwidth. This has led to a resurgence in data orientated design, which involves designing data structures and algorithms for locality of data and linear access, rather than jumping around in memory.
 
 ### The Optimization Process
-Assuming we have a reasonable design, and taking our lessons from Knuth, our first step in optimization should be to identify the biggest bottlenecks - the slowest functions, the low hanging fruit. Once we have successfully improved the speed of the slowest area, it may no longer be the bottleneck. So we should test / profile again, and find the next bottleneck on which to focus.
+Assuming we have a reasonable design, and taking our lessons from Knuth, our first step in optimization should be to identify the biggest bottlenecks - the slowest functions, the low hanging fruit.
+
+Once we have successfully improved the speed of the slowest area, it may no longer be the bottleneck. So we should test / profile again, and find the next bottleneck on which to focus.
 
 The process is thus:
 1) Profile / Identify bottleneck
