@@ -4,6 +4,29 @@ In an ideal world, computers would run at infinite speed, and the only limit to 
 
 Designing games and other software is thus a compromise between what we would like to be possible, and what we can realistically achieve while maintaining good performance.
 
+To achieve the best results, we have two options:
+* Work faster
+* Work smarter
+And preferably, we will use a blend of the two.
+
+### Smoke and Mirrors
+
+Part of working smarter is recognising that, especially in games, we can often get the player to believe they are in a world that is far more complex / interactive / graphically exciting than it really is (under the hood). A good programmer is somewhat akin to a magician, and should strive to learn the tricks of the trade, and try to invent new ones.
+
+
+## Principles
+
+
+
+#### Knuth
+#### Low hanging fruit
+#### The process
+#### Algorithms
+#### Data structures
+#### Routines
+
+
+
 #### Continuous and spikes
 #### CPU / GPU / OS
 
@@ -15,13 +38,6 @@ Designing games and other software is thus a compromise between what we would li
 #### Bottleneck math
 #### Examples
 
-## Principles
-#### Knuth
-#### Low hanging fruit
-#### The process
-#### Algorithms
-#### Data structures
-#### Routines
 
 ## CPU
 #### Threads
