@@ -164,7 +164,7 @@ You can easily test whether you are fill rate limited - Simply render your scene
 #### MultiPlatform Advice
 If you are aiming to release on multiple platforms, the best advice is to test early, and test often, on all your platforms, especially mobile. Developing a game on desktop then last minute attempting to port to mobile is a recipe for disaster.
 
-Often you should design your game for the _lowest common denominator_, then add optional enhancements for more powerful platforms.
+In general you should design your game for the _lowest common denominator_, then add optional enhancements for more powerful platforms.
 
 ### Links
 * 3D Optimization
