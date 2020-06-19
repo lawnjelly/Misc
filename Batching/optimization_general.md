@@ -86,13 +86,20 @@ Of course, in practice, unless you have prior knowledge, you are unlikely to com
 
 It is difficult to give general guidelines for performant design because this is so dependent on the problem space. One point worth mentioning though, in terms of CPU side design, is that modern CPUs are nearly always limited by memory bandwidth. This has led to a resurgence in data orientated design, which involves designing data structures and algorithms for locality of data and linear access, rather than jumping around in memory.
 
-#### Knuth
-#### Low hanging fruit
-#### The process
-#### Algorithms
-#### Data structures
-#### Routines
+### The Optimization Process
+Assuming we have a reasonable design, and taking our lessons from Knuth, our first step in optimization should be to identify the biggest bottlenecks - the slowest functions, the low hanging fruit. Once we have successfully improved the speed of the slowest area, it may no longer be the bottleneck. So we should test / profile again, and find the next bottleneck on which to focus.
 
+The process is thus:
+1) Profile / Identify bottleneck
+2) Optimize bottleneck
+3) Return to step 1
+
+### Optimizing a Bottleneck
+Some profilers will even tell you which part of a function (which data accesses, calculations) are slowing things down.
+
+As with design you should concentrate your efforts first on making sure the algorithms and data structures are the best they can be. Data access should be local (to make best use of CPU cache), and it can often be better to use compact storage of data (again, always profile to test results).
+
+Once algorithms and data is good, you can often make small changes in routines which improve performance, things like moving calculations outside of loops.
 
 
 #### Continuous and spikes
