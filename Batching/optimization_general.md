@@ -26,4 +26,7 @@
 #### Drawcalls / API
 #### Vertex processing
 #### Pixels / Fillrate
+### Links
+* 3D Optimization
+* 2D Batching
 
