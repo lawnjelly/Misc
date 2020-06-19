@@ -52,6 +52,14 @@ Say you know that frames are taking much longer than they should, but you are no
 
 Once you know which of the two halves contains the bottleneck, you can then repeat this process, until you have pinned down the problematic area.
 
+## Profilers
+Profilers generally allow you make a timing run of your program (or sections of it), then provide results telling you what percentage of time was spent in different functions and areas, and how often functions were called.
+
+Godot profiler screenshot
+
+Callgrind screenshot
+
+This can be very useful both to identify bottlenecks and to measure the results of your improvements. Sometimes attempts to improve performance can backfire and lead to slower performance, so always use profiling and timing to guide your efforts.
 
 ## Principles
 
