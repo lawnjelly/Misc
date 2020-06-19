@@ -75,12 +75,16 @@ The message is very important: Programmer / Developer time is limited. Intead of
 
 The problematic bit, is that people tend to focus on the subquote `premature optimization is the root of all evil`. While _premature_ optimization is (by definition) undesirable, I would qualify this by pointing out an opposite point, that _the root of performant software is performant design_.
 
-#### Performant Design
+### Performant Design
 The problem with encouraging people to ignore optimization until necessary, is that the most important time to consider optimization is in the design stage, before a key has even hit a keyboard. If the design / algorithms of a program is inefficient, then no amount of polishing the details will make it run fast. It may run _faster_, but it will never run as fast as a program designed for performance.
 
-This is far more important in game / graphics programming than in more general programming.
+This is far more important in game / graphics programming than in more general programming. A performant design, even without low level optimization, will often run many times faster than a mediocre design with low level optimization.
+
+Bear in mind there is often a trade off between performant design, and design for ease of use. Knowing how to balance these two is a useful skill, it will vary depending on the area.
 
 Of course, in practice, unless you have prior knowledge, you are unlikely to come up with the best design first time. So you will often make a series of versions of a particular area of code, each taking a different approach to the problem, until you come to a satisfactory solution.
+
+It is difficult to give general guidelines for performant design because this is so dependent on the problem space. One point worth mentioning though, in terms of CPU side design, is that modern CPUs are nearly always limited by memory bandwidth. This has led to a resurgence in data orientated design, which involves designing data structures and algorithms for locality of data and linear access, rather than jumping around in memory.
 
 #### Knuth
 #### Low hanging fruit
