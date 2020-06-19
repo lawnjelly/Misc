@@ -138,17 +138,27 @@ _Total : 51 ms_
 
 So in this example, even though we have hugely optimized functionality A, the actual gain in terms of frame rate is quite small.
 
-#### Examples
+## CPU Specific
+Some techniques to look into to speed up CPU side code:
+* Threads
+* GDNative / c++
 
+## GPU Specific
+The GPU and / or communication with the GPU can often be bottlenecks. This is highly hardware specific, particularly mobile GPUs may struggle with scenes that are no problem for desktop.
 
-## CPU
-#### Threads
-#### GDNative / c++
-
-## GPU
 #### Drawcalls / API
+Godot issues instructions to the GPU via a graphics API (OpenGL, GLES2, GLES3, Vulkan). The communication and driver activity involved can be quite costly, especially in OpenGL. Reducing the amount of drawcalls / state changes can greatly benefit performance. Using techniques such as 2D batching, and reducing the overall number of objects in a scene can help with this.
+
 #### Vertex processing
+Too many vertices in a scene can slow down rendering, especially on mobile. Skinned mesh vertices on animated models can be particularly slow in some cases. Reducing poly count or having different versions of models available can help with this.
+
 #### Pixels / Fillrate
+Each fragment or pixel that is shaded takes time (and costs in terms of battery use on mobile). Each access to textures within fragment shaders can also slow things down, as well as complicated shaders.
+
+Transparency can particularly be problematic for fill rate because it can prevent some GPU optimizations (early Z), especially on mobile.
+
+You can easily test whether you are fill rate limited - Simply render your scene to a postage stamp sized window, instead of the whole screen. If the frame rate increases, you are, to some extent, fill rate limited.
+
 #### Platform Specific
 #### Mobile / Tile renderers
 Battery use
