@@ -21,6 +21,22 @@ To the outside observer, performance problems are often lumped together. But in 
 * An intermittent process that causes 'spikes' of slowness, leading to stalls
 * A slow process that occurs outside of normal gameplay, for instance, on level load
 
+Each of these are annoying to the user, but in different ways.
+
+## Measuring Performance
+
+Probably the most important tool for optimization is the ability to measure performance - to identify where bottlenecks are, and to measure the success of our attempts to speed them up.
+
+There are several methods of measuring performance, including :
+* Putting a start / stop timer around code of interest
+* Using the Godot profiler
+* Using external third party profilers
+* Using GPU profilers / debuggers
+* Detective work
+
+
+
+
 
 ## Principles
 
