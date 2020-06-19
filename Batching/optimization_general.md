@@ -14,10 +14,15 @@ And preferably, we will use a blend of the two.
 
 Part of working smarter is recognising that, especially in games, we can often get the player to believe they are in a world that is far more complex / interactive / graphically exciting than it really is (under the hood). A good programmer is somewhat akin to a magician, and should strive to learn the tricks of the trade, and try to invent new ones.
 
+### The nature of slowness
+To the outside observer, performance problems are often lumped together. But in reality, there are several different kinds of performance problem:
+
+* A slow process that occurs every frame, leading to a continuously low frame rate
+* An intermittent process that causes 'spikes' of slowness, leading to stalls
+* A slow process that occurs outside of normal gameplay, for instance, on level load
+
 
 ## Principles
-
-
 
 #### Knuth
 #### Low hanging fruit
