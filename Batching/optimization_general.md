@@ -106,16 +106,38 @@ As with design you should concentrate your efforts first on making sure the algo
 
 Once algorithms and data is good, you can often make small changes in routines which improve performance, things like moving calculations outside of loops.
 
+### Bottleneck math
+The proverb "a chain is only as strong as its weakest link" applies directly to performance optimization. If your project is spending 90% of the time in function 'A', then reducing this time by optimizing A can have a massive effect on performance.
 
-#### Continuous and spikes
-#### CPU / GPU / OS
+```
+A 9 ms
+Everything else 1 ms
+_Total : 10 ms_
+```
 
-## Profiling
-#### Within Godot
-#### External tools
+```
+A 1 ms
+Everything else 1ms
+_Total : 2 ms_
+```
+So in this example improving this bottleneck A by a factor of 9x, decreases overall frame time by 5x, and increases frames per second by 5x.
 
-## Bottlenecks
-#### Bottleneck math
+If however, something else is running slowly and also bottlenecking your project, then the same improvement can lead to less dramatic gains:
+
+```
+A 9 ms
+Everything else 50 ms
+_Total : 59 ms_
+```
+
+```
+A 1 ms
+Everything else 50 ms
+_Total : 51 ms_
+```
+
+So in this example, even though we have hugely optimized functionality A, the actual gain in terms of frame rate is quite small.
+
 #### Examples
 
 
