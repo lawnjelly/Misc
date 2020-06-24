@@ -1,14 +1,17 @@
 # Optimization
-## Table of Contents
+## Table of contents
 
 ### Common
-* Detective Work
+* Principles
+* The optimization process
+* Detective work
 * Measuring performance
 ### CPU
-* CPU Profilers
+* CPU profilers
 * SceneTree
 * GDScript
 * c++
-* PhysicsGPU
+* Physics
+### GPU
 ### 2D
 ### 3D
