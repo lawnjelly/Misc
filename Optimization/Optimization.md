@@ -23,3 +23,8 @@
 ### 2D
 * Batching
 ### 3D
+* Culling
+* Overdraw
+* Transparency / Particles
+* Billboards / Imposters
+* Lighting
