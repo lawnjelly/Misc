@@ -64,7 +64,7 @@ A trick
 
 And now a sleight of hand. Although the idea of painter's order is that objects are rendered from back to front, consider 3 objects A, B and C, that contain 2 different textures, grass and wood.
 
-![overlap1](pics/overlap1.png)
+![overlap1](images_batching/overlap1.png)
 
 In painter's order they are ordered:
 ```
@@ -80,7 +80,7 @@ However, painter's order is only needed on the assumption that they will be draw
 Item reordering
 ^^^^^^^^^^^^^^^
 
-![overlap2](pics/overlap2.png)
+![overlap2](images_batching/overlap2.png)
 
 ```
 A - wood
@@ -95,7 +95,7 @@ Lights
 
 Although the job for the batching system is normally quite straightforward, it becomes considerably more complex when 2D lights are used, because lights are drawn using extra passes, one for each light affecting the primitive. Consider 2 sprites A and B, with identical texture and material. Without lights they would be batched together and drawn in one drawcall. But with 3 lights, they would be drawn as follows, each line a drawcall:
 
-![lights_overlap](pics/lights_overlap.png)
+![lights_overlap](images_batching/lights_overlap.png)
 
 ```
 A
@@ -114,7 +114,7 @@ However, if you remember our magician's trick from item reordering, it turns out
 
 If A and B are not overlapping, we can render them together in a batch, so the draw process is as follows:
 
-![lights_separate](pics/lights_separate.png)
+![lights_separate](images_batching/lights_separate.png)
 
 ```
 AB
@@ -152,7 +152,7 @@ The relationship between the threshold and whether a scissor operation takes pla
 
 The exact relationship is probably not necessary for users to worry about, but out of interest is included in the appendix.
 
-![light_scissoring](pics/scissoring.png)
+![light_scissoring](images_batching/scissoring.png)
 
 *Bottom right is a light, the red area is the pixels saved by the scissoring operation. Only the intersection needs to be rendered.*
 
