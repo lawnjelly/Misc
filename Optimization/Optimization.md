@@ -13,6 +13,7 @@
 * GDScript
 * c++
 * Physics
+* Optimization using Servers
 ### GPU
 * [Drawcalls / state changes / API](gpu/gpu.md)
 * Vertex processing
@@ -28,3 +29,4 @@
 * Billboards / Imposters
 * Lighting
 * Animation / Skinning
+* Optimization using MultiMeshes
