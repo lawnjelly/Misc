@@ -89,7 +89,8 @@ The danger with encouraging people to ignore optimization until necessary, is th
 
 This tends to be far more important in game / graphics programming than in general programming. A performant design, even without low level optimization, will often run many times faster than a mediocre design with low level optimization.
 
-Of course, in practice, unless you have prior knowledge, you are unlikely to come up with the best design first time. So you will often make a series of versions of a particular area of code, each taking a different approach to the problem, until you come to a satisfactory solution.
+### Incremental Design
+Of course, in practice, unless you have prior knowledge, you are unlikely to come up with the best design first time. So you will often make a series of versions of a particular area of code, each taking a different approach to the problem, until you come to a satisfactory solution. It is important not to spend too much time on the details at this stage until you have finalized the overall design, otherwise much of your work will be thrown out.
 
 It is difficult to give general guidelines for performant design because this is so dependent on the problem space. One point worth mentioning though, in terms of CPU side design, is that modern CPUs are nearly always limited by memory bandwidth. This has led to a resurgence in data orientated design, which involves designing data structures and algorithms for locality of data and linear access, rather than jumping around in memory.
 
@@ -109,6 +110,8 @@ Some profilers will even tell you which part of a function (which data accesses,
 As with design you should concentrate your efforts first on making sure the algorithms and data structures are the best they can be. Data access should be local (to make best use of CPU cache), and it can often be better to use compact storage of data (again, always profile to test results). Often you can make use of precalculation to do heavy computation ahead of time (e.g. at level load, or loading precalculated data files).
 
 Once algorithms and data is good, you can often make small changes in routines which improve performance, things like moving calculations outside of loops.
+
+Always retest your timing / bottlenecks after making each change. Some changes will increase speed, others may have a negative effect. Sometimes a small positive effect will be outweighed by the negatives of more complex code, and you may choose to leave out that optimization.
 
 ## Appendix
 ### Bottleneck math
