@@ -117,7 +117,6 @@ However, if you remember our magician's trick from item reordering, it turns out
 
 If A and B are not overlapping, we can render them together in a batch, so the draw process is as follows:
 
-![lights_separate](images_batching/lights_separate.png)
 .. image:: images_batching/lights_separate.png
 	:alt: lights separate image
 
