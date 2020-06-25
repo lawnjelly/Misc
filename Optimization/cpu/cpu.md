@@ -1,7 +1,9 @@
 # CPU Optimization
 
 ## CPU Profilers
-The most important tool in any optimizers bag of tricks is the profiler. Profilers run alongside your program, and as your program runs, they take timing measurements in order to work out what proportion of time is spent in different functions, and different parts of the code.
+In order to know how to speed up our program, we have to know where are the 'bottlenecks', the slowest parts that are limiting the rate that everything can progress. This enables us to concentrate our efforts on optimizing the areas which will give us the greatest speed improvement, instead of spending a lot of time optimizing functions that will lead to little if any improvement to performance.
+
+Bottlnecks are easy to identify with perhaps the most important tool in any optimizers bag of tricks - the profiler. Profilers run alongside your program, and as your program runs, they take timing measurements in order to work out what proportion of time is spent in different functions, and different parts of the code.
 
 The kind of results you will be looking for are illustrated on this diagram (from callgrind, a profiler for linux):
 ![valgrind](images_cpu/valgrind.png)
