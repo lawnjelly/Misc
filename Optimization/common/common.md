@@ -35,6 +35,8 @@ There are several methods of measuring performance, including :
 * Using GPU profilers / debuggers
 * Frame rate (with vsync disabled)
 
+Be very aware that the relative performance of different areas can vary on different hardware. Often it is a good idea to make timings on more than one device, especially including mobile as well as desktop, if you are targetting mobile.
+
 ### Limitations
 CPU Profilers are often the 'go to' method for measuring performance, however they don't always tell the whole story.
 * Bottlenecks are often on the GPU, _as a result_ of instructions given by the CPU
