@@ -12,8 +12,9 @@ In this example we can see nearly all time is spent under the `Main::iteration()
 
 This is actually an excellent example because in an ideal world, only a very small proportion of time would be spent here, and this is an indication that there is a problem with too much communication and work being done in the graphics API. This profiling lead to the development of 2d batching, which greatly speeds up 2d by reducing bottlenecks in this area.
 
-The easiest way to get started with profiling is to use the profiler in built in the Godot IDE. This is an ideal way to find out, for example, what part of your gdscript may be slowing 
+The easiest way to get started with profiling is to use the profiler in built in the Godot IDE. This is an ideal way to find out, for example, what part of your gdscript may be slowing down your project. As well as letting you know how much time is spent in various functions, Godot IDE also features various monitors which can help you track down performance problems.
 
+GODOT PROFILER PICTURE
 
 ## SceneTree
 
