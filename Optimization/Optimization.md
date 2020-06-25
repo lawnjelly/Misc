@@ -21,7 +21,7 @@
 * Multiplatform / Mobile / Tile renderers
 
 ### 2D
-* [Batching](2d/batching.rst)
+* [Batching](2d/batching.md)
 ### 3D
 * [Culling & overdraw](3d/3d.rst)
 * Transparency / Particles
