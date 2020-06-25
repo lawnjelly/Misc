@@ -24,6 +24,9 @@
 ### 2D
 * [Batching](2d/batching.md)
 ### 3D
+* Main 3d Optimization existing doc
+
+Rest is supplemental:
 * [Culling & overdraw](3d/3d.md)
 * Transparency / Particles
 * Billboards / Imposters
