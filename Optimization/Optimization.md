@@ -2,7 +2,7 @@
 ## Table of contents
 
 ### Common
-* Principles
+* [Principles](common/optimization_common.rst)
 * The optimization process
 * Detective work
 * Measuring performance
