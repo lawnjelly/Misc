@@ -32,4 +32,5 @@ Rest is supplemental:
 * Billboards / Imposters
 * Lighting
 * Animation / Skinning
+* Large worlds
 * Optimization using MultiMeshes
