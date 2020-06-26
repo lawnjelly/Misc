@@ -11,16 +11,21 @@ Profilers run alongside your program as it runs, and take timing measurements in
 
 Godot IDE conveniently has a built in profiler. It does not run every time you start your project, and must be manually started and stopped. This is because, in common with most profilers, recording these timing measurements can slow down your project.
 
-After profiling, you can look back at the results for each frame. They may look something like this:
+After profiling, you can look back at the results for a frame.
 
 ![godot profiler](images_cpu/godot_profiler.png)
+_These are the results of a profile of one of the demo projects._
 
+Note that we can see the cost of in built processes such as physics and audio, as well as seeing the cost of our own scripting functions at the bottom.
 
+When a project is running slowly, you will often see an obvious function or process taking a lot more time than others. This is your primary bottleneck, and you can usually increase speed by optimizing this area.
 
+## External Profilers
 
+Although the Godot IDE profiler is very convenient and useful, sometimes you need more power, and the ability to profile the Godot engine source code itself. You can use a number of third party profilers to do this, often free, including Valgrind, VerySleepy, Visual Studio and Intel VTune. Note that in order to use a third party profiler, you may need to compile the Godot engine from source, in order to have program database information available for the profiler. You can also use a debug build, however, note that the results of profiling a debug build will be different to a release build, because of optimizations in the latter. Simply put, bottlenecks are often in a different place in debug builds, so profiling release builds should be the gold standard.
 
-The kind of results you will be looking for are illustrated on this diagram (from callgrind, a profiler for linux):
 ![valgrind](images_cpu/valgrind.png)
+_These are example results from Callgrind, part of Valgrind, on Linux._
 
 From the left, it is listing the percentage of time within a function and its children (Inclusive), the percentage of time spent within the function itself, excluding child functions (Self), the number of times the function is called, the function name, and the file.
 
