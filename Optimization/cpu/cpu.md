@@ -85,6 +85,11 @@ Often an option when a lot of calculations need to be made, or a lot of differen
 The disadvantage is you have to be incredibly careful using threads. As each CPU core operates independently, they can end up trying to access the same memory at the same time. One thread can be reading to a variable while another is writing. Before you use threads make sure you understand the dangers and how to try and prevent these race conditions.
 
 ## SceneTree
+Although scene tree nodes are an incredibly powerful and versatile concept, be aware that every node has a cost. Built in functions such as `_process` and `_physics_process` (and many others) propagate through the tree. This housekeeping can lead to pathological situations when you have very large numbers of nodes.
+
+Also consider that nodes are handled independently in the Godot renderers, sometimes a smaller number of nodes with more in each can lead to better performance.
+
+One quirk of the scenetree is that you can sometimes get much better performance by removing nodes from the scene tree than by pausing or hiding them. You might not choose to delete a detached node. You can for example, keep a reference to a node, detach it from the scene tree, then reattach it later. This can be very useful for adding and removing areas from a game.
 
 ## Physics
 
