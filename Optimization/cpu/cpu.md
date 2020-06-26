@@ -60,16 +60,15 @@ This means that the first time you run a function, it may run slowly, because th
 
 Understanding cache is also crucial to CPU optimization. If you have an algorithm (routine) that loads small bits of data from randomly spread out areas of main memory, this can result in a lot of cache misses, a lot of the time, the CPU will be waiting around for data to operate on instead of doing any work. Instead, if you can make your data accesses localised, or even better, access memory in a linear fashion (like a continuous list), then the cache will work optimally and the CPU will be able to work as fast as possible.
 
-## SceneTree
-
-## GDScript
-
 ## c++
-
-## Physics
 
 ## Threads
 
 ## SIMD
 
+## SceneTree
+
+## Physics
+
+## GDScript
 
