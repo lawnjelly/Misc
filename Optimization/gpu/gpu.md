@@ -3,7 +3,7 @@ The demand for graphical features and progress almost guarantees that you will e
 
 Where bottlenecks occur in graphics is highly hardware specific. Mobile GPUs in particular may struggle with scenes that run easily on desktop.
 
-Understanding and investigating GPU bottlenecks is slightly different to the situation on the CPU, because often you can only change performance indirectly, by changing the instructions you give to the GPU.
+Understanding and investigating GPU bottlenecks is slightly different to the situation on the CPU, because often you can only change performance indirectly, by changing the instructions you give to the GPU, and it may be more difficult to take measurements. Often the only way of measuring performance is by examining changes in frame rate.
 
 ## Drawcalls / state changes / API
 Godot issues instructions to the GPU via a graphics API (OpenGL, GLES2, GLES3, Vulkan). The communication and driver activity involved can be quite costly, especially in OpenGL. Reducing the amount of drawcalls / state changes can greatly benefit performance. Using techniques such as 2D batching, and reducing the overall number of objects in a scene can help with this.
