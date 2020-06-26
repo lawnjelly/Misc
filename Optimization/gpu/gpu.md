@@ -6,7 +6,15 @@ Where bottlenecks occur in graphics is highly hardware specific. Mobile GPUs in 
 Understanding and investigating GPU bottlenecks is slightly different to the situation on the CPU, because often you can only change performance indirectly, by changing the instructions you give to the GPU, and it may be more difficult to take measurements. Often the only way of measuring performance is by examining changes in frame rate.
 
 ## Drawcalls / state changes / API
-Godot issues instructions to the GPU via a graphics API (OpenGL, GLES2, GLES3, Vulkan). The communication and driver activity involved can be quite costly, especially in OpenGL. Reducing the amount of drawcalls / state changes can greatly benefit performance. Using techniques such as 2D batching, and reducing the overall number of objects in a scene can help with this.
+Godot issues instructions to the GPU via a graphics API (OpenGL, GLES2, GLES3, Vulkan). The communication and driver activity involved can be quite costly, especially in OpenGL. If we can provide these instructions in a way that is preferred by the driver and GPU, we can greatly increase performance.
+
+Nearly every API command in OpenGL requires a certain amount of validation, to make sure the GPU is in the correct state. Even seemingly simple commands can lead to a flurry of behind the scenes housekeeping. Therefore the name of the game is reduce these instructions to a bare minimum, and group together similar objects as much as possible so they can be rendered together, or with the minimum number of state changes.
+
+In 2d in particular the costs of treating each item individually can be prohibitively high - there can easily be thousands on screen. This is why 2d batching is used - multiple similar items are grouped together and rendered in a batch, via a single drawcall, rather than making a separate drawcall for each item. In addition this means that state changes, material and texture changes can be kept to a minimum.
+
+
+
+Reducing the amount of drawcalls / state changes can greatly benefit performance. Using techniques such as 2D batching, and reducing the overall number of objects in a scene can help with this.
 
 ## Vertex Processing
 Too many vertices in a scene can slow down rendering, especially on mobile. Skinned mesh vertices on animated models can be particularly slow in some cases. Reducing poly count or having different versions of models available can help with this.
