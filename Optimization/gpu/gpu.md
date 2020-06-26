@@ -1,7 +1,9 @@
 # GPU Optimization
-The GPU and / or communication with the GPU can often be bottlenecks. This is highly hardware specific, particularly mobile GPUs may struggle with scenes that are no problem for desktop.
+The demand for graphical features and progress almost guarantees that you will encounter graphics bottlenecks. Some of these can be CPU side, for instance in calculations inside the Godot engine to prepare objects for rendering. Bottlenecks can also occur on the CPU in the graphics driver, which sorts instructions to pass to the GPU. And finally bottlenecks also occur on the GPU itself.
 
-GPU bottlenecks are slightly different to CPU, because often you can only change performance indirectly, by changing the instructions you give to the GPU.
+Where bottlenecks occur in graphics is highly hardware specific. Mobile GPUs in particular may struggle with scenes that run easily on desktop.
+
+Understanding and investigating GPU bottlenecks is slightly different to the situation on the CPU, because often you can only change performance indirectly, by changing the instructions you give to the GPU.
 
 ## Drawcalls / state changes / API
 Godot issues instructions to the GPU via a graphics API (OpenGL, GLES2, GLES3, Vulkan). The communication and driver activity involved can be quite costly, especially in OpenGL. Reducing the amount of drawcalls / state changes can greatly benefit performance. Using techniques such as 2D batching, and reducing the overall number of objects in a scene can help with this.
