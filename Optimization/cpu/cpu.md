@@ -92,10 +92,14 @@ Also consider that each node is handled individually in the Godot renderers, som
 One quirk of the scenetree is that you can sometimes get much better performance by removing nodes from the scene tree, rather than by pausing or hiding them. You might not choose to delete a detached node. You can for example, keep a reference to a node, detach it from the scene tree, then reattach it later. This can be very useful for adding and removing areas from a game.
 
 ## Physics
-In some situations physics can end up becoming a bottleneck, particularly with complex worlds, and large numbers of physics objects. Some great techniques are to use simplified versions of your rendered geometry for physics. Often this won't be noticable for end users, but can greatly increase performance.
+In some situations physics can end up becoming a bottleneck, particularly with complex worlds, and large numbers of physics objects.
 
-Other techniques can include removing objects from physics when they are out of view / outside the current area, or reusing physics objects (maybe you allow 8 monsters per area, for example, and reuse these).
+Some great techniques to speed up physics:
+* Try using simplified versions of your rendered geometry for physics. Often this won't be noticable for end users, but can greatly increase performance.
+* Try removing objects from physics when they are out of view / outside the current area, or reusing physics objects (maybe you allow 8 monsters per area, for example, and reuse these).
 
 Another crucial aspect to physics is the physics tick rate. In some games you can greatly reduce the tick rate, and instead of for example, updating physics 60 times per second, you may update it at 20, or even 10 ticks per second. This can greatly reduce the CPU load.
 
-The downside of changing physics tick rate is you can get jerky movement or jitter when the physics update rate does not match the frames rendered. The solution to this problem is 'fixed timestep interpolation', which involves smoothing the rendered positions and rotations over multiple frames to match the physics. You can either implement this yourself or use a thirdparty addon. Interpolation is a very cheap operation, performance wise, compared to running a physics tick, orders of magnitude faster, so this can be a significant win, as well as reducing jitter.
+The downside of changing physics tick rate is you can get jerky movement or jitter when the physics update rate does not match the frames rendered.
+
+The solution to this problem is 'fixed timestep interpolation', which involves smoothing the rendered positions and rotations over multiple frames to match the physics. You can either implement this yourself or use a thirdparty addon. Interpolation is a very cheap operation, performance wise, compared to running a physics tick, orders of magnitude faster, so this can be a significant win, as well as reducing jitter.
