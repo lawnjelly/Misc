@@ -61,26 +61,26 @@ This means that the first time you run a function, it may run slowly, because th
 Understanding cache is also crucial to CPU optimization. If you have an algorithm (routine) that loads small bits of data from randomly spread out areas of main memory, this can result in a lot of cache misses, a lot of the time, the CPU will be waiting around for data to operate on instead of doing any work. Instead, if you can make your data accesses localised, or even better, access memory in a linear fashion (like a continuous list), then the cache will work optimally and the CPU will be able to work as fast as possible.
 
 ## Languages
-Some projects require more calculations in 'user' side code than others (as opposed to calculations which are made by the engine itself).
+Godot supports a number of different languages, and it is worth bearing in mind that there are tradeoffs involved - some are designed for ease of use, at the cost of speed, and others are faster but more difficult to work with.
+
+Calculations made 'Godot side' (i.e. in Godot engine code) will tend to be fast, however, if your project is making a lot of calculations in its own code, it is worth considering whether part of it could be moved to a more performant language.
 
 ### GDScript
-Scripting languages such as GDScript are designed to be easy to use and iterate, and are ideal for making many types of game, however, if you find yourself needing to do large amounts of calculations that are slowing down the project, you should consider some other options.
+GDScript is designed to be easy to use and iterate, and is ideal for making many types of game. However, ease of use is considered more important than performance, so if you need to make heavy calculations, consider moving some of your project to one of the other languages.
 
 ### C#
 C# is popular and has first class support in Godot. It offers a good compromise between speed and ease of use.
 
+### Other languages
+Third parties provide support for several other languages, including rust and javascript.
+
 ### c++
-c++ is the language Godot engine is written in. It will usually result in the fastest code, however, on a practical level, it is the most difficult to deploy to end users machines on different platforms.
-
-
-
-
-
-
-
-## c++
+c++ is the language Godot engine is written in. It will usually result in the fastest code, however, on a practical level, it is the most difficult to deploy to end users machines on different platforms. Options for using c++ include gdnative, and modules.
 
 ## Threads
+Often an option when a lot of calculations need to be made, or a lot of different calculations in parallel, is to utilize threads. Modern CPUs have multiple cores, each one capable of doing a limited amount of work. By spreading work over multiple threads we can move further towards peak CPU efficiency.
+
+The disadvantage is you have to be incredibly careful using threads. As each CPU core operates independently, they can end up trying to access the same memory at the same time. One thread can be reading to a variable while another is writing. Before you use threads make sure you understand the dangers and how to try and prevent these race conditions.
 
 ## SIMD
 
