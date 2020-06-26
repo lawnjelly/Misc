@@ -18,11 +18,12 @@
 * Optimization using Servers
 ### GPU
 * [Drawcalls / state changes / API](gpu/gpu.md)
+* Batching
 * Vertex processing
-* Fill rate
-* Shaders
-* Multiplatform / Mobile / Tile renderers
-
+* Pixel / fragment shaders - fill rate
+* Transparency
+* Multiplatform
+* Mobile / Tile renderers
 ### 2D
 * [Batching](2d/batching.md)
 ### 3D
