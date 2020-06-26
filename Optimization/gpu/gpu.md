@@ -33,20 +33,24 @@ In contrast to vertex processing, the costs of fragment shading has increased dr
 
 You can test whether a project is fill rate limited quite easily. Turn off vsync to prevent capping the frames per second, then compare the frames per second when running with a large window, to running with a postage stamp sized window. Usually you will find the fps increases quite a bit using a small window, which indicates you are to some extent fill rate limited. If on the other hand there is little to no increase in fps, then your bottleneck lies elsewhere.
 
+You can increase performance in a fill rate limited project by reducing the amount of work the GPU has to do. You can do this by simplifying the shader (perhaps turn off expensive options if you are using a default shader), and / or reducing the number and size of textures required.
+
+Consider shipping simpler shaders for mobile.
+
 ### Reading textures
 The other factor in fragment shaders is the cost of reading textures. Reading textures is an expensive operation (especially reading from several in a single fragment shader), and also consider the filtering may add expense to this (trilinear filtering between mipmaps, and averaging). Reading textures is also expensive in power terms, which is a big issue on mobiles.
 
 Compressed textures can greatly help with this problem, although be aware that in some cases on mobile you may not be able to use compression for textures with alpha (e.g. tranparency).
 
-
-
-Each fragment or pixel that is shaded takes time (and costs in terms of battery use on mobile). Each access to textures within fragment shaders can also slow things down, as well as complicated shaders.
-
-Transparency can particularly be problematic for fill rate because it can prevent some GPU optimizations (early Z), especially on mobile.
-
-You can easily test whether you are fill rate limited - Simply render your scene to a postage stamp sized window, instead of the whole screen. If the frame rate increases, you are, to some extent, fill rate limited.
+### Post processing / shadows
+Post processing effects and shadows can also be expensive in terms of fragment shading activity. Always test the impact of these on different hardware.
 
 ## Shaders
+
+
+## Transparency / Blending
+Transparency can particularly be problematic for fill rate because it can prevent some GPU optimizations (early Z), especially on mobile.
+
 
 ## Multiplatform / Mobile / Tile renderers
 If you are aiming to release on multiple platforms, the best advice is to test early, and test often, on all your platforms, especially mobile. Developing a game on desktop then last minute attempting to port to mobile is a recipe for disaster.
