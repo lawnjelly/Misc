@@ -31,7 +31,12 @@ On mobile especially, having large numbers of triangles in a small screen area c
 ## Pixel / fragment shaders - fill rate
 In contrast to vertex processing, the costs of fragment shading has increased dramatically over the years. Screen resolutions have increased (the area of a 4K screen is 8,294,400 pixels, versus 307,200 for an old 640x480 VGA screen, that is 27x the area), but also the complexity of fragment shaders has exploded. Physically based rendering requires complex calculations for each fragment.
 
+You can test whether a project is fill rate limited quite easily. Turn off vsync to prevent capping the frames per second, then compare the frames per second when running with a large window, to running with a postage stamp sized window. Usually you will find the fps increases quite a bit using a small window, which indicates you are to some extent fill rate limited. If on the other hand there is little to no increase in fps, then your bottleneck lies elsewhere.
+
+### Reading textures
 The other factor in fragment shaders is the cost of reading textures. Reading textures is an expensive operation (especially reading from several in a single fragment shader), and also consider the filtering may add expense to this (trilinear filtering between mipmaps, and averaging). Reading textures is also expensive in power terms, which is a big issue on mobiles.
+
+Compressed textures can greatly help with this problem, although be aware that in some cases on mobile you may not be able to use compression for textures with alpha (e.g. tranparency).
 
 
 
