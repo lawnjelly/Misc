@@ -96,4 +96,6 @@ In some situations physics can end up becoming a bottleneck, particularly with c
 
 Other techniques can include removing objects from physics when they are out of view / outside the current area, or reusing physics objects (maybe you allow 8 monsters per area, for example, and reuse these).
 
+Another crucial aspect to physics is the physics tick rate. In some games you can greatly reduce the tick rate, and instead of for example, updating physics 60 times per second, you may update it at 20, or even 10 ticks per second. This can greatly reduce the CPU load.
 
+The downside of changing physics tick rate is you can get jerky movement or jitter when the physics update rate does not match the frames rendered. The solution to this problem is fixed timestep interpolation, which smooths the rendered positions and rotations over multiple frames to match the physics. You can either implement this yourself or use a thirdparty addon. Interpolation is a very cheap operation, performance wise, compared to running a physics tick, orders of magnitude faster, so this can be a significant win, as well as reducing jitter.
