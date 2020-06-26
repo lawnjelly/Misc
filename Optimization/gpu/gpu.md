@@ -45,10 +45,17 @@ Compressed textures can greatly help with this problem, although be aware that i
 ### Post processing / shadows
 Post processing effects and shadows can also be expensive in terms of fragment shading activity. Always test the impact of these on different hardware.
 
-## Shaders
-
-
 ## Transparency / Blending
+Non opaque items present particular problems for rendering efficiency. Opaque items (especially in 3d) can be essentially rendered in any order and the Z buffer will ensure that only the front most objects will appear at the front. Transparent or blended objects are different - in most cases they cannot rely on the Z buffer and must be rendered in _painter's order_, from back to front, in order to look correct.
+
+The transparent items often need to be sorted (which can be expensive) but they are also particularly bad for fill rate, because every item has to be drawn, even if later tranparent items will be drawn on top.
+
+Opaque items don't have to do this. They can usually take advantage of the Z buffer by only writing to the Z buffer first, then only performing the fragment shader on the 'winning' fragment, the item that is at the front at a particular pixel.
+
+Transparency is therefore particularly expensive where multiple transparent items overlap. It is usually better to use as small a transparent area as possible in order to minimize these fill rate requirements, especially on mobile, where fill rate is very expensive. Indeed, in many situations, rendering more complex opaque geometry can end up being faster than using transparency to 'cheat'.
+
+
+
 Transparency can particularly be problematic for fill rate because it can prevent some GPU optimizations (early Z), especially on mobile.
 
 
