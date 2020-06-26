@@ -54,13 +54,9 @@ Opaque items don't have to do this. They can usually take advantage of the Z buf
 
 Transparency is therefore particularly expensive where multiple transparent items overlap. It is usually better to use as small a transparent area as possible in order to minimize these fill rate requirements, especially on mobile, where fill rate is very expensive. Indeed, in many situations, rendering more complex opaque geometry can end up being faster than using transparency to 'cheat'.
 
-
-
-Transparency can particularly be problematic for fill rate because it can prevent some GPU optimizations (early Z), especially on mobile.
-
-
-## Multiplatform / Mobile / Tile renderers
+## Multiplatform
 If you are aiming to release on multiple platforms, the best advice is to test early, and test often, on all your platforms, especially mobile. Developing a game on desktop then last minute attempting to port to mobile is a recipe for disaster.
 
 In general you should design your game for the lowest common denominator, then add optional enhancements for more powerful platforms.
 
+## Mobile / Tile renderers
