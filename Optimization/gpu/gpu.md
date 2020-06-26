@@ -10,8 +10,10 @@ Godot issues instructions to the GPU via a graphics API (OpenGL, GLES2, GLES3, V
 
 Nearly every API command in OpenGL requires a certain amount of validation, to make sure the GPU is in the correct state. Even seemingly simple commands can lead to a flurry of behind the scenes housekeeping. Therefore the name of the game is reduce these instructions to a bare minimum, and group together similar objects as much as possible so they can be rendered together, or with the minimum number of state changes.
 
+### 2d batching
 In 2d in particular the costs of treating each item individually can be prohibitively high - there can easily be thousands on screen. This is why 2d batching is used - multiple similar items are grouped together and rendered in a batch, via a single drawcall, rather than making a separate drawcall for each item. In addition this means that state changes, material and texture changes can be kept to a minimum.
 
+### 3d batching
 In 3d we still aim to minimize drawcalls and state changes, however, it can be more difficult to batch together several objects into a separate drawcall. 3d meshes tend to comprise hundreds or thousands of triangles, and combining large meshes at runtime is prohibitively expensive. The costs of joining them quickly exceeds any benefits as the number of triangles grows per mesh. A much better alternative is to join meshes ahead of time (static meshes in relation to each other). This can either be done by artists, or programmatically within Godot.
 
 There is also a cost to batching together objects in 3d. Several objects rendered as one cannot be individually culled. An entire city that is off screen will still be rendered if it is joined to a single blade of grass that is on screen. So attempting to batch together 3d objects should take account of their location and effect on culling. Often though the benefits of joining static objects will outweigh other considerations, especially for large numbers of low poly objects.
