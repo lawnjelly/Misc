@@ -9,9 +9,11 @@
 * Bottleneck math
 ### CPU
 * [CPU profilers](cpu/cpu.md)
+* Manual timing
+* Caches
+* Languages
+* Threads
 * SceneTree
-* GDScript
-* c++
 * Physics
 * Optimization using Servers
 ### GPU
