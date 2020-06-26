@@ -37,6 +37,24 @@ In this example we can see nearly all time is spent under the `Main::iteration()
 
 This is actually an excellent example because in an ideal world, only a very small proportion of time would be spent in the graphics driver, and this is an indication that there is a problem with too much communication and work being done in the graphics API. This profiling lead to the development of 2d batching, which greatly speeds up 2d by reducing bottlenecks in this area.
 
+## Manually timing functions
+Another handy technique, especially once you have identified the bottleneck using a profiler, is to manually time the function or area under test. The specifics vary according to language, but in pseudocode, you would do the following:
+
+```
+var time_start = get_time()
+...
+... your_function
+...
+var time_end = get_time()
+print("Function took " + (time_end - time_start)) 
+```
+I have deliberately left out the time units here, as this will vary.
+
+When manually timing functions, it is usually a good idea to run the function many times (say 1000 or more times), instead of just once (unless it is a very slow function). A large part of the reason for this is that timers often have limited accuracy, and CPUs will schedule processes in a haphazard manner, so an average over a series of runs is more accurate than a single measurement.
+
+
+
+
 ## SceneTree
 
 ## GDScript
