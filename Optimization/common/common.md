@@ -79,14 +79,14 @@ Just because we _can_ optimize a particular bit of code, it doesn't necessarily 
 One misleading aspect of the quote is that people tend to focus on the subquote `premature optimization is the root of all evil`. While _premature_ optimization is (by definition) undesirable, I would counter this by pointing out that performant software is the result of performant design.
 
 ### Performant Design
-The danger with encouraging people to ignore optimization until necessary, is that it conveniently ignores that the most important time to consider performance is at the design stage, before a key has even hit a keyboard. If the design / algorithms of a program is inefficient, then no amount of polishing the details later will make it run fast. It may run _faster_, but it will never run as fast as a program designed for performance.
+The danger with encouraging people to ignore optimization until necessary, is that it conveniently ignores that the most important time to consider performance is at the beginning, in the design stage, before a key has even hit a keyboard. If the design / algorithms of a program is inefficient, then no amount of polishing the details later will make it run fast. It may run _faster_, but it will never run as fast as a program designed for performance.
 
 This tends to be far more important in game / graphics programming than in general programming. A performant design, even without low level optimization, will often run many times faster than a mediocre design with low level optimization.
 
 ### Incremental Design
 Of course, in practice, unless you have prior knowledge, you are unlikely to come up with the best design first time. So you will often make a series of versions of a particular area of code, each taking a different approach to the problem, until you come to a satisfactory solution. It is important not to spend too much time on the details at this stage until you have finalized the overall design, otherwise much of your work will be thrown out.
 
-It is difficult to give general guidelines for performant design because this is so dependent on the problem space. One point worth mentioning though, in terms of CPU side design, is that modern CPUs are nearly always limited by memory bandwidth. This has led to a resurgence in data orientated design, which involves designing data structures and algorithms for locality of data and linear access, rather than jumping around in memory.
+It is difficult to give general guidelines for performant design because this is so dependent on the problem space. One point worth mentioning though, on the CPU side, is that modern CPUs are nearly always limited by memory bandwidth. This has led to a resurgence in data orientated design, which involves designing data structures and algorithms for locality of data and linear access, rather than jumping around in memory.
 
 ### The Optimization Process
 Assuming we have a reasonable design, and taking our lessons from Knuth, our first step in optimization should be to identify the biggest bottlenecks - the slowest functions, the low hanging fruit.
@@ -94,7 +94,7 @@ Assuming we have a reasonable design, and taking our lessons from Knuth, our fir
 Once we have successfully improved the speed of the slowest area, it may no longer be the bottleneck. So we should test / profile again, and find the next bottleneck on which to focus.
 
 The process is thus:
-1) Profile / Identify bottleneck
+1) Identify bottleneck
 2) Optimize bottleneck
 3) Return to step 1
 
@@ -109,7 +109,7 @@ Always retest your timing / bottlenecks after making each change. Some changes w
 
 ## Appendix
 ### Bottleneck math
-The proverb "a chain is only as strong as its weakest link" applies directly to performance optimization. If your project is spending 90% of the time in function 'A', then reducing this time by optimizing A can have a massive effect on performance.
+The proverb "a chain is only as strong as its weakest link" applies directly to performance optimization. If your project is spending 90% of the time in function 'A', then optimizing A can have a massive effect on performance.
 
 ```
 A 9 ms
