@@ -52,8 +52,13 @@ I have deliberately left out the time units here, as this will vary.
 
 When manually timing functions, it is usually a good idea to run the function many times (say 1000 or more times), instead of just once (unless it is a very slow function). A large part of the reason for this is that timers often have limited accuracy, and CPUs will schedule processes in a haphazard manner, so an average over a series of runs is more accurate than a single measurement.
 
+## Caches
 
+Something else to be particularly aware of, especially when comparing timing results of two different versions of a function, is that the results can be highly dependent on whether the data is in the CPU cache or not. CPUs don't load data directly from main memory, because although main memory can be huge (many GBs), it is very slow to access. Instead CPUs load data from a smaller, higher speed bank of memory, called cache. Loading data from cache is super fast, but every time you try and load a memory address that is not stored in cache, the cache must make a trip to main memory and slowly load in some data. This delay can result in the CPU sitting around idle for a long time, and is referred to as a 'cache miss'.
 
+This means that the first time you run a function, it may run slowly, because the data is not in cache. The second and later times, it may run much faster because the data is in cache. So always use averages when timing, and be aware of the effects of cache.
+
+Understanding cache is also crucial to CPU optimization. If you have an algorithm (routine) that loads small bits of data from randomly spread out areas of main memory, this can result in a lot of cache misses, a lot of the time, the CPU will be waiting around for data to operate on instead of doing any work. Instead, if you can make your data accesses localised, or even better, access memory in a linear fashion (like a continuous list), then the cache will work optimally and the CPU will be able to work as fast as possible.
 
 ## SceneTree
 
