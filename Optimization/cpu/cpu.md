@@ -92,6 +92,8 @@ Also consider that nodes are handled independently in the Godot renderers, somet
 One quirk of the scenetree is that you can sometimes get much better performance by removing nodes from the scene tree than by pausing or hiding them. You might not choose to delete a detached node. You can for example, keep a reference to a node, detach it from the scene tree, then reattach it later. This can be very useful for adding and removing areas from a game.
 
 ## Physics
+In some situations physics can end up becoming a bottleneck, particularly with complex worlds, and large numbers of physics objects. Some great techniques are to use simplified versions of your rendered geometry for physics. Often this won't be noticable for end users, but can greatly increase performance.
 
-## GDScript
+Other techniques can include removing objects from physics when they are out of view / outside the current area, or reusing physics objects (maybe you allow 8 monsters per area, for example, and reuse these).
+
 
