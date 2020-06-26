@@ -82,8 +82,6 @@ Often an option when a lot of calculations need to be made, or a lot of differen
 
 The disadvantage is you have to be incredibly careful using threads. As each CPU core operates independently, they can end up trying to access the same memory at the same time. One thread can be reading to a variable while another is writing. Before you use threads make sure you understand the dangers and how to try and prevent these race conditions.
 
-## SIMD
-
 ## SceneTree
 
 ## Physics
