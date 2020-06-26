@@ -60,3 +60,6 @@ If you are aiming to release on multiple platforms, the best advice is to test e
 In general you should design your game for the lowest common denominator, then add optional enhancements for more powerful platforms.
 
 ## Mobile / Tile renderers
+In particular GPUs on mobile devices can work in dramatically different ways to GPUs on desktop. Most mobiles use tile renderers. They split up the screen into regular sized tiles. This enables them to fit the entire tile into super fast cache memory, and reduce the reads and writes to main memory.
+
+There are some downsides though, it can make certain techniques much more complicated and expensive to perform. Tiles that rely on the results of rendering in different tiles can be very slow, or tiles that rely on the results of earlier operations being preserved. Be very careful to test shaders, viewport textures and post processing, in regards to their effects on performance.
