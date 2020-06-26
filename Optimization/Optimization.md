@@ -2,10 +2,10 @@
 ## Table of contents
 
 ### Common
+* Measuring performance
+* Detective work
 * [Principles](common/common.md)
 * The optimization process
-* Detective work
-* Measuring performance
 * Bottleneck math
 ### CPU
 * [CPU profilers](cpu/cpu.md)
