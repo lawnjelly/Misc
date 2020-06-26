@@ -52,6 +52,8 @@ I have deliberately left out the time units here, as this will vary.
 
 When manually timing functions, it is usually a good idea to run the function many times (say 1000 or more times), instead of just once (unless it is a very slow function). A large part of the reason for this is that timers often have limited accuracy, and CPUs will schedule processes in a haphazard manner, so an average over a series of runs is more accurate than a single measurement.
 
+As you attempt to optimize functions, be sure to either repeatedly profile or time them as you go. This will give you crucial feedback as to whether the optimization is working (or not).
+
 ## Caches
 
 Something else to be particularly aware of, especially when comparing timing results of two different versions of a function, is that the results can be highly dependent on whether the data is in the CPU cache or not. CPUs don't load data directly from main memory, because although main memory can be huge (many GBs), it is very slow to access. Instead CPUs load data from a smaller, higher speed bank of memory, called cache. Loading data from cache is super fast, but every time you try and load a memory address that is not stored in cache, the cache must make a trip to main memory and slowly load in some data. This delay can result in the CPU sitting around idle for a long time, and is referred to as a 'cache miss'.
