@@ -1,5 +1,4 @@
 # General Optimization
-_Level: Intermediate_
 ## Introduction
 In an ideal world, computers would run at infinite speed, and the only limit to what we could achieve would be our imagination. In the real world, however, it is all too easy to produce software that will bring even the fastest computer to its knees.
 
@@ -59,23 +58,17 @@ This may lead to a further hypothesis - does the size of the sprite determine th
 #### Binary search
 Say you know that frames are taking much longer than they should, but you are not sure where the bottleneck lies. You could begin by commenting out approximately half the routines that occur on a normal frame. Has the performance improved more or less than expected?
 
-Once you know which of the two halves contains the bottleneck, you can then repeat this process, until you have pinned down the problematic area.
+Once you know which of the two halves contains the bottleneck, you can then repeat this process within the bottleneck half, until you have pinned down the problematic area.
 
 ## Profilers
-Profilers generally allow you make a timing run of your program (or sections of it), then provide results telling you what percentage of time was spent in different functions and areas, and how often functions were called.
-
-Godot profiler screenshot
-
-Callgrind screenshot
+Profilers allow you make a timing run of your program (or sections of it), then provide results telling you what percentage of time was spent in different functions and areas, and how often functions were called.
 
 This can be very useful both to identify bottlenecks and to measure the results of your improvements. Sometimes attempts to improve performance can backfire and lead to slower performance, so always use profiling and timing to guide your efforts.
 
-## Principles
+## Principles of optimization
 
 #### Donald Knuth:
 > Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%.
-
-This famous quote is a great one, because it does contain some important lessons, but in some ways it is misleading.
 
 The messages are very important:
 * Programmer / Developer time is limited. Intead of blindly trying to speed up all aspects of a program we should concentrate our efforts on the aspects that really matter.
@@ -83,8 +76,7 @@ The messages are very important:
 
 Just because we _can_ optimize a particular bit of code, it doesn't necessarily mean that we should. Knowing when, and when not to optimize is a great skill to build up.
 
-The problematic bit, is that people tend to focus on the subquote `premature optimization is the root of all evil`. While _premature_ optimization is (by definition) undesirable, I would qualify this by pointing out an opposing point:
-* The root of performant software is performant design.
+One misleading aspect of the quote is that people tend to focus on the subquote `premature optimization is the root of all evil`. While _premature_ optimization is (by definition) undesirable, I would counter this by pointing out that performant software is the result of performant design.
 
 ### Performant Design
 The danger with encouraging people to ignore optimization until necessary, is that it conveniently ignores that the most important time to consider performance is at the design stage, before a key has even hit a keyboard. If the design / algorithms of a program is inefficient, then no amount of polishing the details later will make it run fast. It may run _faster_, but it will never run as fast as a program designed for performance.
