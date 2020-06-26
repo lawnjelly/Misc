@@ -18,7 +18,7 @@ In 3d we still aim to minimize drawcalls and state changes, however, it can be m
 
 There is also a cost to batching together objects in 3d. Several objects rendered as one cannot be individually culled. An entire city that is off screen will still be rendered if it is joined to a single blade of grass that is on screen. So attempting to batch together 3d objects should take account of their location and effect on culling. Often though the benefits of joining static objects will outweigh other considerations, especially for large numbers of low poly objects.
 
-## Vertex Processing
+## Vertex processing
 Historically, vertex processing could be a big bottleneck, which is why old games often featured low poly models. On modern hardware however, the costs of pixel and fragment processing have relatively become a far greater problem. Essentially - the number of triangles has increased, but the number of pixels to shade and the complexity of those shaders has increased to a far greater extent.
 
 That said there are two exceptions to be aware of.
@@ -28,7 +28,13 @@ That said there are two exceptions to be aware of.
 On mobile especially, having large numbers of triangles in a small screen area can slow down performance. Consider using low poly models or level of detail in this situation.
 
 
-## Pixels / Fill Rate
+## Pixel / fragment shaders - fill rate
+In contrast to vertex processing, the costs of fragment shading has increased dramatically over the years. Screen resolutions have increased (the area of a 4K screen is 8,294,400 pixels, versus 307,200 for an old 640x480 VGA screen, that is 27x the area), but also the complexity of fragment shaders has exploded. Physically based rendering requires complex calculations for each fragment.
+
+The other factor in fragment shaders is the cost of reading textures. Reading textures is an expensive operation (especially reading from several in a single fragment shader), and also consider the filtering may add expense to this (trilinear filtering between mipmaps, and averaging). Reading textures is also expensive in power terms, which is a big issue on mobiles.
+
+
+
 Each fragment or pixel that is shaded takes time (and costs in terms of battery use on mobile). Each access to textures within fragment shaders can also slow things down, as well as complicated shaders.
 
 Transparency can particularly be problematic for fill rate because it can prevent some GPU optimizations (early Z), especially on mobile.
