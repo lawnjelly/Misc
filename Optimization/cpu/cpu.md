@@ -9,6 +9,11 @@ For the CPU, the easiest way to identify bottlenecks is to use a profiler.
 
 Profilers run alongside your program as it runs, and take timing measurements in order to work out what proportion of time is spent in each function.
 
+Godot IDE conveniently has a built in profiler. It does not run every time you start your project, and must be manually started and stopped. This is because, in common with most profilers, recording these timing measurements can slow down your project.
+
+After profiling, you can look back at the results for each frame. They may look something like this:
+
+![godot profiler](images_cpu/godot_profiler.png)
 
 
 
@@ -25,7 +30,6 @@ This is actually an excellent example because in an ideal world, only a very sma
 
 The easiest way to get started with profiling is to use the profiler in built in the Godot IDE. This is an ideal way to find out, for example, what part of your gdscript may be slowing down your project. As well as letting you know how much time is spent in various functions, Godot IDE also features various monitors which can help you track down performance problems.
 
-![godot profiler](images_cpu/godot_profiler.png)
 
 When you need more information than Godot profiler provides, there a number of third party profilers that can be used profile the Godot source code itself, although they will usually require a specially compiled version of Godot including some program database information that can be used to track line numbers (either a debug build or a release without program database stripped). Note that bottlnecks can be quite different in debug and release builds. Profiling debug builds can give approximate information, but release builds will be the gold standard, because compiler optimizations can drastically change the relative cost of different areas.
 
