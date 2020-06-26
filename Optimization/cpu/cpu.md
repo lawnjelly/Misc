@@ -89,7 +89,7 @@ Although scene tree nodes are an incredibly powerful and versatile concept, be a
 
 Also consider that each node is handled individually in the Godot renderers, sometimes a smaller number of nodes with more in each can lead to better performance.
 
-One quirk of the scenetree is that you can sometimes get much better performance by removing nodes from the scene tree than by pausing or hiding them. You might not choose to delete a detached node. You can for example, keep a reference to a node, detach it from the scene tree, then reattach it later. This can be very useful for adding and removing areas from a game.
+One quirk of the scenetree is that you can sometimes get much better performance by removing nodes from the scene tree, rather than by pausing or hiding them. You might not choose to delete a detached node. You can for example, keep a reference to a node, detach it from the scene tree, then reattach it later. This can be very useful for adding and removing areas from a game.
 
 ## Physics
 In some situations physics can end up becoming a bottleneck, particularly with complex worlds, and large numbers of physics objects. Some great techniques are to use simplified versions of your rendered geometry for physics. Often this won't be noticable for end users, but can greatly increase performance.
