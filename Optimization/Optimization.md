@@ -30,8 +30,7 @@
 * Main 3d Optimization existing doc
 
 Rest is supplemental:
-* [Culling & overdraw](3d/3d.md)
-* Transparency / Particles
+* [Occlusion culling](3d/3d.md)
 * Billboards / Imposters
 * Lighting
 * Animation / Skinning
