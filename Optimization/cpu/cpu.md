@@ -60,6 +60,24 @@ This means that the first time you run a function, it may run slowly, because th
 
 Understanding cache is also crucial to CPU optimization. If you have an algorithm (routine) that loads small bits of data from randomly spread out areas of main memory, this can result in a lot of cache misses, a lot of the time, the CPU will be waiting around for data to operate on instead of doing any work. Instead, if you can make your data accesses localised, or even better, access memory in a linear fashion (like a continuous list), then the cache will work optimally and the CPU will be able to work as fast as possible.
 
+## Languages
+Some projects require more calculations in 'user' side code than others (as opposed to calculations which are made by the engine itself).
+
+### GDScript
+Scripting languages such as GDScript are designed to be easy to use and iterate, and are ideal for making many types of game, however, if you find yourself needing to do large amounts of calculations that are slowing down the project, you should consider some other options.
+
+### C#
+C# is popular and has first class support in Godot. It offers a good compromise between speed and ease of use.
+
+### c++
+c++ is the language Godot engine is written in. It will usually result in the fastest code, however, on a practical level, it is the most difficult to deploy to end users machines on different platforms.
+
+
+
+
+
+
+
 ## c++
 
 ## Threads
