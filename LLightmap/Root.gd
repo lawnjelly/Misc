@@ -173,8 +173,8 @@ func update_lighting(delta):
 
 	col *= power
 
-
-	sample.color_indirect *= 0.3
+	# balance indirect light here
+	sample.color_indirect *= 0.6
 
 	# lerp towards this color
 	var fraction : float = delta * 3.0
@@ -191,7 +191,7 @@ func update_lighting(delta):
 	mat.set_shader_param("light_pos", pos)
 	mat.set_shader_param("light_color", col)
 	mat.set_shader_param("light_indirect", m_ColIndirect)
-	mat.set_shader_param("view_pos", cam_pos)
+	#mat.set_shader_param("view_posu", cam_pos)
 
 
 func DisplayMessage(var msg):

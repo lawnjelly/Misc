@@ -7,6 +7,8 @@ var m_ProbeMap : ProbeMap = ProbeMap.new()
 var m_bError : bool = false
 var m_bDebugFrame : bool = false
 
+var m_Directional_Distance : float = 15.0
+
 class SampleResult:
 	var pos : Vector3
 	var power : float
@@ -281,6 +283,12 @@ func sample(var pos : Vector3):
 #			winner = l
 			
 		var pl : ProbeLight = m_ProbeMap.lights[ol.light_id]
+		
+		# special cases for types of light
+		# directional
+		if pl.type == 2:
+			pl.pos = orig_pos - (pl.dir * m_Directional_Distance)
+		
 		var offset : Vector3 = pl.pos - orig_pos
 		var dist = offset.length_squared() + 1.0
 		
@@ -318,9 +326,9 @@ func sample(var pos : Vector3):
 		
 		sr.pos = pl.pos
 		sr.power = max_power
+
+		# divide by zero? - maybe influence can never be zero
 		sr.color = total_col / total_influence
-		
-		# divide by zero?
 		sr.pos = total_pos / total_influence
 		
 		
@@ -535,10 +543,31 @@ func load_file(var szFilename):
 		return false
 	
 	# load fourcc
+	var fourcc_matches = 0
+	
+	# must be Prob (in ascii)
 	var c0 = m_File.get_8()
+	if (c0 == 80):
+		fourcc_matches += 1
 	var c1 = m_File.get_8()
+	if (c1 == 114):
+		fourcc_matches += 1
 	var c2 = m_File.get_8()
+	if (c2 == 111):
+		fourcc_matches += 1
 	var c3 = m_File.get_8()
+	if (c3 == 98):
+		fourcc_matches += 1
+	
+	if (fourcc_matches != 4):
+		OS.alert("Error", "Not a probe file")
+		return false
+	
+	# version
+	var version = m_File.get_16()
+	if (version != 100):
+		OS.alert("Probe file wrong version", "Re-export with matching version")
+		return false
 	
 	m_ProbeMap.dims.x = m_File.get_16()
 	m_ProbeMap.dims.y = m_File.get_16()
@@ -556,4 +585,4 @@ func load_file(var szFilename):
 	m_File.close()
 	
 	_create_octaprobes()
-	pass
+	return true

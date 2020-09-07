@@ -7,14 +7,20 @@ uniform sampler2D texture_albedo : hint_albedo;
 uniform vec3 light_pos;
 uniform vec4 light_color;
 uniform vec4 light_indirect;
-uniform vec3 view_pos;
+//uniform vec3 view_posu;
 
 varying vec3 v_specular;
 
 void vertex() {
 	// get view pos from camera matrix
-	//vec4 view_pos = vec4(0);
-	//view_pos = CAMERA_MATRIX * view_pos;
+	
+	//vec4 view_pos = vec4(view_posu, 1.0);
+	
+//	if (sin(TIME * 6.0) < 0.0)
+//	{
+	vec4 view_pos = vec4(0, 0, 0, 1);
+	view_pos = CAMERA_MATRIX * view_pos;
+//	}
 	
 	// absolute pain but there's a bug in the core shaders .. if skinning is applied
 	// then using world_vertex_coords breaks the skinning. So we have to do the world
@@ -53,11 +59,17 @@ void vertex() {
 	// magic falloff, prevents divide by zero and more linear that just inverse square
 	dist += 10.0;
 	float falloff = 1.0 / (0.01 * (dist * dist));
+	falloff = max (0.0, falloff);
 	
-	d *= max (0.0, falloff);
+	d *= falloff;
+	spec *= falloff;
 	
 	// scale diffuse
 	d *= 0.8;
+	
+	// test
+	// d = 0.0;
+	// spec = 0.0f;
 	
 	
 	//COLOR = vec4((light_color.rgb * (d + spec)) + light_indirect.rgb, 1);
