@@ -132,8 +132,24 @@ For instance, when outside you may wish to use a directional light to represent 
 
 The same thing applies for rain effects, skyboxes and much more.
 
+## Internal Rooms
+There is one more trick that RoomGroups have up their sleeve. A very common desire is to have a game level with a mixed outdoor and indoor environment. We have already mentioned that Rooms can be used to represent both rooms in a building, and areas of landscape, such as a canyon.
 
+What happens if you wish to have a house in a terrain room?
 
+With the functionality described so far you can do it, you would need to place portals around the house though, forming needless rooms above the house. This has been done in many games. But what if there was a simpler way?
+
+It turns out there is a simpler way of handling this scenario. Godot supports rooms WITHIN rooms (we will call them 'internal rooms'). That is, you can place a house within a terrain room, or even a building, or set of buildings, and even have exit portals in different terrain rooms!
+
+This is actually very simple to do. You don't need to place a room within another in the scene tree, just create them as regular rooms. But the internal rooms should be grouped together in a `RoomGroup`. If you look in the inspector there is a `roomgroup_priority` which defaults to 0.
+
+If you want a room to be internal, just set the priority to a higher value than the outer (enclosing) room, using the RoomGroup. That's all there is to it.
+
+The system uses the priority to give priority to the internal room when deciding which room a camera or object is within. Everything else works in a mostly similar way.
+
+The only differences:
+* Portals of internal rooms are not considered as part of the bound of outer rooms
+* STATIC and DYNAMIC Objects from outer rooms will not sprawl into internal rooms. If you want objects to cross these portals, place them in the internal room. This is to prevent large objects like terrain sections sprawling into entire buildings, and rendering when not necessary.
 
 
 
