@@ -122,3 +122,18 @@ func _notification(what):
 ```
 
 Signals are sent just as any other signal, they can be attached to functions using the Editor Inspector. The signals are called `gameplay_entered` and `gameplay_exited`.
+
+In fact, you don't just receive these callbacks for ROAMING objects. In addition Rooms and RoomGroups (which can be used to form groups of rooms) can also receive callbacks. You can use this to e.g. trigger AI behaviour when the player reaches certain points in a level. There are no rules, it is up to you.
+
+## RoomGroups
+`RoomGroup`s are a special type of Spatial which conveniently can let you deal with a group of `Rooms`s at once, instead of having write code for them individually. This is especially useful in conjunction with callbacks. The most important use for RoomGroups is to delineate between 'inside' and 'outside' areas.
+
+For instance, when outside you may wish to use a directional light to represent the sun. When you receive an enter gameplay callback, you can turn the light on, and turn it off when none of the outside rooms are within gameplay. With the light off, performance will increase as there is no need to render it indoors.
+
+The same thing applies for rain effects, skyboxes and much more.
+
+
+
+
+
+
