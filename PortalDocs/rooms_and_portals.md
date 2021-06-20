@@ -111,4 +111,14 @@ This problem is solved because the portal system contains a subsystem called the
 
 You can choose to either receive these callbacks as signals, or as notifications.
 
+Notifications can be handled e.g. in gdscript:
+```
+func _notification(what):
+	match what:
+		NOTIFICATION_ENTER_GAMEPLAY:
+			print("notification enter gameplay")
+		NOTIFICATION_EXIT_GAMEPLAY:
+			print("notification exit gameplay")
+```
 
+Signals are sent just as any other signal, they can be attached to functions using the Editor Inspector. The signals are called `gameplay_entered` and `gameplay_exited`.
