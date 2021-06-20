@@ -31,10 +31,15 @@ The naming convention is as follows:
 * Prefix `Room_`
 * Suffix should be the name you choose to give the room, e.g. `Lounge`, `Kitchen` etc.
 
+E.g. `Room_Lounge`.
+
 ### How do I define the shape and position of my convex hull?
 There are two ways of defining the shape of a room in Godot:
-1) Provide a manual bound - a MeshInstance that has geometry in the shape of the desired bound
+1) Provide a manual bound - a MeshInstance that has geometry in the shape of the desired bound, with a name prefixed by `Bound_`
 2) Use the geometry of the objects contained within the room to automatically create an approximate bound
 
-The first option is the most powerful, but it does involve a small amount of work in your modelling program (e.g. blender). On the other hand, for simple situations, you may successfully be able to use the automatic bound. Or you may use a combination, using automatic bounds for most rooms, and manual bounds for problem areas.
+The first option is the most powerful, but it does involve a small amount of work in your modelling program (e.g. blender). On the other hand, for simple situations (especially regular shapes like boxes), you may successfully be able to use the automatic bound. Or you may use a combination, using automatic bounds for most rooms, and manual bounds for problem areas.
+
+The automatic method is used whenever a manual bound is not supplied.
+
 
