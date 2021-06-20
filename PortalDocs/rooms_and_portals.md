@@ -85,4 +85,7 @@ Global mode is for objects that you don't want occlusion culled at all. Things l
 ### IGNORE
 Ignore is a special mode for objects that will be essentially free in the system. Manual bounds (`Bound_`) get converted to ignore portal mode automatically. They don't need to show up during the game, but are kept in the scene tree in case you need to convert the level multiple times (e.g. in the Editor). You might also choose to use this for objects that you only want to show up in the editor (when RoomManager is inactive).
 
+### In rooms or not?
+STATIC and DYNAMIC objects should always be placed within rooms - the system needs to know which room they are in during conversion as it assumes they will never change room. ROAMING and GLOBAL objects you are recommended to maintain in the scene tree outside of any rooms (their position can be inside the rooms, but in terms of the SceneTree they are better kept on their own branch). There are no restrictions on the placement of IGNORE objects.
+
 
