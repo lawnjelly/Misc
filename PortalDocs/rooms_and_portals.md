@@ -88,4 +88,27 @@ Ignore is a special mode for objects that will be essentially free in the system
 ### In rooms or not?
 STATIC and DYNAMIC objects should always be placed within rooms - the system needs to know which room they are in during conversion as it assumes they will never change room. ROAMING and GLOBAL objects you are recommended to maintain in the scene tree outside of any rooms (their position can be inside the rooms, but in terms of the SceneTree they are better kept on their own branch). There are no restrictions on the placement of IGNORE objects.
 
+### Object Lifetimes
+At the time of writing, the lifetime of STATIC and DYNAMIC objects is tied to the lifetime of the level, between when you call `rooms_convert` to activate the portal system, and calling `rooms_clear` to unload the system. You should therefore not try to create or delete STATIC or DYNAMIC objects while the portal system is active. Doing so will cause the system to automatically unload because it is in an invalid state.
+
+Other objects can be created and deleted as required.
+
+Congratulations! You have now mastered the basic techniques required to use rooms and portals. You can use these to make games already, but there are many more features.
+
+# Gameplay Callbacks
+Although occlusion culling greatly reduces the number of objects that need to be rendered, there are other costs to maintaining objects in a game besides the final rendering. For instance, did you know that in Godot, animated objects will still be animated whether they appear on screen or not! This can take up a lot of processing power, especially for objects that use software skinning (where skinning is calculated on the CPU).
+
+Fear not, rooms and portals can solve these problems, and more.
+
+By building our system of rooms for our game level, not only do we have the information needed for occlusion culling, we also have handily created the information required to know which rooms are in the local 'gameplay area' of the player (or camera). If you think about it, in a lot of cases, there is no need to do a lot of simulation on objects that have nothing to do with gameplay.
+
+The gameplay area is not confined to just the objects you can see in front of you. AI monsters behind you still need to attack you when your back is turned! In Godot the gameplay area is defined as the `potentially visible set` (PVS) of rooms, from the room you are currently within. That is, if there is any part of a room that can possibly be viewed from any part of the room you are in (even from a corner), it is considered within the PVS, and hence the gameplay area.
+
+This works because if a monster is in an area that is completely out of view for yourself or the monster, you are less likely to care what it is doing.
+
+### How does a monster know whether it is within the gameplay area?
+This problem is solved because the portal system contains a subsystem called the `gameplay monitor` that can be turned on and off. When switched on, any roaming objects that move inside or outside the gameplay area (whether by moving themselves, or the player moving) will receive callbacks to let them know of this change.
+
+You can choose to either receive these callbacks as signals, or as notifications.
+
 
