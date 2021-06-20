@@ -27,8 +27,9 @@ A Room is a node type that can be added to the scene tree like any other. You wo
 
 However there is another way of creating rooms. In order to allow users to build levels almost entirely within modelling programs such as Blender, rooms can start life as `Spatial`s (or `Empties` in blender). As long as you use a special naming convention, the `RoomManager` will automatically convert these Spatials to Rooms during the conversion phase.
 
-All 
-
+The naming convention is as follows:
+* Prefix `Room_`
+* Suffix should be the name you choose to give the room, e.g. `Lounge`, `Kitchen` etc.
 
 ### How do I define the shape and position of my convex hull?
 There are two ways of defining the shape of a room in Godot:
