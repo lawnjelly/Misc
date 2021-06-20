@@ -64,4 +64,25 @@ Portals have some restrictions to work properly. They should be convex, and the 
 
 In practice, in many cases, and especially when beginning, it is sensible to use the Godot builtin `Plane` primitive which is part of `MeshInstance`. This can create rectangular portals only, but in many cases they will do the job.
 
+## Trying it out
+By now you should be able to create a couple of rooms, add some objects (regular `MeshInstance`s) within the rooms, and add portals between the rooms. Try converting the rooms in the editor, and see if you can now see the objects in neighbouring rooms, through the portals. Great success!
+
+You have now mastered the basic principles of the system.
+
+The next step is to look at the different types of objects that can be managed by the system.
+
+## Portal mode
+If you look in the inspector, every `MeshInstance` in Godot is derived from a `CullInstance`, where you can set a `PortalMode`. This determines how objects will behave in the portal system.
+
+### STATIC
+The default mode for objects is STATIC. Static objects are objects within rooms that will not move throughout the life of the level. Things like floors, walls, ceilings are good candidates for STATIC objects.
+### DYNAMIC
+Dynamic mode is for objects that are expected to move during the game. But there is a limitation - they must not move outside of their original room. These objects are handled very efficiently by the system. Examples might include moving platforms, and elevators.
+### ROAMING
+Roaming mode is for objects that can move between rooms. Things like players you will want to be roaming. These are more expensive to calculate than STATIC or DYNAMIC modes, because the system has to keep track of which room a roaming object is within.
+### GLOBAL
+Global mode is for objects that you don't want occlusion culled at all. Things like a main player's weapon, bullets and particle effects are good candidates for GLOBAL mode.
+### IGNORE
+Ignore is a special mode for objects that will be essentially free in the system. Manual bounds (`Bound_`) get converted to ignore portal mode automatically. They don't need to show up during the game, but are kept in the scene tree in case you need to convert the level multiple times (e.g. in the Editor). You might also choose to use this for objects that you only want to show up in the editor (when RoomManager is inactive).
+
 
