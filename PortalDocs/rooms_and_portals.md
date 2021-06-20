@@ -25,9 +25,9 @@ A room doesn't need to correspond to a literal room, it could also be for exampl
 The reason why rooms are defined as convex volumes (or hulls), is that mathematically it is very easy to determine whether a point is within a convex hull. A simple plane check will tell you the distance of a point from a plane. If a point is behind all the planes bounding the convex hull, then by definition, it is inside the room. This makes all kinds of things easier in the internals of the system, like checking which room a Camera is within.
 
 ### How do I create a room?
-A Room is a node type that can be added to the scene tree like any other. You would then place objects within the room by making them children and grand-children of the Room node.
+A Room is a node type that can be added to the scene tree like any other. You would then place objects within the room by making them children and grand-children of the Room node. Instead of placing the rooms as children of a scene root, you will need to create a Spatial to be the parent. This node we will call the 'RoomList'. You will need to assign the roomlist node in the `RoomManager`, so the RoomManager knows where to find the rooms.
 
-However there is another way of creating rooms. In order to allow users to build levels almost entirely within modelling programs such as Blender, rooms can start life as `Spatial`s (or `Empties` in blender). As long as you use a special naming convention, the `RoomManager` will automatically convert these Spatials to Rooms during the conversion phase.
+There is actually another way of creating rooms. In order to allow users to build levels almost entirely within modeling programs such as Blender, rooms can start life as `Spatial`s (or `Empties` in blender). As long as you use a special naming convention, the `RoomManager` will automatically convert these Spatials to Rooms during the conversion phase.
 
 The naming convention is as follows:
 * Prefix `Room_`
