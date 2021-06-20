@@ -93,15 +93,16 @@ At the time of writing, the lifetime of STATIC and DYNAMIC objects is tied to th
 
 Other objects can be created and deleted as required.
 
-## Sprawling
+### Sprawling
 Although users can usually ignore the internals of the portal system, they should be aware that it is capable of handling objects that are so big they end up in more than one room. Each object has a central room, but using the AABB or geometry the system can detect when an object extends across a portal into a neighbouring room / rooms. This is called `Sprawling`.
 
 This means that if the corner of an object is showing in a neighbouring room, but the object's main room is not showing (e.g. a train where the end is in a different room), the object will not be culled. The object will only be culled if it is not present in any of the rooms that are visible.
 
-## Include in Bound
+### Include in Bound
 The support for objects that are larger than a single room has one side effect - you may not want to include some objects in the calculation of the automatic room bound. You can turn this off in the inspector - `CullInstance/IncludeInBound`.
 
-## Lighting
+### Lighting
+In general lights are handled like other objects. They can be placed in rooms, and they will sprawl to affect neighbouring rooms, according to the dimensions of the light. The exception to this is DirectionalLights. DirectionalLights have no source room as they affect _everywhere_. They should therefore be placed outside the `RoomList`. As DirectionalLights can be expensive, it is a good idea to turn them off when inside, see the `RoomGroup`s section below for more details.
 
 Congratulations! You have now mastered the basic techniques required to use rooms and portals. You can use these to make games already, but there are many more features.
 
