@@ -155,6 +155,7 @@ If you want a room to be internal, just set the priority to a higher value than 
 The system uses the priority to give priority to the internal room when deciding which room a camera or object is within. Everything else works in a mostly similar way.
 
 The only differences:
+* Portals between internal rooms and outer rooms should always [b]be placed in the inner (internal) room[/b]
 * Portals of internal rooms are not considered as part of the bound of outer rooms
 * STATIC and DYNAMIC Objects from outer rooms will not sprawl into internal rooms. If you want objects to cross these portals, place them in the internal room. This is to prevent large objects like terrain sections sprawling into entire buildings, and rendering when not necessary.
 
