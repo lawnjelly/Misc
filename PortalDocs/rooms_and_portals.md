@@ -125,6 +125,13 @@ Signals are sent just as any other signal, they can be attached to functions usi
 
 In fact, you don't just receive these callbacks for ROAMING objects. In addition Rooms and RoomGroups (which can be used to form groups of rooms) can also receive callbacks. You can use this to e.g. trigger AI behaviour when the player reaches certain points in a level. There are no rules, it is up to you.
 
+## VisbilityNotifiers / VisibilityEnablers
+Gameplay callbacks have one more useful function. By default in Godot animation and physics are still processed regardless of whether an object is within view. This can sap performance, especially when using software skinning.
+
+The engine's solution to this problem is `VisibilityNotifier`s, and the slightly easier to use `VisibilityEnabler`. Full details of their functionality is on their respective pages, but briefly, `VisibilityEnabler` can be used to switch off animation and sleep physics when an object is outside the view frustum. You do this by simply placing a `VisibilityEnabler` node in your subscene (for e.g. a monster). It will do the rest.
+
+What if the `VisibilityEnabler` could turn off objects when they were occlusion culled? Well it turns out they can. All you have to do is switch on the `Gameplay Monitor` and the rest happens automatically.
+
 ## RoomGroups
 `RoomGroup`s are a special type of Spatial which conveniently can let you deal with a group of `Rooms`s at once, instead of having write code for them individually. This is especially useful in conjunction with callbacks. The most important use for RoomGroups is to delineate between 'inside' and 'outside' areas.
 
@@ -150,6 +157,5 @@ The system uses the priority to give priority to the internal room when deciding
 The only differences:
 * Portals of internal rooms are not considered as part of the bound of outer rooms
 * STATIC and DYNAMIC Objects from outer rooms will not sprawl into internal rooms. If you want objects to cross these portals, place them in the internal room. This is to prevent large objects like terrain sections sprawling into entire buildings, and rendering when not necessary.
-
 
 
