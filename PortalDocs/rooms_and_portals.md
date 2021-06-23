@@ -159,7 +159,7 @@ In fact, you don't just receive these callbacks for ROAMING objects. In addition
 ## VisbilityNotifiers / VisibilityEnablers
 Gameplay callbacks have one more useful function. By default in Godot animation and physics are still processed regardless of whether an object is within view. This can sap performance, especially when using software skinning.
 
-The engine's solution to this problem is `VisibilityNotifier`s, and the slightly easier to use `VisibilityEnabler`. Full details of their functionality is on their respective pages, but briefly, `VisibilityEnabler` can be used to switch off animation and sleep physics when an object is outside the view frustum. You do this by simply placing a `VisibilityEnabler` node in your subscene (for e.g. a monster). It will do the rest.
+The engine's solution to this problem is `VisibilityNotifier`s, and the slightly easier to use `VisibilityEnabler`. `VisibilityEnabler` can be used to switch off animation and sleep physics when an object is outside the view frustum. You do this by simply placing a `VisibilityEnabler` node in your subscene (for e.g. a monster). It will do the rest. Consult the `VisibilityEnabler` documentation for full details.
 
 What if the `VisibilityEnabler` could turn off objects when they were occlusion culled? Well it turns out they can. All you have to do is switch on the `Gameplay Monitor` and the rest happens automatically.
 
@@ -201,8 +201,11 @@ In order to keep drawcalls to a minimum, the system offers the option to automat
 #### Plane Simplification
 In some cases, automatically generated convex hull bounds may contain a very large number of planes. This is not ideal because it slows down determining which room a camera or object is within. The system can optionally simplify hulls. Each plane is defined by a normal, and a distance. If the angle and distance between two planes is below these selectable thresholds, two planes will be joined into one.
 
-### Portal
+### Portals
 #### Portal Active
 Portals can be turned on and off at runtime. This is especially useful if you have open and closing doors.
 #### Two Way
 Portals can either be two way or one way. One way portals may be useful for example to create windows that can be seen out of, but not seen into. This can help performance when viewing buildings from outdoors.
+
+### Particle Systems
+Be aware that when placing STATIC particle systems, the AABB on conversion may have zero size. This means the particle system may be unexpectedly culled early. To prevent this, either set the particle system `portal mode` to DYNAMIC, or alternatively, add an `extra cull margin` to the particle system in the Geometry Inspector.
