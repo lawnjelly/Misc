@@ -16,6 +16,8 @@ This conversion must take place every time you want to activate the system, it d
 
 If you convert the level while the editor is running, it is important to realise that the portal culling system will take over from the normal Godot frustum culling. This may affect some editor features. For this reason, you can turn the portal culling on and off, using the `Active` setting in the `RoomManager`.
 
+_Note: In order use the RoomManager you have to tell it where the Rooms are in your SceneTree, or rather where the 'RoomList' node is, that is, the parent of your Rooms - see below. If the RoomList is not set, conversion will fail._
+
 ![RoomManager](images/room_manager.png)
 
 ## Rooms
