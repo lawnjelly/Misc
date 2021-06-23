@@ -131,9 +131,9 @@ The gameplay area is not confined to just the objects you can see in front of yo
 This works because if a monster is in an area that is completely out of view for yourself or the monster, you are less likely to care what it is doing.
 
 ### How does a monster know whether it is within the gameplay area?
-This problem is solved because the portal system contains a subsystem called the `gameplay monitor` that can be turned on and off. When switched on, any roaming objects that move inside or outside the gameplay area (whether by moving themselves, or the player moving) will receive callbacks to let them know of this change.
+This problem is solved because the portal system contains a subsystem called the `gameplay monitor` that can be turned on and off from the `RoomManager`. When switched on, any roaming objects that move inside or outside the gameplay area (whether by moving themselves, or the player moving) will receive callbacks to let them know of this change.
 
-You can choose to either receive these callbacks as signals, or as notifications.
+You can choose to either receive these callbacks as `signals`, or as `notifications`.
 
 Notifications can be handled e.g. in gdscript:
 ```
