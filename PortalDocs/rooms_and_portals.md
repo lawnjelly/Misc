@@ -60,6 +60,8 @@ Portals are special convex polygons, that you position over openings between roo
 
 Portals only need to be placed in one of each pair of neighbouring rooms (the 'source room') - the system will automatically make them two way unless you choose otherwise in the Portal settings.
 
+![Portal](images/portal_inspector.png)
+
 The naming convention for portals is as follows:
 * Prefix `Portal_`
 * Optional : You can add a suffix of the room that the portal will lead to ('destination room'). E.g. `Portal_Kitchen`
