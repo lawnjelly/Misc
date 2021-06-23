@@ -68,6 +68,11 @@ The suffix is optional - in many cases the system can automatically detect the n
 
 In rare cases you may end up with two or more portals that you want to give the same name, because they lead into the same destination room. But Godot does not allow duplicate names! The solution to this is the wildcard character `*`. If you place a wildcard at the end of the name, the rest of the characters will be ignored. E.g. `Portal_Kitchen*1`, `Portal_Kitchen*2`.
 
+All in all there are three ways of specifying which Room a Portal should link to:
+* Leaving the name suffix blank to use auto-linking
+* A suffix in the name
+* Assigning the `Linked Room` in the inspector for a Portal node (this is simply a shortcut for setting the name)
+
 ### Portal restrictions
 Portals have some restrictions to work properly. They should be convex, and the polygon points should be in the same plane. The accuracy to the plane does not have to be exact, the system will automatically average the direction of the portal plane.
 
