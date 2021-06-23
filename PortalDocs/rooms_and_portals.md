@@ -113,7 +113,7 @@ At the time of writing, the lifetime of STATIC and DYNAMIC objects is tied to th
 
 Other objects can be created and deleted as required.
 
-### Sprawling
+## Sprawling
 Although users can usually ignore the internals of the portal system, they should be aware that it is capable of handling objects that are so big they end up in more than one room. Each object has a central room, but using the AABB or geometry the system can detect when an object extends across a portal into a neighbouring room / rooms. This is called `Sprawling`.
 
 This means that if the corner of an object is showing in a neighbouring room, but the object's main room is not showing (e.g. a train where the end is in a different room), the object will not be culled. The object will only be culled if it is not present in any of the rooms that are visible.
@@ -195,4 +195,8 @@ The only differences:
 #### Show Debug
 This can be used to turn on and off display of portals in the editor, and control the amount of logging. Debug will always be set to false on exported projects.
 #### Debug Sprawl
-This is a special 
+This mode will only display meshes that sprawl through portals from the room the current camera room. Static objects do not always sprawl to neighbouring rooms the moment they cross a portal. There is an adjustable leeway, called the `portal margin` (shown in translucent red in the editor) which defines the distance objects can cross before they are considered to sprawl to the neighbouring room. You can set this margin globally in the `RoomManager` and you can also override the margin for individual portals in the Inspector.
+#### Merge Meshes
+In order to keep drawcalls to a minimum, the system offers the option to automatically merge similar meshes within a room. This can increase performance in many cases. The culling accuracy is reduced, but as a room is a fairly logical unit for culling, this trade off usually works in your favour.
+#### Plane Simplification
+In some cases, automatically generated convex hull bounds may contain a very large number of planes. This is not ideal because it slows down determining which room a camera or object is within. The system can optionally simplify hulls. Each plane is defined by a normal, and a distance. If the angle and distance between two planes is below these selectable thresholds, two planes will be joined into one.
