@@ -40,6 +40,7 @@ This tutorial will introduce you to building a 'hello world' room system with tw
 * Make sure you have saved your project before this next step (it is always a good idea to save and make a backup before converting).
 * Select the `RoomManager`, and you will see a button in the toolbar at the top of the 3d view called 'Convert Rooms'. Press this button.
 * If all goes well, the `RoomManager` will have created the runtime data (the `room graph`) to do culling at runtime.
+* Notice how the `Spatial` nodes marked as 'Room_' have automatically been converted to `Room` nodes, and the `Spatial` nodes marked as 'Portal_' have been converted to `Portal` nodes. Although you can add these node types directly, using the indirect method means you can can build your whole game level in blender rather than the Godot editor. All you need to do is use Em
 * If you now move the editor camera inside the rooms, you should see the meshes in the opposite room being culled depending on what you can see through the portal.
 * In the `RoomManager`, turn off the 'Show Debug' tickbox to get a better view.
 ## Conclusion
@@ -51,3 +52,4 @@ This concludes this simple tutorial. Don't be afraid to experiment with the new 
 * The geometry you created so far is all `STATIC` (non-moving). If you look in the inspector for geometry nodes, you will see they derive from `CullInstance`. Here you can set the `portal_mode` for objects in the portal system. This determines how the node is processed.
 * If you now write a script to move one of your objects within a room and view it through a `Camera` as the scene runs, you may notice that the object gets culled incorrectly. This is because `STATIC` objects are assumed not to move in the system. If you instead change the object to `DYNAMIC`, it should now update the culling correctly.
 * There are several `portal_modes`, these are described in the main documentation.
+* Try turning the portal on and off at runtime from your script! Once converted to a `Portal`, you can run `set_portal_active` to open and close the portal. 
