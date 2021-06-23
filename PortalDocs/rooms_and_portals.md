@@ -1,4 +1,5 @@
 # Rooms and Portals
+
 ## Introduction
 The rooms and portals system is an optional component of Godot that allows you to partition your game levels into a series of rooms (aka cells), and portals which are openings between the rooms that the camera can see through.
 
@@ -14,6 +15,8 @@ Anytime you want to use the portal system, you need to include a special node in
 This conversion must take place every time you want to activate the system, it does not store the `room graph` in your project (for flexibility and to save memory). You can either trigger it by pressing the `convert rooms` button in the editor when the `RoomManager` is selected, or you can call the `rooms_convert` function in the `RoomManager`. This latter method will be what you use in game.
 
 If you convert the level while the editor is running, it is important to realise that the portal culling system will take over from the normal Godot frustum culling. This may affect some editor features. For this reason, you can turn the portal culling on and off, using the `Active` setting in the `RoomManager`.
+
+![RoomManager](images/room_manager.png)
 
 ## Rooms
 ### What is a room?
@@ -67,12 +70,16 @@ In practice, in many cases, and especially when beginning, it is sensible to use
 ## Trying it out
 By now you should be able to create a couple of rooms, add some objects (regular `MeshInstance`s) within the rooms, and add portals between the rooms. Try converting the rooms in the editor, and see if you can now see the objects in neighbouring rooms, through the portals. Great success!
 
+![Simple SceneTree](images/simple_scenetree.png)
+
 You have now mastered the basic principles of the system.
 
 The next step is to look at the different types of objects that can be managed by the system.
 
 ## Portal mode
 If you look in the inspector, every `MeshInstance` in Godot is derived from a `CullInstance`, where you can set a `PortalMode`. This determines how objects will behave in the portal system.
+
+![CullInstance](images/cull_instance.png)
 
 ### STATIC
 The default mode for objects is STATIC. Static objects are objects within rooms that will not move throughout the life of the level. Things like floors, walls, ceilings are good candidates for STATIC objects.
