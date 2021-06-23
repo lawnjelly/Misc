@@ -47,6 +47,10 @@ The first option is the most powerful, but it does involve a small amount of wor
 
 The automatic method is used whenever a manual bound is not supplied.
 
+_A simple pair of rooms. The portal margin is shown with translucent red, and the room hulls are shown with green wireframe._
+
+![Simple Room](images/simple_room.png)
+
 ## Portals
 If you create some rooms, place objects within them, then convert the level in the editor, you will the objects in the rooms appearing and showing as you move between rooms. There is one problem however! Although you can see the objects within the room that the camera is in, you can't see to any neighbouring rooms! For that we need portals.
 
