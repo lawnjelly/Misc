@@ -191,7 +191,7 @@ The only differences:
 * STATIC and DYNAMIC Objects from outer rooms will not sprawl into internal rooms. If you want objects to cross these portals, place them in the internal room. This is to prevent large objects like terrain sections sprawling into entire buildings, and rendering when not necessary.
 
 # Advanced
-### RoomManager
+## RoomManager
 #### Show Debug
 This can be used to turn on and off display of portals in the editor, and control the amount of logging. Debug will always be set to false on exported projects.
 #### Debug Sprawl
@@ -201,7 +201,7 @@ In order to keep drawcalls to a minimum, the system offers the option to automat
 #### Plane Simplification
 In some cases, automatically generated convex hull bounds may contain a very large number of planes. This is not ideal because it slows down determining which room a camera or object is within. The system can optionally simplify hulls. Each plane is defined by a normal, and a distance. If the angle and distance between two planes is below these selectable thresholds, two planes will be joined into one.
 
-### Portals
+## Portals
 #### Portal Active
 Portals can be turned on and off at runtime. This is especially useful if you have open and closing doors.
 #### Two Way
@@ -209,3 +209,6 @@ Portals can either be two way or one way. One way portals may be useful for exam
 
 ### Particle Systems
 Be aware that when placing STATIC particle systems, the AABB on conversion may have zero size. This means the particle system may be unexpectedly culled early. To prevent this, either set the particle system `portal mode` to DYNAMIC, or alternatively, add an `extra cull margin` to the particle system in the Geometry Inspector.
+
+### Multimeshes
+Note that multimeshes will be culled as a group, rather than individually. You should therefore attempt to keep them localised to the same area wherever possible.
