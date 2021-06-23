@@ -40,7 +40,7 @@ This tutorial will introduce you to building a 'hello world' room system with tw
 * Make sure you have saved your project before this next step (it is always a good idea to save and make a backup before converting).
 * Select the `RoomManager`, and you will see a button in the toolbar at the top of the 3d view called 'Convert Rooms'. Press this button.
 * If all goes well, the `RoomManager` will have created the runtime data (the `room graph`) to do culling at runtime.
-* Notice how the `Spatial` nodes marked as 'Room_' have automatically been converted to `Room` nodes, and the `Spatial` nodes marked as 'Portal_' have been converted to `Portal` nodes. Although you can add these node types directly, using the indirect method means you can can build your whole game level in blender rather than the Godot editor. All you need to do is use Em
+* Notice how the `Spatial` nodes marked as 'Room_' have automatically been converted to `Room` nodes, and the `Spatial` nodes marked as 'Portal_' have been converted to `Portal` nodes. Although you can add these node types directly, using the indirect method means you can can build your whole game level in blender rather than the Godot editor. All you need to do is use Empties using the naming convention for 'Room_' and 'Portal_'.
 * If you now move the editor camera inside the rooms, you should see the meshes in the opposite room being culled depending on what you can see through the portal.
 * In the `RoomManager`, turn off the 'Show Debug' tickbox to get a better view.
 ## Conclusion
