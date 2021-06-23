@@ -31,6 +31,15 @@ This tutorial will introduce you to building a 'hello world' room system with tw
 * I've used a green material to make them stand out more.
 * Also an an `Omni` light to one of the rooms.
 ## Step 6
-![Tutorial Simple 5](images/tutorial_simple5.png)
 ![Select RoomList](images/select_roomlist.png)
+* Next comes a crucial stage, we must let the `RoomManager` know where the rooms are!
+* Select the `RoomManager` and look in the Inspector window in the 'Paths' section.
+* You need to assign the 'RoomList' to point to the 'RoomList' node we created earlier (which is the parent of all the rooms).
+## Step 7
+![Tutorial Simple 5](images/tutorial_simple5.png)
+* Make sure you have saved your project before this next step (it is always a good idea to save and make a backup before converting).
+* Select the `RoomManager`, and you will see a button in the toolbar at the top of the 3d view called 'Convert Rooms'. Press this button.
+* If all goes well, the `RoomManager` will have created the runtime data (the `room graph`) to do culling at runtime.
+* If you now move the editor camera inside the rooms, you should see the meshes in the opposite room being culled depending on what you can see through the portal.
+* In the `RoomManager`, turn off the 'Show Debug' tickbox to get a better view.
 
