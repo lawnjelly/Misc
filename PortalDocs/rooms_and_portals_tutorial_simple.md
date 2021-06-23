@@ -27,6 +27,10 @@ This tutorial will introduce you to building a 'hello world' room system with tw
 * The portal plane should face _outward_ from the source room, i.e. towards the lounge.
 ## Step 5
 ![Tutorial Simple 4](images/tutorial_simple4.png)
+* In order to make things more exciting, add a few more boxes to the rooms.
+* I've used a green material to make them stand out more.
+* Also an an `Omni` light to one of the rooms.
+## Step 6
 ![Tutorial Simple 5](images/tutorial_simple5.png)
 ![Select RoomList](images/select_roomlist.png)
 
