@@ -200,3 +200,9 @@ This mode will only display meshes that sprawl through portals from the room the
 In order to keep drawcalls to a minimum, the system offers the option to automatically merge similar meshes within a room. This can increase performance in many cases. The culling accuracy is reduced, but as a room is a fairly logical unit for culling, this trade off usually works in your favour.
 #### Plane Simplification
 In some cases, automatically generated convex hull bounds may contain a very large number of planes. This is not ideal because it slows down determining which room a camera or object is within. The system can optionally simplify hulls. Each plane is defined by a normal, and a distance. If the angle and distance between two planes is below these selectable thresholds, two planes will be joined into one.
+
+### Portal
+#### Portal Active
+Portals can be turned on and off at runtime. This is especially useful if you have open and closing doors.
+#### Two Way
+Portals can either be two way or one way. One way portals may be useful for example to create windows that can be seen out of, but not seen into. This can help performance when viewing buildings from outdoors.
