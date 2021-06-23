@@ -58,7 +58,7 @@ If you create some rooms, place objects within them, then convert the level in t
 
 Portals are special convex polygons, that you position over openings between rooms to allow the system to see between them. You can create a Portal node directly in the editor - it is really just a `MeshInstance` with some extra functions. Or like with rooms, you can create portals by making a MeshInstance (e.g. in Blender), and using a special naming convention.
 
-Portals only need to be placed in one of each pair of neighbouring rooms (the 'source room') - the system will automatically make them two way unless you choose otherwise in the Portal settings.
+Portals only need to be placed in one of each pair of neighbouring rooms (the 'source room') - the system will automatically make them two way unless you choose otherwise in the Portal settings. The portal normal should face outward from the source room, with the front face visible from outside the room.
 
 ![Portal](images/portal_inspector.png)
 
@@ -190,4 +190,9 @@ The only differences:
 * Portals of internal rooms are not considered as part of the bound of outer rooms
 * STATIC and DYNAMIC Objects from outer rooms will not sprawl into internal rooms. If you want objects to cross these portals, place them in the internal room. This is to prevent large objects like terrain sections sprawling into entire buildings, and rendering when not necessary.
 
-
+# Advanced
+### RoomManager
+#### Show Debug
+This can be used to turn on and off display of portals in the editor, and control the amount of logging. Debug will always be set to false on exported projects.
+#### Debug Sprawl
+This is a special 
