@@ -18,9 +18,14 @@ This tutorial will introduce you to building a 'hello world' room system with tw
 * You can do this simply by duplicating the first room (select the 'Room_kitchen' node, right click and choose 'duplicate').
 * Rotate and position the second room so that the openings line up.
 * Rename the second room to 'Room_lounge'.
-
 ## Step 3
 ![Tutorial Simple 3](images/tutorial_simple3.png)
+* Next we will add a portal between the two rooms
+* Create a new `MeshInstance` in the kitchen, and call it `Portal_lounge`. The name ensures it will be converted to a portal, and tells the system which room it should link to.
+* Create a new `Plane` mesh for this `MeshInstance`.
+* Scale and position the plane so it fits within the opening between the two rooms.
+* The portal plane should face _outward_ from the source room, i.e. towards the lounge.
+## Step 5
 ![Tutorial Simple 4](images/tutorial_simple4.png)
 ![Tutorial Simple 5](images/tutorial_simple5.png)
 ![Select RoomList](images/select_roomlist.png)
