@@ -42,4 +42,12 @@ This tutorial will introduce you to building a 'hello world' room system with tw
 * If all goes well, the `RoomManager` will have created the runtime data (the `room graph`) to do culling at runtime.
 * If you now move the editor camera inside the rooms, you should see the meshes in the opposite room being culled depending on what you can see through the portal.
 * In the `RoomManager`, turn off the 'Show Debug' tickbox to get a better view.
+## Conclusion
+This concludes this simple tutorial. Don't be afraid to experiment with the new room system you have created.
 
+#### Some things to try:
+* Create different types of geometry - CSG nodes, Particle systems, Multimeshes
+* Try creating a `Camera` and adding it to the scene. If you run the scene you will notice that the portal culling is not active. This is because the 'room graph' must be created each time you load a level, by converting the rooms. Instead of using a button in the editor, in real games you call a function in the `RoomManager` to convert the level, called `rooms_convert()`. Try this out with a script, perhaps running within a `_ready` function.
+* The geometry you created so far is all `STATIC` (non-moving). If you look in the inspector for geometry nodes, you will see they derive from `CullInstance`. Here you can set the `portal_mode` for objects in the portal system. This determines how the node is processed.
+* If you now write a script to move one of your objects within a room and view it through a `Camera` as the scene runs, you may notice that the object gets culled incorrectly. This is because `STATIC` objects are assumed not to move in the system. If you instead change the object to `DYNAMIC`, it should now update the culling correctly.
+* There are several `portal_modes`, these are described in the main documentation.
