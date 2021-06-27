@@ -23,12 +23,17 @@ _Note: In order use the RoomManager you have to tell it where the Rooms are in y
 
 ## Rooms
 ### What is a room?
-Rooms are a way of spatially partitioning your level into areas that make sense in terms of the level design. Rooms often quite literally *are* rooms (for instance in a building). Ultimately as far as the engine is concerned, a room respresents a convex volume, in which you would typically place most of your objects that fall within that area.
+Rooms are a way of spatially partitioning your level into areas that make sense in terms of the level design. Rooms often quite literally *are* rooms (for instance in a building). Ultimately as far as the engine is concerned, a room respresents a __non-overlapping__ convex volume, in which you would typically place most of your objects that fall within that area.
 
 A room doesn't need to correspond to a literal room, it could also be for example, a canyon in an outdoor area, or a smaller part of a concave room.
 
 ### Why convex?
 The reason why rooms are defined as convex volumes (or hulls), is that mathematically it is very easy to determine whether a point is within a convex hull. A simple plane check will tell you the distance of a point from a plane. If a point is behind all the planes bounding the convex hull, then by definition, it is inside the room. This makes all kinds of things easier in the internals of the system, like checking which room a Camera is within.
+
+### Why non-overlapping?
+If two rooms overlap, and a camera or player is in this overlapping zone, then there is no way to tell which room the object should be in - and hence render from, or be rendered in. This does have implications for level design.
+
+The exception is for internal rooms (see later). Internal rooms use a priority system to allow them to work. When an object is in an overlapping zone, the logic always assigns them to the _higher priority_ room (internal room). This allows rooms _within_ rooms.
 
 ### How do I create a room?
 A Room is a node type that can be added to the scene tree like any other. You would then place objects within the room by making them children and grand-children of the Room node. Instead of placing the rooms as children of a scene root, you will need to create a Spatial to be the parent. This node we will call the 'RoomList'. You will need to assign the roomlist node in the `RoomManager`, so the RoomManager knows where to find the rooms.
