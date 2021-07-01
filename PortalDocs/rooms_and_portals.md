@@ -115,7 +115,7 @@ Ignore is a special mode for objects that will be essentially free in the system
 STATIC and DYNAMIC objects should always be placed within rooms - the system needs to know which room they are in during conversion as it assumes they will never change room. ROAMING and GLOBAL objects you are recommended to maintain in the scene tree outside of any rooms (their position can be inside the rooms, but in terms of the SceneTree they are better kept on their own branch). There are no restrictions on the placement of IGNORE objects.
 
 ### Object Lifetimes
-At the time of writing, the lifetime of STATIC and DYNAMIC objects is tied to the lifetime of the level, between when you call `rooms_convert` to activate the portal system, and calling `rooms_clear` to unload the system. You should therefore not try to create or delete STATIC or DYNAMIC objects while the portal system is active. Doing so will cause the system to automatically unload because it is in an invalid state.
+At the time of writing, the lifetime of STATIC and DYNAMIC objects is tied to the lifetime of the level, between when you call `rooms_convert` to activate the portal system, and calling `rooms_clear` to unload the system. You should therefore not try to create or delete STATIC or DYNAMIC objects while the portal system is active. Doing so will cause the system to automatically unload because it is in an invalid state. You can however, freely `show` and `hide` these objects.
 
 Other objects can be created and deleted as required.
 
