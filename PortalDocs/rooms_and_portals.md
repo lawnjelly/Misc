@@ -33,7 +33,11 @@ The reason why rooms are defined as convex volumes (or hulls), is that mathemati
 ### Why non-overlapping?
 If two rooms overlap, and a camera or player is in this overlapping zone, then there is no way to tell which room the object should be in - and hence render from, or be rendered in. This does have implications for level design.
 
-The exception is for internal rooms (see later). Internal rooms use a priority system to allow them to work. When an object is in an overlapping zone, the logic always assigns them to the _higher priority_ room (internal room). This allows rooms _within_ rooms.
+If you accidentally create overlapping rooms, the editor will flag a warning when you convert the rooms, and indicate any overlapping zones in red.
+
+The system does attempt to cope with overlapping rooms as best as possible by making the current room _'sticky'_. That is, each object remembers which room it was in last frame, and stays within it as long as it does not move outside the convex hull room bound. This can result in some hysteresis in these overlapping zones.
+
+There is an exception however - internal rooms (see later). Internal rooms are rooms placed _within_ another room. They use a room priority system to work. When an object is in an overlapping zone, the logic always assigns them to the _higher priority_ room (internal room). The room priority is set using a RoomGroup.
 
 ### How do I create a room?
 A Room is a node type that can be added to the scene tree like any other. You would then place objects within the room by making them children and grand-children of the Room node. Instead of placing the rooms as children of a scene root, you will need to create a Spatial to be the parent. This node we will call the 'RoomList'. You will need to assign the roomlist node in the `RoomManager`, so the RoomManager knows where to find the rooms.
