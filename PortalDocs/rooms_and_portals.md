@@ -62,9 +62,9 @@ _A simple pair of rooms. The portal margin is shown with translucent red, and th
 ## Portals
 If you create some rooms, place objects within them, then convert the level in the editor, you will the objects in the rooms appearing and showing as you move between rooms. There is one problem however! Although you can see the objects within the room that the camera is in, you can't see to any neighbouring rooms! For that we need portals.
 
-Portals are special convex polygons, that you position over openings between rooms to allow the system to see between them. You can create a Portal node directly in the editor - it is really just a `MeshInstance` with some extra functions. Or like with rooms, you can create portals by making a MeshInstance (e.g. in Blender), and using a special naming convention.
+Portals are special convex polygons, that you position over openings between rooms to allow the system to see between them. You can create a Portal node directly in the editor, or like with rooms, you can create portals by first making a MeshInstance (e.g. in Blender), and using a special naming convention, and it will be converted to a Portal node during room conversion.
 
-Portals only need to be placed in one of each pair of neighbouring rooms (the 'source room') - the system will automatically make them two way unless you choose otherwise in the Portal settings. The portal normal should face outward from the source room, with the front face visible from outside the room.
+Portals only need to be placed in one of each pair of neighbouring rooms (the _'source room'_) - the system will automatically make them two way unless you choose otherwise in the Portal settings. The portal normal should face _outward_ from the source room. The front face should be visible from _outside_ the room.
 
 ![Portal](images/portal_inspector.png)
 
@@ -82,9 +82,9 @@ All in all there are three ways of specifying which Room a Portal should link to
 * Assigning the `Linked Room` in the inspector for a Portal node (this is simply a shortcut for setting the name)
 
 ### Portal restrictions
-Portals have some restrictions to work properly. They should be convex, and the polygon points should be in the same plane. The accuracy to the plane does not have to be exact, the system will automatically average the direction of the portal plane.
+Portals have some restrictions to work properly. They should be convex, and the polygon points should be in the same plane. The accuracy to the plane does not have to be exact, the system will automatically average the direction of the portal plane. Once converted to a Portal node, the snapping to the portal plane is enforced, and the vertices are specified (and editable) as 2d coordinates in the inspector.
 
-In practice, in many cases, and especially when beginning, it is sensible to use the Godot builtin `Plane` primitive which is part of `MeshInstance`. This can create rectangular portals only, but in many cases they will do the job.
+In practice, in many cases, and especially when beginning, it is sensible to use the Godot builtin `Plane` primitive which is part of `MeshInstance`. This can create rectangular portals only, but in many cases they will do the job. Or you can immediately create a `Portal` node, which defaults to a plane.
 
 ## Trying it out
 By now you should be able to create a couple of rooms, add some objects (regular `MeshInstance`s) within the rooms, and add portals between the rooms. Try converting the rooms in the editor, and see if you can now see the objects in neighbouring rooms, through the portals. Great success!
