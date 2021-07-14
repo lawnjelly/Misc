@@ -177,12 +177,12 @@ In fact, you don't just receive these callbacks for ROAMING objects. In addition
 ## VisbilityNotifiers / VisibilityEnablers
 Gameplay callbacks have one more useful function. By default in Godot animation and physics are still processed regardless of whether an object is within view. This can sap performance, especially when using software skinning.
 
-The engine's solution to this problem is `VisibilityNotifier`s, and the slightly easier to use `VisibilityEnabler`. `VisibilityEnabler` can be used to switch off animation and sleep physics when an object is outside the view frustum. You do this by simply placing a `VisibilityEnabler` node in your subscene (for e.g. a monster). It will do the rest. Consult the `VisibilityEnabler` documentation for full details.
+The engine's solution to this problem is the `VisibilityNotifier` node, and its slightly easier to use variation, the `VisibilityEnabler` node. `VisibilityEnabler` can be used to switch off animation and sleep physics when an object is outside the view frustum. You do this by simply placing a `VisibilityEnabler` node in your subscene (for e.g. a monster). It will do the rest. Consult the `VisibilityEnabler` documentation for full details.
 
 What if the `VisibilityEnabler` could turn off objects when they were occlusion culled? Well it turns out they can. All you have to do is switch on the `Gameplay Monitor` and the rest happens automatically.
 
 ## RoomGroups
-`RoomGroup`s are a special type of Spatial which conveniently can let you deal with a group of `Rooms`s at once, instead of having write code for them individually. This is especially useful in conjunction with callbacks. The most important use for RoomGroups is to delineate between 'inside' and 'outside' areas.
+A `RoomGroup` is a special node which allows you to deal with a group of `Rooms`s at once, instead of having write code for them individually. This is especially useful in conjunction with gameplay callbacks. The most important use for `RoomGroup`s is to delineate between 'inside' and 'outside' areas.
 
 For instance, when outside you may wish to use a directional light to represent the sun. When you receive an enter gameplay callback, you can turn the light on, and turn it off when none of the outside rooms are within gameplay. With the light off, performance will increase as there is no need to render it indoors.
 
@@ -191,15 +191,15 @@ The same thing applies for rain effects, skyboxes and much more.
 ## Internal Rooms
 There is one more trick that RoomGroups have up their sleeve. A very common desire is to have a game level with a mixed outdoor and indoor environment. We have already mentioned that Rooms can be used to represent both rooms in a building, and areas of landscape, such as a canyon.
 
-What happens if you wish to have a house in a terrain room?
+What happens if you wish to have a house in a terrain 'room'?
 
-With the functionality described so far you can do it, you would need to place portals around the house though, forming needless rooms above the house. This has been done in many games. But what if there was a simpler way?
+With the functionality described so far you _can_ do it, you would need to place portals around the exterior of the house though, forming needless rooms above the house. This has been done in many games. But what if there was a simpler way?
 
 It turns out there is a simpler way of handling this scenario. Godot supports rooms WITHIN rooms (we will call them 'internal rooms'). That is, you can place a house within a terrain room, or even a building, or set of buildings, and even have exit portals in different terrain rooms!
 
-This is actually very simple to do. You don't need to place a room within another in the scene tree, just create them as regular rooms. But the internal rooms should be grouped together in a `RoomGroup`. If you look in the inspector there is a `roomgroup_priority` which defaults to 0.
+This is actually very simple to do. You don't need to place a room within another room in the scene tree (in fact you will get a warning if you try this). Instead, just create them as regular rooms. But the internal rooms should be grouped together with a `RoomGroup` as parent. If you look in the inspector for the `RoomGroup` there is a `roomgroup_priority` which defaults to 0.
 
-If you want a room to be internal, just set the priority to a higher value than the outer (enclosing) room, using the RoomGroup. That's all there is to it.
+If you want a room or set of rooms to be internal, just set the priority to a higher value than the outer (enclosing) room, using the `RoomGroup`. That's all there is to it.
 
 The system uses the priority to give priority to the internal room when deciding which room a camera or object is within. Everything else works in a mostly similar way.
 
@@ -209,6 +209,9 @@ The only differences:
 * STATIC and DYNAMIC Objects from outer rooms will not sprawl into internal rooms. If you want objects to cross these portals, place them in the internal room. This is to prevent large objects like terrain sections sprawling into entire buildings, and rendering when not necessary.
 
 # Advanced
+
+## Portal Point Editing
+
 
 ## Room Point Editing
 
