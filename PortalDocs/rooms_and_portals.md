@@ -64,8 +64,6 @@ _A simple pair of rooms. The portal margin is shown with translucent red, and th
 
 ![Simple Room](images/simple_room.png)
 
-## Room Point Editing
-
 ## Portals
 If you create some rooms, place objects within them, then convert the level in the editor, you will the objects in the rooms appearing and showing as you move between rooms. There is one problem however! Although you can see the objects within the room that the camera is in, you can't see to any neighbouring rooms! For that we need portals.
 
@@ -103,7 +101,7 @@ You have now mastered the basic principles of the system.
 The next step is to look at the different types of objects that can be managed by the system.
 
 ## Portal mode
-If you look in the inspector, every `MeshInstance` in Godot is derived from a `CullInstance`, where you can set a `PortalMode`. This determines how objects will behave in the portal system.
+If you look in the inspector, every `VisualInstance` in Godot is derived from a `CullInstance`, where you can set a `PortalMode`. This determines how objects will behave in the portal system.
 
 ![CullInstance](images/cull_instance.png)
 
@@ -119,10 +117,15 @@ Global mode is for objects that you don't want occlusion culled at all. Things l
 Ignore is a special mode for objects that will be essentially free in the system. Manual bounds (`Bound_`) get converted to ignore portal mode automatically. They don't need to show up during the game, but are kept in the scene tree in case you need to convert the level multiple times (e.g. in the Editor). You might also choose to use this for objects that you only want to show up in the editor (when RoomManager is inactive).
 
 ### In rooms or not?
-STATIC and DYNAMIC objects should always be placed within rooms - the system needs to know which room they are in during conversion as it assumes they will never change room. ROAMING and GLOBAL objects you are recommended to maintain in the scene tree outside of any rooms (their position can be inside the rooms, but in terms of the SceneTree they are better kept on their own branch). There are no restrictions on the placement of IGNORE objects.
+STATIC and DYNAMIC objects should always be placed within rooms in the scene tree - the system needs to know which room they are in during conversion as it assumes they will never change room. ROAMING and GLOBAL objects you are recommended to maintain in a branch of the scene tree outside of any rooms (their position can be inside the rooms, but in terms of the SceneTree they are better kept on their own branch). There are no restrictions on the placement of IGNORE objects.
 
 ### Object Lifetimes
 At the time of writing, the lifetime of STATIC and DYNAMIC objects is tied to the lifetime of the level, between when you call `rooms_convert` to activate the portal system, and calling `rooms_clear` to unload the system. You should therefore not try to create or delete STATIC or DYNAMIC objects while the portal system is active. Doing so will cause the system to automatically unload because it is in an invalid state. You can however, freely `show` and `hide` these objects.
+
+The sequence should be therefore:
+* Load your level
+* Place any STATIC or DYNAMIC objects
+* Then run `rooms_convert`.
 
 Other objects can be created and deleted as required.
 
@@ -134,8 +137,10 @@ This means that if the corner of an object is showing in a neighbouring room, bu
 ### Include in Bound
 The support for objects that are larger than a single room has one side effect - you may not want to include some objects in the calculation of the automatic room bound. You can turn this off in the inspector - `CullInstance/IncludeInBound`.
 
+While this works great for large moving objects, it also has the side effect of allowing you a lot more leeway in level design. You can for instance create a large terrain section and have it present in multiple rooms, without splitting up the mesh.
+
 ### Lighting
-In general lights are handled like other objects. They can be placed in rooms, and they will sprawl to affect neighbouring rooms, according to the dimensions of the light. The exception to this is DirectionalLights. DirectionalLights have no source room as they affect _everywhere_. They should therefore be placed outside the `RoomList`. As DirectionalLights can be expensive, it is a good idea to turn them off when inside, see the `RoomGroup`s section below for more details.
+In general lights are handled like other objects. They can be placed in rooms, and they will sprawl to affect neighbouring rooms, according to the dimensions of the light. The exception to this is DirectionalLights. DirectionalLights have no source room as they affect _everywhere_. They should therefore not be placed in a `Room`. As DirectionalLights can be expensive, it is a good idea to turn them off when inside, see the `RoomGroup`s section below for more details on how to do this.
 
 Congratulations! You have now mastered the basic techniques required to use rooms and portals. You can use these to make games already, but there are many more features.
 
@@ -204,6 +209,9 @@ The only differences:
 * STATIC and DYNAMIC Objects from outer rooms will not sprawl into internal rooms. If you want objects to cross these portals, place them in the internal room. This is to prevent large objects like terrain sections sprawling into entire buildings, and rendering when not necessary.
 
 # Advanced
+
+## Room Point Editing
+
 ## RoomManager
 #### Show Debug
 This can be used to turn on and off display of portals in the editor, and control the amount of logging. Debug will always be set to false on exported projects.
