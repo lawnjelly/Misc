@@ -30,6 +30,9 @@ A room doesn't need to correspond to a literal room, it could also be for exampl
 ### Why convex?
 The reason why rooms are defined as convex volumes (or 'hulls'), is that mathematically it is very easy to determine whether a point is within a convex hull. A simple plane check will tell you the distance of a point from a plane. If a point is behind all the planes bounding the convex hull, then by definition, it is inside the room. This makes all kinds of things easier in the internals of the system, like checking which room a Camera is within.
 
+_A convex hull. The hull is defined as a series of planes facing outward. If a point is behind all the planes, it is within the hull._
+![Convex Hull](images/convex_hull.png)
+
 ### Why non-overlapping?
 If two rooms overlap, and a camera or player is in this overlapping zone, then there is no way to tell which room the object should be in - and hence render from, or be rendered in. This does have implications for level design.
 
