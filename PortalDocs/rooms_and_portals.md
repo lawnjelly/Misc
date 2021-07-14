@@ -214,10 +214,15 @@ Portals are defined by a combination of the transform of the Portal node, and by
 
 The default portal has 4 corners as shown in the inspector:
 
+![Portal Points](images/portal_points.png)
+
 You can edit these points in the inspector to make a better match to the opening in your game level. But bear in mind it generally better to keep the number of points as low as possible for the efficiency of the system. It is better to risk rendering a little too much than to spend the time culling objects at 20 different edges, for example.
 
 ## Room Point Editing
 You also have the option to manually edit the points used to define the convex hull of a `Room`. These points are not present by default, you would typically create them by pressing the `Generate Points` button in the editor, when a Room is selected. This will transfer the auto bound from the geometry (or manual `Bound_` mesh) into the inspector. Once there are points in the inspector, they will be used and override any other method. So if you wish to revert your manual editing, simply delete all the points.
+
+![Room Points](images/room_points.png)
+
 Manually editing rooms points is more difficult than editing portal points, but it can be useful in some situations, especially where the auto-bound doesn't _quite_ get the right result you want. It is usually a good idea to use a lot of `simplification` in the inspector for the Room before generating the points (be aware though that by default, the `simplification` value will be inherited from the `RoomManager`).
 
 ## RoomManager
