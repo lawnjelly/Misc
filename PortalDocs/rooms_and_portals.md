@@ -28,7 +28,7 @@ Rooms are a way of spatially partitioning your level into areas that make sense 
 A room doesn't need to correspond to a literal room, it could also be for example, a canyon in an outdoor area, or a smaller part of a concave room.
 
 ### Why convex?
-The reason why rooms are defined as convex volumes (or hulls), is that mathematically it is very easy to determine whether a point is within a convex hull. A simple plane check will tell you the distance of a point from a plane. If a point is behind all the planes bounding the convex hull, then by definition, it is inside the room. This makes all kinds of things easier in the internals of the system, like checking which room a Camera is within.
+The reason why rooms are defined as convex volumes (or 'hulls'), is that mathematically it is very easy to determine whether a point is within a convex hull. A simple plane check will tell you the distance of a point from a plane. If a point is behind all the planes bounding the convex hull, then by definition, it is inside the room. This makes all kinds of things easier in the internals of the system, like checking which room a Camera is within.
 
 ### Why non-overlapping?
 If two rooms overlap, and a camera or player is in this overlapping zone, then there is no way to tell which room the object should be in - and hence render from, or be rendered in. This does have implications for level design.
@@ -37,10 +37,10 @@ If you accidentally create overlapping rooms, the editor will flag a warning whe
 
 The system does attempt to cope with overlapping rooms as best as possible by making the current room _'sticky'_. That is, each object remembers which room it was in last frame, and stays within it as long as it does not move outside the convex hull room bound. This can result in some hysteresis in these overlapping zones.
 
-There is an exception however - internal rooms (see later). Internal rooms are rooms placed _within_ another room. They use a room priority system to work. When an object is in an overlapping zone, the logic always assigns them to the _higher priority_ room (internal room). The room priority is set using a RoomGroup.
+There is one exception however - _internal rooms_ (see later). Internal rooms are rooms placed _within_ another room. They use a room priority system to work. When an object is in an overlapping zone, the logic always assigns them to the _higher priority_ room (internal room). The room priority is set using a RoomGroup.
 
 ### How do I create a room?
-A Room is a node type that can be added to the scene tree like any other. You would then place objects within the room by making them children and grand-children of the Room node. Instead of placing the rooms as children of a scene root, you will need to create a Spatial to be the parent. This node we will call the 'RoomList'. You will need to assign the roomlist node in the `RoomManager`, so the RoomManager knows where to find the rooms.
+A Room is a node type that can be added to the scene tree like any other. You would then place objects within the room by making them children and grand-children of the Room node. Instead of placing the rooms as children of a Scene root node, you will need to create a Spatial especially for the job of being the parent. This node we will call the 'RoomList'. You will need to assign the roomlist node in the `RoomManager`, so the RoomManager knows where to find the rooms.
 
 There is actually another way of creating rooms. In order to allow users to build levels almost entirely within modeling programs such as Blender, rooms can start life as `Spatial`s (or `Empties` in blender). As long as you use a special naming convention, the `RoomManager` will automatically convert these Spatials to Rooms during the conversion phase.
 
@@ -51,11 +51,12 @@ The naming convention is as follows:
 E.g. `Room_Lounge`.
 
 ### How do I define the shape and position of my convex hull?
-There are two ways of defining the shape of a room in Godot:
-1) Provide a manual bound - a MeshInstance in the room that has geometry in the shape of the desired bound, with a name prefixed by `Bound_`
-2) Use the geometry of the objects contained within the room to automatically create an approximate bound
+Because defining the room bound is the most important aspect of the system, there are THREE methods available to define the shape of a room in Godot:
+1) Use the geometry of the objects contained within the room to automatically create an approximate bound
+2) Provide a manual bound - a MeshInstance in the room that has geometry in the shape of the desired bound, with a name prefixed by `Bound_`. This is something you may use if you create your levels in Blender or similar.
+3) By manually editing the points that define the convex hull, in the Room inspector.
 
-The first option is the most powerful, but it does involve a small amount of work in your modelling program (e.g. blender). On the other hand, for simple situations (especially regular shapes like boxes), you may successfully be able to use the automatic bound. Or you may use a combination, using automatic bounds for most rooms, and manual bounds for problem areas.
+While the first option can be all that is required, particularly with simple rooms, or for pre-production, the power of the manual bounds gives you ultimate control (at the expense of a small amount of editing). You can also combine the two approaches, perhaps using automatic bounds for most rooms but manually editing problem areas.
 
 The automatic method is used whenever a manual bound is not supplied.
 
@@ -63,12 +64,14 @@ _A simple pair of rooms. The portal margin is shown with translucent red, and th
 
 ![Simple Room](images/simple_room.png)
 
+## Room Point Editing
+
 ## Portals
 If you create some rooms, place objects within them, then convert the level in the editor, you will the objects in the rooms appearing and showing as you move between rooms. There is one problem however! Although you can see the objects within the room that the camera is in, you can't see to any neighbouring rooms! For that we need portals.
 
 Portals are special convex polygons, that you position over openings between rooms to allow the system to see between them. You can create a Portal node directly in the editor, or like with rooms, you can create portals by first making a MeshInstance (e.g. in Blender), and using a special naming convention, and it will be converted to a Portal node during room conversion.
 
-Portals only need to be placed in one of each pair of neighbouring rooms (the _'source room'_) - the system will automatically make them two way unless you choose otherwise in the Portal settings. The portal normal should face _outward_ from the source room. The front face should be visible from _outside_ the room.
+Portals only need to be placed in one of each pair of neighbouring rooms (the _'source room'_) - the system will automatically make them two way unless you choose otherwise in the Portal settings. The portal normal should face _outward_ from the source room. The front face should be visible from _outside_ the room. The editor gizmo indicates the direction the portal is facing with an arrow, and a different color for each face.
 
 ![Portal](images/portal_inspector.png)
 
@@ -86,9 +89,9 @@ All in all there are three ways of specifying which Room a Portal should link to
 * Assigning the `Linked Room` in the inspector for a Portal node (this is simply a shortcut for setting the name)
 
 ### Portal restrictions
-Portals have some restrictions to work properly. They should be convex, and the polygon points should be in the same plane. The accuracy to the plane does not have to be exact, the system will automatically average the direction of the portal plane. Once converted to a Portal node, the snapping to the portal plane is enforced, and the vertices are specified (and editable) as 2d coordinates in the inspector.
+`Portal`s have some restrictions to work properly. They should be convex, and the polygon points should be in the same plane. The accuracy to the plane does not have to be exact, the system will automatically average the direction of the portal plane. Once converted to a `Portal` node, the snapping to the portal plane is enforced, and the vertices are specified (and editable) as 2d coordinates in the inspector, rather than 3d points. The orientation of the `Portal` is then defined by the transform of the `Portal` node.
 
-In practice, in many cases, and especially when beginning, it is sensible to use the Godot builtin `Plane` primitive which is part of `MeshInstance`. This can create rectangular portals only, but in many cases they will do the job. Or you can immediately create a `Portal` node, which defaults to a plane.
+When learning the system you are encouraged to create `Portal` nodes directly in the editor, which will behave in a similar manner to `Plane` `MeshInstance`s (unless you start editing the `Portal` points).
 
 ## Trying it out
 By now you should be able to create a couple of rooms, add some objects (regular `MeshInstance`s) within the rooms, and add portals between the rooms. Try converting the rooms in the editor, and see if you can now see the objects in neighbouring rooms, through the portals. Great success!
