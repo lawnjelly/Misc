@@ -11,7 +11,8 @@ This tutorial will introduce you to building a 'hello world' room system with tw
 * Add a `Spatial` as the scene root (I have called it 'Root')
 * Next add a `RoomManager` node. We will need this later to process the room system.
 * Next we need to start defining our rooms. We create all our rooms under another `Spatial` we have called 'RoomList'.
-* We can, but don't need to create rooms as `Room` nodes directly. Here the indirect method is used - the room is simply a `Spatial` with a name that starts with the prefix `Room_`. We add our chosen name as a suffix, here we have used 'kitchen'.
+* Add a new `Room` node as a child of the roomlist.
+* Give it a  name that starts with the prefix `Room_`. We add our chosen name as a suffix, here we have used 'kitchen'.
 * We will now create the geometry of our room. The names you give to the geometry is up to you.
 * Create a `MeshInstance` for the floor. Create a box mesh, and scale and position it to form a floor.
 * Create `MeshInstance`s for the walls. Again use box meshes, and scale and position them, but be sure to leave an opening on one side (you will need to create two wall segments to do this on that side).
@@ -24,28 +25,28 @@ This tutorial will introduce you to building a 'hello world' room system with tw
 ## Step 3
 ![Tutorial Simple 3](images/tutorial_simple3.png)
 * Next we will add a portal between the two rooms
-* Create a new `MeshInstance` in the kitchen, and call it `Portal_lounge`. The name ensures it will be converted to a portal, and tells the system which room it should link to.
-* Create a new `Plane` mesh for this `MeshInstance`.
-* Scale and position the plane so it fits within the opening between the two rooms.
-* The portal plane should face _outward_ from the source room, i.e. towards the lounge.
-## Step 5
+* Create a new `Portal` in the kitchen, and call it `Portal_lounge`. The naming scheme tells the system which room it should link to.
+* Scale and position the portal using the node Transform in the inspector, so it fits within the opening between the two rooms.
+* The portal plane should face _outward_ from the source room, i.e. towards the lounge. This direction is indicated by the arrow in the editor gizmo, and the color of the portal.
+## Step 4
 ![Tutorial Simple 4](images/tutorial_simple4.png)
-* In order to make things more exciting, add a few more boxes to the rooms.
-* I've used a green material to make them stand out more.
-* Also an an `Omni` light to one of the rooms.
-## Step 6
+* In order to make things more exciting, we want to add a few more boxes to the rooms.
+* Placing these boxes as children / grand children of the room nodes explicitly tells the system which room the objects should be in. However, we can also create these objects _outside_ the rooms. Provided they are in the roomlist branch, the system will attempt to automatically place them in the correct room at runtime.
+* I've placed these boxes as children of a `Spatial` I have called 'Freeform', just to keep our scene tree neat and tidy.
+* I've also used a green material to make the boxes stand out more.
+* Let's also place an `Omni` light so it will be autoplaced in one of the rooms.
+## Step 5
 ![Tutorial Simple 5](images/tutorial_simple5.png)
 * Next comes a crucial stage, we must let the `RoomManager` know where the rooms are!
 * Select the `RoomManager` and look in the Inspector window in the 'Paths' section.
 * You need to assign the 'RoomList' to point to the 'RoomList' node we created earlier (which is the parent of all the rooms).
-## Step 7
+## Step 6
 ![Tutorial Simple 6](images/tutorial_simple6.png)
 * Make sure you have saved your project before this next step (it is always a good idea to save and make a backup before converting).
 * Select the `RoomManager`, and you will see a button in the toolbar at the top of the 3d view called 'Convert Rooms'. Press this button.
 * If all goes well, the `RoomManager` will have created the runtime data (the `room graph`) to do culling at runtime.
-* Notice how the `Spatial` nodes marked as 'Room_' have automatically been converted to `Room` nodes, and the `Spatial` nodes marked as 'Portal_' have been converted to `Portal` nodes. Although you can add these node types directly, using the indirect method means you can can build your whole game level in blender rather than the Godot editor. All you need to do is use Empties using the naming convention for 'Room_' and 'Portal_'.
+* You can see a log of the conversion process in the output window. This is helpful for finding problems.
 * If you now move the editor camera inside the rooms, you should see the meshes in the opposite room being culled depending on what you can see through the portal.
-* In the `RoomManager`, turn off the 'Show Debug' tickbox to get a better view.
 ## Conclusion
 This concludes this simple tutorial. Don't be afraid to experiment with the new room system you have created.
 
