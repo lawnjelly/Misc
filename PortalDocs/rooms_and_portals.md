@@ -40,7 +40,7 @@ If you accidentally create overlapping rooms, the editor will flag a warning whe
 
 The system does attempt to cope with overlapping rooms as best as possible by making the current room _'sticky'_. That is, each object remembers which room it was in last frame, and stays within it as long as it does not move outside the convex hull room bound. This can result in some hysteresis in these overlapping zones.
 
-There is one exception however - _internal rooms_ (see later). Internal rooms are rooms placed _within_ another room. They use a room priority system to work. When an object is in an overlapping zone, the logic always assigns them to the _higher priority_ room (internal room). The room priority is set using a RoomGroup.
+There is one exception however - _internal rooms_ (they are described later, you do not have to worry about these to start with).
 
 ### How do I create a room?
 A Room is a node type that can be added to the scene tree like any other. You would then place objects within the room by making them children and grand-children of the Room node. Instead of placing the rooms as children of a Scene root node, you will need to create a Spatial especially for the job of being the parent. This node we will call the 'RoomList'. You will need to assign the roomlist node in the `RoomManager`, so the RoomManager knows where to find the rooms.
