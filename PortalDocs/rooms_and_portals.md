@@ -193,7 +193,7 @@ A `RoomGroup` is a special node which allows you to deal with a group of `Rooms`
 
 ![RoomGroups](images/roomgroups.png)
 
-For instance, when outside you may wish to use a directional light to represent the sun. When you receive an enter gameplay callback, you can turn the light on, and turn it off when none of the outside rooms are within gameplay. With the light off, performance will increase as there is no need to render it indoors.
+For instance, when outside you may wish to use a directional light to represent the sun. When the outside `RoomGroup` receives an enter gameplay callback, you can turn the light on, and you can turn it off when the `RoomGroup` exits gameplay. With the light off, performance will increase as there is no need to render it indoors.
 
 The same thing applies for rain effects, skyboxes and much more.
 
