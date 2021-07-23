@@ -141,6 +141,11 @@ Although users can usually ignore the internals of the portal system, they shoul
 
 This means that if the corner of an object is showing in a neighbouring room, but the object's main room is not showing (e.g. a train where the end is in a different room), the object will not be culled. The object will only be culled if it is not present in any of the rooms that are visible.
 
+### Portal Margins
+It is hard to place objects exactly at the edges of rooms, and if we chose to sprawl objects to the adjacent room the moment a portal was crossed (even by a minute amount), there would be an unnecessary amount of sprawling, and more objects would be rendered than we need. To counter this, portals have an adjustable leeway, called a `margin` over which an object can cross without being considered in the next room. The margin is shown in the editor gizmo as a red translucent area.
+
+You can set the margin globally in the `RoomManager`, and you can override this margin value in any `Portal` if you need to fine tune things. As you edit the margin values in the Inspector, you should see the margins change in the 3d window.
+
 ### Include in Bound
 The support for objects that are larger than a single room has one side effect - you may not want to include some objects in the calculation of the automatic room bound. You can turn this off in the inspector - `CullInstance/IncludeInBound`.
 
@@ -242,7 +247,7 @@ Manually editing rooms points is more difficult than editing portal points, but 
 #### Show Debug
 This can be used to turn on and off display of portals in the editor, and control the amount of logging. Debug will always be set to false on exported projects.
 #### Debug Sprawl
-This mode will only display meshes that sprawl through portals from the room the current camera room. Static objects do not always sprawl to neighbouring rooms the moment they cross a portal. There is an adjustable leeway, called the `portal margin` (shown in translucent red in the editor) which defines the distance objects can cross before they are considered to sprawl to the neighbouring room. You can set this margin globally in the `RoomManager` and you can also override the margin for individual portals in the Inspector.
+This mode will only display meshes that are sprawling through portals from the current camera room. Large statics that cross portals are usually the ones you want to sprawl. Typical examples might be terrain mesh areas, or large floor or ceiling meshes. You usually don't want things like door frames to sprawl to the adjacent room - that is what fine tuning the `Portal margin` is for.
 #### Merge Meshes
 In order to keep drawcalls to a minimum, the system offers the option to automatically merge similar meshes within a room. This can increase performance in many cases. The culling accuracy is reduced, but as a room is a fairly logical unit for culling, this trade off usually works in your favour.
 #### Plane Simplification
