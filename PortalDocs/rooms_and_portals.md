@@ -151,7 +151,7 @@ The support for objects that are larger than a single room has one side effect -
 
 While this works great for large moving objects, it also has the side effect of allowing you a lot more leeway in level design. You can for instance create a large terrain section and have it present in multiple rooms, without splitting up the mesh.
 
-### Lighting
+## Lighting
 In general lights are handled like other objects. They can be placed in rooms, and they will sprawl to affect neighbouring rooms, according to the dimensions of the light. The exception to this is DirectionalLights. DirectionalLights have no source room as they affect _everywhere_. They should therefore not be placed in a `Room`. As DirectionalLights can be expensive, it is a good idea to turn them off when inside, see the `RoomGroup`s section below for more details on how to do this.
 
 Congratulations! You have now mastered the basic techniques required to use rooms and portals. You can use these to make games already, but there are many more features.
