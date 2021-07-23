@@ -119,8 +119,11 @@ Global mode is for objects that you don't want occlusion culled at all. Things l
 ### IGNORE
 Ignore is a special mode for objects that will be essentially free in the system. Manual bounds (`Bound_`) get converted to ignore portal mode automatically. They don't need to show up during the game, but are kept in the scene tree in case you need to convert the level multiple times (e.g. in the Editor). You might also choose to use this for objects that you only want to show up in the editor (when RoomManager is inactive).
 
-### In rooms or not?
-STATIC and DYNAMIC objects are recommended to be placed within rooms in the scene tree - the system needs to know which room they are in during conversion as it assumes they will never change room. Placing them within rooms in the scene tree allows you to explicitly tell the system where you want them. However, for ease of use, it is also possible to place STATIC and DYNAMIC objects _outside_ the rooms, but within the roomlist branch. The system will attempt to _autoplace_ the objects into the appropriate room. This works in most cases but if in doubt, use the explicit approach, especially when dealing with internal rooms, which have some restrictions for sprawling objects.
+### Should you place objects within rooms (in the scene tree) or not?
+STATIC and DYNAMIC objects are ideally placed within rooms in the scene tree. The system needs to know which room they are in during conversion as it assumes they will never change room. Placing them within rooms in the scene tree allows you to explicitly tell the system where you want them.
+
+### Autoplace
+However, for ease of use, it is also possible to place STATIC and DYNAMIC objects _outside_ the rooms, but within the roomlist branch. The system will attempt to _autoplace_ the objects into the appropriate room. This works in most cases but if in doubt, use the explicit approach, especially when dealing with internal rooms, which have some restrictions for sprawling objects.
 
 Note that if you place STATIC and DYNAMIC objects outside of rooms, they will not contribute to the room bound. So if you are using the room geometry to derive the bound, tables and chairs can be placed outside the room, but walls and floors should be explicitly within the Room branch of the scene tree, in order to ensure the bound is correct.
 
