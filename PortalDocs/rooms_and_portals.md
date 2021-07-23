@@ -191,6 +191,8 @@ What if the `VisibilityEnabler` could turn off objects when they were occlusion 
 ## RoomGroups
 A `RoomGroup` is a special node which allows you to deal with a group of `Rooms`s at once, instead of having write code for them individually. This is especially useful in conjunction with gameplay callbacks. The most important use for `RoomGroup`s is to delineate between 'inside' and 'outside' areas.
 
+![RoomGroups](images/roomgroups.png)
+
 For instance, when outside you may wish to use a directional light to represent the sun. When you receive an enter gameplay callback, you can turn the light on, and turn it off when none of the outside rooms are within gameplay. With the light off, performance will increase as there is no need to render it indoors.
 
 The same thing applies for rain effects, skyboxes and much more.
