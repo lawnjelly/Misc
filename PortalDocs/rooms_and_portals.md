@@ -199,7 +199,7 @@ This is an example of a simple `RoomGroup` script to turn on and off a `Directio
 
 ![RoomGroup notification example](images/roomgroup_notification.png)
 
-The same thing applies for rain effects, skyboxes and much more.
+You can apply the same technique for switching on and off rain effects, skyboxes and much more.
 
 ## Internal Rooms
 There is one more trick that RoomGroups have up their sleeve. A very common desire is to have a game level with a mixed outdoor and indoor environment. We have already mentioned that Rooms can be used to represent both rooms in a building, and areas of landscape, such as a canyon.
