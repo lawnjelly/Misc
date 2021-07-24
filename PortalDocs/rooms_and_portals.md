@@ -229,17 +229,14 @@ The only differences:
 
 # Appendix
 ## Creating Rooms and Portals in Blender (or other modeling tools)
-There is actually another way of creating rooms. In order to allow users to build levels almost entirely within modeling programs such as Blender, rooms can start life as `Spatial`s (or `Empties` in blender). As long as you use a special naming convention, the `RoomManager` will automatically convert these Spatials to Rooms during the conversion phase.
+Although you can create your room system entirely within the editor, you can also build rooms and portals within your modeling tool. There is one small snag - modeling tools such as Blender have no knowledge of `Room` and `Portal` nodes. In order to work around this we use the naming conventions that were discussed earlier.
 
-The naming convention is as follows:
-* Prefix `Room_`
-* Suffix should be the name you choose to give the room, e.g. `Lounge`, `Kitchen` etc.
+Rooms should be created as Empties with names such as `Room_kitchen` (substituting your preferred room name). If you place meshes within the rooms within the modeling tool, these Empties will form `Spatial` nodes in Godot, and will be converted to `Room` nodes automatically during the room conversion phase.
 
-E.g. `Room_Lounge`.
+`Portal`s also use the same naming convention as within Godot - the name should start with the prefix `Portal_` followed by the name of the room the portal should link to. However, for `Portal`s, we want to specify the shape and position of the polygon within the modeling tool, so the nodes should be Meshes rather than Empties.
 
-`Portal`s have some restrictions to work properly. They should be convex, and the polygon points should be in the same plane. The accuracy to the plane does not have to be exact, the system will automatically average the direction of the portal plane. Once converted to a `Portal` node, the snapping to the portal plane is enforced, and the vertices are specified (and editable) as 2d coordinates in the inspector, rather than 3d points. The orientation of the `Portal` is then defined by the transform of the `Portal` node.
-
-
+### Portal Meshes
+`Portal` meshes have some restrictions to work properly. They should be convex, and the polygon points should be in the same plane. The accuracy to the plane does not have to be exact, as Godot will automatically average the direction of the portal plane. Once converted to a `Portal` node, the snapping to the portal plane is enforced, and the vertices are specified (and editable) as 2d coordinates in the inspector, rather than 3d points.
 
 ## Portal Point Editing
 Portals are defined by a combination of the transform of the Portal node, and by a set of points which form the corners.
