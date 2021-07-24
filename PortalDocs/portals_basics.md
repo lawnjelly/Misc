@@ -37,6 +37,8 @@ If two rooms overlap, and a camera or player is in this overlapping zone, then t
 
 If you accidentally create overlapping rooms, the editor will flag a warning when you convert the rooms, and indicate any overlapping zones in red.
 
+![Room Overlap](images/room_overlap.png)
+
 The system does attempt to cope with overlapping rooms as best as possible by making the current room _'sticky'_. That is, each object remembers which room it was in last frame, and stays within it as long as it does not move outside the convex hull room bound. This can result in some hysteresis in these overlapping zones.
 
 There is one exception however - _internal rooms_ (they are described later, you do not have to worry about these to start with).
