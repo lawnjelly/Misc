@@ -228,12 +228,14 @@ The only differences:
 * STATIC and DYNAMIC Objects from outer rooms will not sprawl into internal rooms. If you want objects to cross these portals, place them in the internal room. This is to prevent large objects like terrain sections sprawling into entire buildings, and rendering when not necessary.
 
 # Appendix
-## Creating Rooms and Portals in Blender (or other modeling tools)
-Although you can create your room system entirely within the editor, you can also build rooms and portals within your modeling tool. There is one small snag - modeling tools such as Blender have no knowledge of `Room` and `Portal` nodes. In order to work around this we use the naming conventions that were discussed earlier.
+## Creating Room systems in Blender (or other modeling tools)
+Although you can create your room system entirely within the editor, you can also build rooms and portals within your modeling tool. There is one small snag - modeling tools such as Blender have no knowledge of `Room`, `RoomGroup` and `Portal` nodes. In order to work around this we use the naming conventions that were discussed earlier.
 
 Rooms should be created as Empties with names such as `Room_kitchen` (substituting your preferred room name). If you place meshes within the rooms within the modeling tool, these Empties will form `Spatial` nodes in Godot, and will be converted to `Room` nodes automatically during the room conversion phase.
 
 `Portal`s also use the same naming convention as within Godot - the name should start with the prefix `Portal_` followed by the name of the room the portal should link to. However, for `Portal`s, we want to specify the shape and position of the polygon within the modeling tool, so the nodes should be Meshes rather than Empties.
+
+Creating a `RoomGroup` is easy - any Empty with the name prefix 'RoomGroup' will be converted to a `RoomGroup`.
 
 ### Portal Meshes
 `Portal` meshes have some restrictions to work properly. They should be convex, and the polygon points should be in the same plane. The accuracy to the plane does not have to be exact, as Godot will automatically average the direction of the portal plane. Once converted to a `Portal` node, the snapping to the portal plane is enforced, and the vertices are specified (and editable) as 2d coordinates in the inspector, rather than 3d points.
