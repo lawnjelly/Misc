@@ -233,11 +233,11 @@ Although you can create your room system entirely within the editor, you can als
 
 Rooms should be created as Empties with names such as `Room_kitchen` (substituting your preferred room name). If you place meshes within the rooms within the modeling tool, these Empties will form `Spatial` nodes in Godot, and will be converted to `Room` nodes automatically during the room conversion phase.
 
-`Portal`s also use the same naming convention as within Godot - the name should start with the prefix `Portal_` followed by the name of the room the portal should link to. However, for `Portal`s, we want to specify the shape and position of the polygon within the modeling tool, so the nodes should be Meshes rather than Empties.
-
 Creating a `RoomGroup` is easy - any Empty with the name prefix 'RoomGroup' will be converted to a `RoomGroup`.
 
-### Portal Meshes
+#### Creating Portals in modeling tools
+`Portal`s also use the same naming convention as within Godot - the name should start with the prefix `Portal_` followed by the name of the room the portal should link to. However, for `Portal`s, we want to specify the shape and position of the polygon within the modeling tool, so the nodes should be Meshes rather than Empties.
+
 `Portal` meshes have some restrictions to work properly. They should be convex, and the polygon points should be in the same plane. The accuracy to the plane does not have to be exact, as Godot will automatically average the direction of the portal plane. Once converted to a `Portal` node, the snapping to the portal plane is enforced, and the vertices are specified (and editable) as 2d coordinates in the inspector, rather than 3d points.
 
 ## Portal Point Editing
