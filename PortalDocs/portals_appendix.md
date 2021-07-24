@@ -1,5 +1,8 @@
 ### Rooms and Portals
 # Appendix
+## Example SceneTree
+![Example SceneTree](images/example_scenetree.png)
+
 ## Creating Room systems in Blender (or other modeling tools)
 Although you can create your room system entirely within the editor, you can also build rooms and portals within your modeling tool. There is one small snag - modeling tools such as Blender have no knowledge of `Room`, `RoomGroup` and `Portal` nodes. In order to work around this we use the naming conventions that were discussed earlier.
 
