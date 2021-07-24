@@ -47,7 +47,7 @@ This can be used to turn on and off display of portals in the editor, and contro
 #### Debug Sprawl
 This mode will only display meshes that are sprawling through portals from the current camera room. Large statics that cross portals are usually the ones you want to sprawl. Typical examples might be terrain mesh areas, or large floor or ceiling meshes. You usually don't want things like door frames to sprawl to the adjacent room - that is what fine tuning the `Portal margin` is for.
 #### Merge Meshes
-In order to keep drawcalls to a minimum, the system offers the option to automatically merge similar meshes within a room. This can increase performance in many cases. The culling accuracy is reduced, but as a room is a fairly logical unit for culling, this trade off usually works in your favour.
+In order to keep drawcalls to a minimum, the system offers the option to automatically merge similar STATIC meshes within a room (aka, _static batching_). This can increase performance in many cases. The culling accuracy is reduced, but as a room is a fairly logical unit for culling, this trade off usually works in your favour.
 #### Plane Simplification
 In some cases, automatically generated convex hull bounds may contain a very large number of planes. This is not ideal because it slows down determining which room a camera or object is within. The system can optionally simplify hulls. The degree of simplification can be selected by the user, between 0 (no simplification) and 1 (maximum simplification). You can also override this value in individual rooms.
 
