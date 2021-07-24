@@ -1,7 +1,17 @@
 ### Rooms and Portals
 # Appendix
 ## Example SceneTree
+Putting all the ideas together, here is an example scene tree:
+
 ![Example SceneTree](images/example_scenetree.png)
+
+* We have used a `RoomGroup` to denote an outside area
+* The `MeshInstance`s inside the `Room`s are either STATIC or DYNAMIC
+* We have created a Spatial (I decided to call it 'Freeform', but you could use any name) under which to place STATIC and DYNAMIC objects that will be autoplaced in rooms
+(Freeform is inside the roomlist, but _not_ inside a room).
+* The player and the monsters are on branches OUTSIDE the roomlist
+* The player and monster meshes have portal mode ROAMING so they can be in any room
+* The camera is outside the roomlist
 
 ## Creating Room systems in Blender (or other modeling tools)
 Although you can create your room system entirely within the editor, you can also build rooms and portals within your modeling tool. There is one small snag - modeling tools such as Blender have no knowledge of `Room`, `RoomGroup` and `Portal` nodes. In order to work around this we use the naming conventions that were discussed earlier.
