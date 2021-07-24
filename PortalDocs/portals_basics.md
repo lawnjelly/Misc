@@ -1,5 +1,15 @@
 ### Rooms and Portals
 # The Basics
+## Introduction
+The rooms and portals system is an optional component of Godot that allows you to partition your game levels into a series of rooms (aka cells), and portals which are openings between the rooms that the camera can see through.
+
+This allows several features:
+* Portal occlusion culling, which can increase performance by reducing the number of objects that are drawn
+* Gameplay callbacks, allowing turning off activity outside the gameplay area
+
+The trade off for these features is that we have to manually partition our level into rooms, and add portals between them.
+
+Note that some specific types of games may not offer many opportunities for occlusion culling, for example games with fixed top down view, or very small levels that do not stress the engine. However most other games with medium to large sized levels can benefit significantly, performance between 2-10x times faster is not uncommon, which can make the difference between a playable and unplayable game, especially on low power devices such as mobile.
 
 ## The RoomManager
 Anytime you want to use the portal system, you need to include a special node in your scene tree, called the `RoomManager`. The RoomManager is responsible for the runtime maintenance of the system, especially converting the objects in your rooms into a `room graph` which is used at runtime to perform occlusion culling and other tasks.
