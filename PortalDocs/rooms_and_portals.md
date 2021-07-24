@@ -48,15 +48,10 @@ There is one exception however - _internal rooms_ (they are described later, you
 ### How do I create a room?
 A Room is a node type that can be added to the scene tree like any other. You would then typically place objects within the room by making them children and grand-children of the Room node. Instead of placing the rooms as children of a Scene root node, you will need to create a Spatial especially for the job of being the parent of all the rooms. This node we will call the 'RoomList'. You will need to assign the roomlist node in the `RoomManager`, so the RoomManager knows where to find the rooms.
 
-There is actually another way of creating rooms. In order to allow users to build levels almost entirely within modeling programs such as Blender, rooms can start life as `Spatial`s (or `Empties` in blender). As long as you use a special naming convention, the `RoomManager` will automatically convert these Spatials to Rooms during the conversion phase.
+### Room naming convention
+Unlike most nodes in Godot, a specific naming convention should be followed in order to identify each room. The name should have the prefix `Room_` followed by the name you wish to give the room, e.g. `Room_kitchen`, `Room_lounge`. If you don't follow these naming guidelines, the system will warn you and may not work correctly.
 
-The naming convention is as follows:
-* Prefix `Room_`
-* Suffix should be the name you choose to give the room, e.g. `Lounge`, `Kitchen` etc.
-
-E.g. `Room_Lounge`.
-
-### How do I define the shape and position of my convex hull?
+### How do I define the shape and position of my room convex hull?
 Because defining the room bound is the most important aspect of the system, there are THREE methods available to define the shape of a room in Godot:
 1) Use the geometry of the objects contained within the room to automatically create an approximate bound
 2) Provide a manual bound - a MeshInstance in the room that has geometry in the shape of the desired bound, with a name prefixed by `Bound_`. This is something you may use if you create your levels in Blender or similar.
@@ -73,7 +68,7 @@ _A simple pair of rooms. The portal margin is shown with translucent red, and th
 ## Portals
 If you create some rooms, place objects within them, then convert the level in the editor, you will the objects in the rooms appearing and showing as you move between rooms. There is one problem however! Although you can see the objects within the room that the camera is in, you can't see to any neighbouring rooms! For that we need portals.
 
-Portals are special convex polygons, that you position over openings between rooms to allow the system to see between them. You can create a Portal node directly in the editor, or like with rooms, you can create portals by first making a MeshInstance (e.g. in Blender), and using a special naming convention, and it will be converted to a Portal node during room conversion.
+Portals are special convex polygons, that you position over openings between rooms to allow the system to see between them. You can create a Portal node directly in the editor.
 
 Portals only need to be placed in one of each pair of neighbouring rooms (the _'source room'_) - the system will automatically make them two way unless you choose otherwise in the Portal settings. The portal normal should face _outward_ from the source room. The front face should be visible from _outside_ the room. The editor gizmo indicates the direction the portal is facing with an arrow, and a different color for each face.
 
@@ -164,8 +159,6 @@ In general lights are handled like other objects. They can be placed in rooms, a
 Congratulations! You have now mastered the basic techniques required to use rooms and portals. You can use these to make games already, but there are many more features.
 
 # Advanced
-## Creating Rooms and Portals in Blender (
-
 ## Gameplay Callbacks
 Although occlusion culling greatly reduces the number of objects that need to be rendered, there are other costs to maintaining objects in a game besides the final rendering. For instance, did you know that in Godot, animated objects will still be animated whether they appear on screen or not! This can take up a lot of processing power, especially for objects that use software skinning (where skinning is calculated on the CPU).
 
@@ -237,6 +230,19 @@ The only differences:
 * STATIC and DYNAMIC Objects from outer rooms will not sprawl into internal rooms. If you want objects to cross these portals, place them in the internal room. This is to prevent large objects like terrain sections sprawling into entire buildings, and rendering when not necessary.
 
 # Appendix
+## Creating Rooms and Portals in Blender (or other modeling tools)
+There is actually another way of creating rooms. In order to allow users to build levels almost entirely within modeling programs such as Blender, rooms can start life as `Spatial`s (or `Empties` in blender). As long as you use a special naming convention, the `RoomManager` will automatically convert these Spatials to Rooms during the conversion phase.
+
+The naming convention is as follows:
+* Prefix `Room_`
+* Suffix should be the name you choose to give the room, e.g. `Lounge`, `Kitchen` etc.
+
+E.g. `Room_Lounge`.
+
+`Portal`s have some restrictions to work properly. They should be convex, and the polygon points should be in the same plane. The accuracy to the plane does not have to be exact, the system will automatically average the direction of the portal plane. Once converted to a `Portal` node, the snapping to the portal plane is enforced, and the vertices are specified (and editable) as 2d coordinates in the inspector, rather than 3d points. The orientation of the `Portal` is then defined by the transform of the `Portal` node.
+
+
+
 ## Portal Point Editing
 Portals are defined by a combination of the transform of the Portal node, and by a set of points which form the corners.
 
