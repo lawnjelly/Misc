@@ -56,4 +56,16 @@ To balance these advantages there are several potential problems with the cells 
 ### Partitioning the Rooms
 The largest downside however is the difficulty in building / processing a level to form these convex rooms and portals.
 
+Early games using this approach were able to simplify the problem. They were often mostly built on a snapped grid, and a binary space partitioning tree (BSP tree) was built from the geometry - partly to identify areas which could form cells, and the portals between them.
+
+This worked to a point, but once artists started experimenting with irregular room shapes and lost the grid, new approaches were needed in order to partition the world into cells and portals.
+
+This led to the use of manually specified rooms and portals. Essentially artists, as well as building level geometry, would be responsible for creating a convex hull for each room, and assigning objects to each room, then creating the portals between rooms. This is the approach that Godot takes. It is potentially labor intensive in some situations, but is the most adaptable solution.
+
+### Automated solutions
+It may be possible in some circumstances to automatically identify rooms and place portals. This is a difficult problem however in a freeform game level, and this isn't yet offered as an option.
+
+Some other much more practical approaches (if you want to save out on manual labour) are:
+* the use of procedural techniques for level building
+* kit bashing - the use of pre-build room templates (with the room bound defined and portals) and reusing these multiple times to build a level
 
