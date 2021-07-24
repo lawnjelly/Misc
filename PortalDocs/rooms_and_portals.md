@@ -10,6 +10,7 @@ This allows several features:
 
 The trade off for these features is that we have to manually partition our level into rooms, and add portals between them.
 
+# The Basics
 ## The RoomManager
 Anytime you want to use the portal system, you need to include a special node in your scene tree, called the `RoomManager`. The RoomManager is responsible for the runtime maintenance of the system, especially converting the objects in your rooms into a `room graph` which can be used at runtime to perform occlusion culling and other tasks.
 
@@ -103,6 +104,7 @@ You have now mastered the basic principles of the system.
 
 The next step is to look at the different types of objects that can be managed by the system.
 
+# Intermediate
 ## Portal mode
 If you look in the inspector, every `VisualInstance` in Godot is derived from a `CullInstance`, where you can set a `PortalMode`. This determines how objects will behave in the portal system.
 
@@ -159,7 +161,8 @@ In general lights are handled like other objects. They can be placed in rooms, a
 
 Congratulations! You have now mastered the basic techniques required to use rooms and portals. You can use these to make games already, but there are many more features.
 
-# Gameplay Callbacks
+# Advanced
+## Gameplay Callbacks
 Although occlusion culling greatly reduces the number of objects that need to be rendered, there are other costs to maintaining objects in a game besides the final rendering. For instance, did you know that in Godot, animated objects will still be animated whether they appear on screen or not! This can take up a lot of processing power, especially for objects that use software skinning (where skinning is calculated on the CPU).
 
 Fear not, rooms and portals can solve these problems, and more.
@@ -229,7 +232,7 @@ The only differences:
 * Portals of internal rooms are not considered as part of the bound of outer rooms
 * STATIC and DYNAMIC Objects from outer rooms will not sprawl into internal rooms. If you want objects to cross these portals, place them in the internal room. This is to prevent large objects like terrain sections sprawling into entire buildings, and rendering when not necessary.
 
-# Advanced
+# Appendix
 ## Portal Point Editing
 Portals are defined by a combination of the transform of the Portal node, and by a set of points which form the corners.
 
