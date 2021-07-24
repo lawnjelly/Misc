@@ -63,9 +63,17 @@ This worked to a point, but once artists started experimenting with irregular ro
 This led to the use of manually specified rooms and portals. Essentially artists, as well as building level geometry, would be responsible for creating a convex hull for each room, and assigning objects to each room, then creating the portals between rooms. This is the approach that Godot takes. It is potentially labor intensive in some situations, but is the most adaptable solution.
 
 ### Automated solutions
-It may be possible in some circumstances to automatically identify rooms and place portals. This is a difficult problem however in a freeform game level, and this isn't yet offered as an option.
+It may be possible in some circumstances to automatically identify rooms and place portals. This is a difficult problem however in a freeform game level, and this isn't yet offered as a pre-built option.
 
 Some other much more practical approaches (if you want to save out on manual labour) are:
 * the use of procedural techniques for level building
 * kit bashing - the use of pre-build room templates (with the room bound defined and portals) and reusing these multiple times to build a level
 
+## Overview
+Overall, despite the manual work involved, portal rendering has a lot to offer:
+* It is fast. Probably the fastest method for occlusion, especially on low power machines such as mobile
+* Low system requirements
+* Does not suffer from culling errors
+* Once partitioned into rooms, the data can be used for multiple other purposes
+
+And finally consider that although fully portalling up a large level manually can seem daunting, there are no requirements that you *have* to partition a level to the fullest extent possible. For instance, in many simple levels, just separating the level into two rooms with a single portal between them can significantly increase performance, and this may take less than 5 mins. Further rooms / portals will increase performance again, and it is totally up to you how important performance is versus the effort of partitioning.
