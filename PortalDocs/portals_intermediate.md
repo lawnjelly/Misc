@@ -1,5 +1,7 @@
 ### Rooms and Portals
 # Intermediate
+Normally, when you use Godot, all objects that you can see (`VisualInstance`s) are treated the same by the engine. The portal renderer is slightly different, in that it makes a distinction between the different roles objects will have in your game, in order to define the `Room`s, and in order to render and process everything in the most efficient way.
+
 ## Portal mode
 If you look in the inspector, every `VisualInstance` in Godot is derived from a `CullInstance`, where you can set a `PortalMode`. This determines how objects will behave in the portal system.
 
