@@ -52,7 +52,7 @@ Unlike most nodes in Godot, a specific naming convention should be followed in o
 ### How do I define the shape and position of my room convex hull?
 Because defining the room bound is the most important aspect of the system, there are THREE methods available to define the shape of a room in Godot:
 1) Use the geometry of the objects contained within the room to automatically create an approximate bound
-2) Provide a manual bound - a MeshInstance in the room that has geometry in the shape of the desired bound, with a name prefixed by `Bound_`. This is something you may use if you create your levels in Blender or similar.
+2) Provide a manual bound - a MeshInstance in the room that has geometry in the shape of the desired bound, with a name prefixed by `Bound_`. This is something you may use if you create your levels in Blender or similar (_see the appendix for details of creating levels in Blender_).
 3) By manually editing the points that define the convex hull, in the Room inspector.
 
 While the first option can be all that is required, particularly with simple rooms, or for pre-production, the power of the manual bounds gives you ultimate control (at the expense of a small amount of editing). You can also combine the two approaches, perhaps using automatic bounds for most rooms but manually editing problem areas.
