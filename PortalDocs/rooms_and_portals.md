@@ -74,7 +74,7 @@ Portals only need to be placed in one of each pair of neighbouring rooms (the _'
 
 ![Portal](images/portal_inspector.png)
 
-The naming convention for portals is as follows:
+Like `Room`s, `Portal`s also follow a naming convention which is as follows:
 * Prefix `Portal_`
 * Optional : You can add a suffix of the room that the portal will lead to ('destination room'). E.g. `Portal_Kitchen`
 
