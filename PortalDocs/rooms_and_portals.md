@@ -164,6 +164,8 @@ In general lights are handled like other objects. They can be placed in rooms, a
 Congratulations! You have now mastered the basic techniques required to use rooms and portals. You can use these to make games already, but there are many more features.
 
 # Advanced
+## Creating Rooms and Portals in Blender (
+
 ## Gameplay Callbacks
 Although occlusion culling greatly reduces the number of objects that need to be rendered, there are other costs to maintaining objects in a game besides the final rendering. For instance, did you know that in Godot, animated objects will still be animated whether they appear on screen or not! This can take up a lot of processing power, especially for objects that use software skinning (where skinning is calculated on the CPU).
 
