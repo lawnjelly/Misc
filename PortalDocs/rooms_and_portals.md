@@ -88,9 +88,7 @@ All in all there are three ways of specifying which Room a Portal should link to
 * Assigning the `Linked Room` in the inspector for a Portal node (this is simply a shortcut for setting the name)
 
 ### Portal restrictions
-`Portal`s have some restrictions to work properly. They should be convex, and the polygon points should be in the same plane. The accuracy to the plane does not have to be exact, the system will automatically average the direction of the portal plane. Once converted to a `Portal` node, the snapping to the portal plane is enforced, and the vertices are specified (and editable) as 2d coordinates in the inspector, rather than 3d points. The orientation of the `Portal` is then defined by the transform of the `Portal` node.
-
-When learning the system you are encouraged to create `Portal` nodes directly in the editor, which will behave in a similar manner to `Plane` `MeshInstance`s (unless you start editing the `Portal` points).
+`Portal`s have some restrictions to work properly. They should be convex, and the polygon points should be in the same plane. The snapping of points to a plane is enforced because `Portal` points are only defined in 2D (with x and y coordinates) - the node transform is used to convert these to world space 3D points. The node transform thus determines the portal orientation.
 
 ## Trying it out
 By now you should be able to create a couple of rooms, add some objects (regular `MeshInstance`s) within the rooms, and add portals between the rooms. Try converting the rooms in the editor, and see if you can now see the objects in neighbouring rooms, through the portals. Great success!
