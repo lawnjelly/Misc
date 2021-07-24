@@ -1,5 +1,5 @@
 # Room and Portals - Tutorial Simple
-[Main Documentation](rooms_and_portals.md) \
+[Back to Index](portals_index.md) \
 [Download Tutorial Project](PortalDemo_Simple.zip)
 
 ## Introduction
