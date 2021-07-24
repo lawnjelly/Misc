@@ -26,10 +26,12 @@ However, for ease of use, it is also possible to place STATIC and DYNAMIC object
 
 Note that if you place STATIC and DYNAMIC objects outside of rooms, they will not contribute to the room bound. So if you are using the room geometry to derive the bound, tables and chairs can be placed outside the room, but walls and floors should be explicitly within the Room branch of the scene tree, in order to ensure the bound is correct.
 
-ROAMING and GLOBAL objects you are recommended to maintain in a branch of the scene tree outside of any rooms or the roomlist (their _can_ be placed inside the rooms, but to save confusion they are normally better kept on their own branch). There are no restrictions on the placement of IGNORE objects.
+ROAMING and GLOBAL objects you are recommended to maintain in a branch of the scene tree outside of any rooms or the roomlist (they _can_ be placed inside the rooms, but to save confusion they are normally better kept on their own branch). There are no restrictions on the placement of IGNORE objects.
 
 ### Object Lifetimes
-At the time of writing, the lifetime of STATIC and DYNAMIC objects is tied to the lifetime of the level, between when you call `rooms_convert` to activate the portal system, and calling `rooms_clear` to unload the system. You should therefore not try to create or delete STATIC or DYNAMIC objects while the portal system is active. Doing so will cause the system to automatically unload because it is in an invalid state. You can however, freely `show` and `hide` these objects.
+It is important to note that the lifetime of STATIC and DYNAMIC objects is tied to the lifetime of the level, between when you call `rooms_convert` to activate the portal system, and calling `rooms_clear` to unload the system. This is because quite a bit of pre-processing goes on during the conversion phase in order to render them efficiently.
+
+You should therefore not try to create or delete STATIC or DYNAMIC objects while the portal system is active. Doing so will cause the system to automatically unload because it is in an invalid state. You can however, freely `show` and `hide` these objects.
 
 The sequence should be therefore:
 * Load your level
@@ -54,6 +56,6 @@ The support for objects that are larger than a single room has one side effect -
 While this works great for large moving objects, it also has the side effect of allowing you a lot more leeway in level design. You can for instance create a large terrain section and have it present in multiple rooms, without splitting up the mesh.
 
 ## Lighting
-In general lights are handled like other objects. They can be placed in rooms, and they will sprawl to affect neighbouring rooms, according to the dimensions of the light. The exception to this is DirectionalLights. DirectionalLights have no source room as they affect _everywhere_. They should therefore not be placed in a `Room`. As DirectionalLights can be expensive, it is a good idea to turn them off when inside, see the `RoomGroup`s section below for more details on how to do this.
+In general lights are handled like other objects. They can be placed in rooms, and they will sprawl to affect neighbouring rooms, according to the dimensions of the light. The exception to this is DirectionalLights. DirectionalLights have no source room as they affect _everywhere_. They should therefore not be placed in a `Room`. As DirectionalLights can be expensive, it is a good idea to turn them off when inside, see the later `RoomGroup`s section for details on how to do this.
 
 Congratulations! You have now mastered the intermediate techniques required to use rooms and portals. You can use these to make games already, but there are many more features.
