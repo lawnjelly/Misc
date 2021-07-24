@@ -9,6 +9,9 @@ This allows several features:
 
 The trade off for these features is that we have to manually partition our level into rooms, and add portals between them.
 
+### And now a warning
+Note that the portal system should be considered an _advanced feature_ of Godot. You should not attempt to use rooms and portals until you are familiar with the Godot editor, and have successfully made at least a couple of test games. It gives you great power as a game designer, but the trade off is it requires a more technical approach to level design than you may be accustomed to. It is aimed at producing professional quality results and assumes the user is prepared to put in the work for this. It is not intended to be used for all 3D games - not all will benefit, and it may require more time than a short game jam allows.
+
 ## The RoomManager
 Anytime you want to use the portal system, you need to include a special node in your scene tree, called the `RoomManager`. The RoomManager is responsible for the runtime maintenance of the system, especially converting the objects in your rooms into a `room graph` which is used at runtime to perform occlusion culling and other tasks.
 
