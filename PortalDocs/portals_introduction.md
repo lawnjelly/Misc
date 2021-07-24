@@ -31,7 +31,9 @@ Of course there is a catch. The Z buffer works pretty well when you maybe have o
 The basic Z buffer is not very good at dealing with this problem.
 
 ### Raster Occlusion Culling
-There are various techniques to try and improve this with a 'better' Z buffer, that allows faster testing for whole objects, or groups of objects. This is known as _raster occlusion culling_. Rejecting an entire object is far better than rejecting triangles on a pixel by pixel basis, as it is potentially a lot more efficient.
+There are various techniques to try and improve this with a 'better' Z buffer, that allows faster testing for whole objects, or groups of objects. This is known as _raster occlusion culling_. Rejecting an entire object is far better than rejecting triangles on a pixel by pixel basis, as it is potentially a lot more efficient. Raster occlusion culling has only recently become a practical method due to advances in hardware and techniques.
 
+## Geometric Occlusion Culling
+There is on the other hand an entirely different way of dealing with occlusion. Instead of working with pixels (which can be expensive, because there are a lot of them!), what if we could use geometrical methods (some smart maths) to occlusion cull objects instead of doing all that brute force work?
 
-
+It turns out there are a whole class of techniques available, which have historically been the foundation of most high performance games in the last 2-3 decades. The earliest reference I could find was the work 
