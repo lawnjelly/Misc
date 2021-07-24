@@ -1,4 +1,5 @@
-# Rooms and Portals - The Basics
+### Rooms and Portals
+# The Basics
 
 ## The RoomManager
 Anytime you want to use the portal system, you need to include a special node in your scene tree, called the `RoomManager`. The RoomManager is responsible for the runtime maintenance of the system, especially converting the objects in your rooms into a `room graph` which is used at runtime to perform occlusion culling and other tasks.
