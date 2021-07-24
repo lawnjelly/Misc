@@ -49,3 +49,11 @@ One magic property of doing all this work geometrically rather than using raster
 So this technique sounds fantastic? What are the downsides?
 
 ### The downsides
+To balance these advantages there are several potential problems with the cells (rooms) and portals approach.
+* The data structures involved often have to be pre-calculated and mostly depend on static (non-moving) level geometry.
+* It doesn't (in the simplest form) deal with dynamic objects that move around a level.
+
+### Partitioning the Rooms
+The largest downside however is the difficulty in building / processing a level to form these convex rooms and portals.
+
+
