@@ -1,7 +1,7 @@
 ### Rooms and Portals
 # The Basics
 ## Introduction
-The rooms and portals system is an optional component of Godot that allows you to partition your 3D game levels into a series of rooms (aka cells), and portals which are openings between the rooms that the camera can see through.
+The rooms and portals system is an optional component of Godot that allows you to partition your 3D game levels into a series of rooms (_aka cells_), and portals which are openings between the rooms that the camera can see through.
 
 This allows several features:
 * Portal occlusion culling, which can increase performance by reducing the number of objects that are drawn
