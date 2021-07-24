@@ -24,6 +24,8 @@ STATIC and DYNAMIC objects are ideally placed within rooms in the scene tree. Th
 ### Autoplace
 However, for ease of use, it is also possible to place STATIC and DYNAMIC objects _outside_ the rooms, but within the roomlist branch. The system will attempt to _autoplace_ the objects into the appropriate room. This works in most cases but if in doubt, use the explicit approach, especially when dealing with internal rooms, which have some restrictions for sprawling objects.
 
+![Autoplace](images/freeform.png)
+
 Note that if you place STATIC and DYNAMIC objects outside of rooms, they will not contribute to the room bound. So if you are using the room geometry to derive the bound, tables and chairs can be placed outside the room, but walls and floors should be explicitly within the Room branch of the scene tree, in order to ensure the bound is correct.
 
 ROAMING and GLOBAL objects you are recommended to maintain in a branch of the scene tree outside of any rooms or the roomlist (they _can_ be placed inside the rooms, but to save confusion they are normally better kept on their own branch). There are no restrictions on the placement of IGNORE objects.
