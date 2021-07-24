@@ -36,4 +36,8 @@ There are various techniques to try and improve this with a 'better' Z buffer, t
 ## Geometric Occlusion Culling
 There is on the other hand an entirely different way of dealing with occlusion. Instead of working with pixels (which can be expensive, because there are a lot of them!), what if we could use geometrical methods (some smart maths) to occlusion cull objects instead of doing all that brute force work?
 
-It turns out there are a whole class of techniques available, which have historically been the foundation of most high performance games in the last 2-3 decades. The earliest reference I could find was the work 
+It turns out there are a whole class of techniques available, which have historically been the foundation of most high performance games in the last 2-3 decades. The earliest reference I could find was the work of C.B. Jones, in 1971, with the paper "A new approach to the 'hidden line' problem".
+
+Another landmark was Seth Teller's PhD in 1992 which went on to inspire Quake.
+
+The basic idea was to partition the world (or game level) into a number of convex cells (_aka rooms_), with a series of portals that were windows that established visibility between the cells.
