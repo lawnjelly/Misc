@@ -42,4 +42,10 @@ Another landmark was Seth Teller's PhD in 1992 which went on to inspire Quake.
 
 The basic idea was to partition the world (or game level) into a number of convex cells (_aka rooms_), with a series of portals that were windows that established visibility between the cells. Once you had such a data structure, the process of determining visibility involved recursively tracing out from the camera cell, and only moving into neighbouring cells if there was a view into the cell via a portal. If you know what objects are in each cell, you can simply render these as you go, and voila, you have an occlusion culled view of the world, from that spot.
 
-What is more, this process of tracing through the cells is actually very efficient. Many games made this more efficient still by pre-calculating a list of cells (or objects) that were visible from each source cell, so all that needed to be done at runtime was find the cell the camera was within, then lookup a list of objects to draw.
+What is more, this process of tracing through the cells is actually very efficient. Many games made this more efficient still by pre-calculating a list of cells (or objects) that were visible from each source cell, so all that needed to be done at runtime was find the cell the camera was within, then lookup a list of objects to draw. This is called a _potentially visible set_, or PVS.
+
+One magic property of doing all this work geometrically rather than using raster, or pixel by pixel, approaches, is that the process is just as cheap whatever screen resolution you are rendering to. This becomes important when screen sizes move towards 4K resolutions.
+
+So this technique sounds fantastic? What are the downsides?
+
+### The downsides
