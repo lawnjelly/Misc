@@ -35,6 +35,8 @@ Gameplay callbacks have one more useful function. By default in Godot animation 
 
 The engine's solution to this problem is the `VisibilityNotifier` node, and its slightly easier to use variation, the `VisibilityEnabler` node. `VisibilityEnabler` can be used to switch off animation and sleep physics when an object is outside the view frustum. You do this by simply placing a `VisibilityEnabler` node in your subscene (for e.g. a monster). It will do the rest. Consult the `VisibilityEnabler` documentation for full details.
 
+![Visibility Enabler](images/visibility_enabler.png)
+
 What if the `VisibilityEnabler` could turn off objects when they were occlusion culled? Well it turns out they can. All you have to do is switch on the `Gameplay Monitor` and the rest happens automatically.
 
 ## RoomGroups
