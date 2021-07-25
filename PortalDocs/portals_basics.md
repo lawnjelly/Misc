@@ -80,7 +80,7 @@ All in all there are three ways of specifying which Room a Portal should link to
 `Portal`s have some restrictions to work properly. They should be convex, and the polygon points should be in the same plane. The snapping of points to a plane is enforced because `Portal` points are only defined in 2D (with x and y coordinates) - the node transform is used to convert these to world space 3D points. The node transform thus determines the portal orientation.
 
 ## Trying it out
-By now you should be able to create a couple of rooms, add some objects (regular `MeshInstance`s) within the rooms, and add portals between the rooms. Try converting the rooms in the editor, and see if you can now see the objects in neighbouring rooms, through the portals. Great success!
+By now you should be able to create a couple of rooms, add some objects (regular `MeshInstance`s) within the rooms, and add a portal between the rooms. Try converting the rooms in the editor, and see if you can now see the objects in neighbouring rooms, through the portal. Great success!
 
 ![Simple SceneTree](images/simple_scenetree.png)
 
