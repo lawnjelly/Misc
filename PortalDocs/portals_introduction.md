@@ -8,6 +8,8 @@ This allows several features:
 
 The trade off for these features is that we have to manually partition our level into rooms, and add portals between them.
 
+Godot `Portal`s should not be confused with those in the games of the same name. They do not warp space, they simply represent a window that the camera (or lights) can see through.
+
 ### Minimizing partitioning effort
 Bear in mind with portalling that although the effort involved in creating rooms for a large level may seem daunting (particularly if you are a one person team!) there are several factors which can make this much easier:
 
