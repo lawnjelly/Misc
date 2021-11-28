@@ -143,7 +143,10 @@ There are many permutations and variations of Camera types, but it should be cle
 ### Why can any Node have physics interpolation disabled, why not just Cameras?
 Although Cameras are the most common example, there are a number of cases when you may wish other nodes to control their own interpolation, or be non-interpolated. Consider another example, a player in a top view game whose rotation is controlled by mouse look. Disabling physics rotation allows the player rotation to match the mouse in realtime.
 
+## Special considerations for 2D
+Although physics interpolation can be as useful in 2D as in 3D, there are some special situations where you may choose not to use physics interpolation.
 
+### Snapping and pixel perfect retro games
+Pixel perfect 2D games where the texels of sprites can be large on screen often utilize snapping to keep objects aligned to a pixel grid. When sprites move off a precise grid, you can get artifacts as fractional relative differences between sprites give a jiggling effect as they move.
 
-
-
+Physics interpolation by nature involves fractional positions, and can throw objects off such a grid, resulting in these unwanted artifacts. So in many cases it can be better to disable physics interpolation in such games and use other approaches to deal with varying frame rates and hardware.
