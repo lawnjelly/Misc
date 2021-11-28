@@ -41,8 +41,13 @@ If our physics ticks are happening once per second (for this example), what happ
 
 The x coordinate would be:
 ```
-x = old_x + ((new_x - old_x) * 0.5)
+x = x_prev + ((x_curr - x_prev) * 0.5)
 ```
+Let me break that down a bit.
+* We know the x starts from the coordinate on the previous tick (x_prev)
+* We know that after the full tick, the difference between the current tick and the previous tick will have been added (x_curr - x_prev)
+* The only thing we need to vary is the proportion of this difference we add, according to how far we are through the physics tick
 
+This last proportion or fraction is known as the `physics_interpolation_fraction`, and is handily available in Godot via the `Engine.get_physics_interpolation_fraction()` funcion.
 
 
