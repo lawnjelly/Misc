@@ -65,3 +65,11 @@ There is another simple alternative to this scheme, which is instead of interpol
 * Providing the movement speed is slow, these incorrect predictions may not be too much of a problem.
 * When a prediction was incorrect, the object may have to jump or snap back onto the corrected path. This can be visually jarring.
 
+In Godot this system is referred to as physics interpolation, but you may also hear it referred to as "fixed timestep interpolation", as it is interpolating between objects moved with a fixed timestep (physics ticks per second). In some ways the second term is more accurate, because it can equally well be used to interpolate objects that are not driven by physics.
+
+## Incorporating physics interpolation into your game
+This all sounds as though it could be very beneficial, but is theoretical, but how do we actually incorporate physics interpolation into a Godot game? Are there any caveats?
+
+We have tried to make the system as easy to use as possible, and most existing games will work with little or even no significant changes. That said there are some situations which require special treatment, and these will be described.
+
+
