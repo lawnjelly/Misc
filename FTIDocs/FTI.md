@@ -140,6 +140,10 @@ Often you will want to use a combination of interpolation and non-interpolation:
 
 There are many permutations and variations of Camera types, but it should be clear that in many cases, disabling physics interpolation and handling this yourself in `_process` can give a better result.
 
+### Why can any Node have physics interpolation disabled, why not just Cameras?
+Although Cameras are the most common example, there are a number of cases when you may wish other nodes to control their own interpolation, or be non-interpolated. Consider another example, a player in a top view game whose rotation is controlled by mouse look. Disabling physics rotation allows the player rotation to match the mouse in realtime.
+
+
 
 
 
