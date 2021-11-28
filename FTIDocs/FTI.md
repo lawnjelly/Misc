@@ -59,10 +59,9 @@ Putting all this together shows that it should be possible to have a nice smooth
 What does this mean? This scheme does work, but it does mean we are effectively introducing a single physics tick of delay between what we see on the screen, and where the objects _should_ be. In practice we are not very good at noticing this delay, there are already significant delays involved in games, we just don't typically notice them. The most significant effect is there can be a slight delay to input, which can be a factor in fast twitch games. In some of these fast input situations you may wish to turn off physics interpolation and use a different scheme.
 
 ### Why look into the past? Why not predict the future?
-There is another simple alternative to this scheme, which is instead of interpolating between the previous and current tick, we use maths to _extrapolate_ into the future, i.e. try to predict where the object _will be_, rather than show it where it was. This can be done and may be offered as an option, but there are some significant downsides.
+There is another simple alternative to this scheme, which is instead of interpolating between the previous and current tick, we use maths to _extrapolate_ into the future, i.e. try to predict where the object _will be_, rather than show it where it was. This can be done and may be offered as an option in future, but there are some significant downsides.
 * The prediction may not be correct, especially when an object collides with another object during the physics tick.
 * Where a prediction was incorrect, the object may extrapolate into an "impossible" position, like inside a wall.
 * Providing the movement speed is slow, these incorrect predictions may not be too much of a problem.
 * When a prediction was incorrect, the object may have to jump or snap back onto the corrected path. This can be visually jarring.
-
 
