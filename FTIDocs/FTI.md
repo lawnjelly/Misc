@@ -48,6 +48,21 @@ Let me break that down a bit.
 * We know that after the full tick, the difference between the current tick and the previous tick will have been added (x_curr - x_prev)
 * The only thing we need to vary is the proportion of this difference we add, according to how far we are through the physics tick
 
-This last proportion or fraction is known as the `physics_interpolation_fraction`, and is handily available in Godot via the `Engine.get_physics_interpolation_fraction()` funcion.
+This last proportion or fraction is known as the `physics_interpolation_fraction`, and is handily available in Godot via the `Engine.get_physics_interpolation_fraction()` funcion. In this case we are at 0.5 seconds through a 1 second physics tick, so our interpolation fraction is quite simply `0.5/1.0`, which is handily also 0.5!
+
+Although this example uses the position, the same thing can be done with the rotation and scale of objects. It is not necessary to know the details of this as Godot can do all this for you.
+
+### Smoothed transformations between physics ticks?
+Putting all this together shows that it should be possible to have a nice smooth estimation of the transform of objects between the current and previous physics tick. But wait, you may have noticed something. If we are interpolating between the current and previous ticks, we are not estimating the position of the object _now_, we are estimating the position of the object in the past. To be exact, we are estimating the position of the object _1 tick_ into the past.
+
+### In the past
+What does this mean? This scheme does work, but it does mean we are effectively introducing a single physics tick of delay between what we see on the screen, and where the objects _should_ be. In practice we are not very good at noticing this delay, there are already significant delays involved in games, we just don't typically notice them. The most significant effect is there can be a slight delay to input, which can be a factor in fast twitch games. In some of these fast input situations you may wish to turn off physics interpolation and use a different scheme.
+
+### Why look into the past? Why not predict the future?
+There is another simple alternative to this scheme, which is instead of interpolating between the previous and current tick, we use maths to _extrapolate_ into the future, i.e. try to predict where the object _will be_, rather than show it where it was. This can be done and may be offered as an option, but there are some significant downsides.
+* The prediction may not be correct, especially when an object collides with another object during the physics tick.
+* Where a prediction was incorrect, the object may extrapolate into an "impossible" position, like inside a wall.
+* Providing the movement speed is slow, these incorrect predictions may not be too much of a problem.
+* When a prediction was incorrect, the object may have to jump or snap back onto the corrected path. This can be visually jarring.
 
 
