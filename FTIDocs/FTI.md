@@ -77,7 +77,7 @@ We have tried to make the system as easy to use as possible, and most existing g
 ### Turn on the physics interpolation setting
 The first step is to turn on physics interpolation in `project_settings/physics/common/physics_interpolation`. You can now run your game. It is likely that nothing looks hugely different, particularly if you are running physics at 60 tps or a similar high tick rate, however quite a bit more is happening behind the scenes.
 
-### Move (almost) all game logic from _process to _physics_process
+### Move (almost) all game logic from `_process` to `_physics_process`
 The most fundamental requirement (which you may be doing already) is to make sure your scripts are running on the physics tick rather than the rendered frame. This means in most cases you should be putting code, for input, AI etc in `_physics_process` (which runs at a physics tick) rather than `_process` (which runs on a rendered frame). 
 
 
