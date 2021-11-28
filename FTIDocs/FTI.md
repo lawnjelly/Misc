@@ -133,6 +133,13 @@ Mouse look is a very common way of controlling Cameras. But there is a problem. 
 
 In this situation it can be better to disable physics interpolation for the Camera node (using `set_physics_interpolated()`) and directly apply the mouse input to the rotation in the camera `_process` function, rather than `_physics_process`.
 
-Often you will want to 
+Often you will want to use a combination of interpolation and non-interpolation:
+
+* A first person camera may position the camera at a player location (perhaps using `get_global_transform_interpolated()`), but control the Camera rotation from mouse look _without_ interpolation.
+* A third person camera may similarly determine the look at (target location) of the camera using `get_global_transform_interpolated()`, but position the camera using mouse look _without_ interpolation.
+
+There are many permutations and variations of Camera types, but it should be clear that in many cases, disabling physics interpolation and handling this yourself in `_process` can give a better result.
+
+
 
 
