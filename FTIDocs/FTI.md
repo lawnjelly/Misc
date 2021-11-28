@@ -150,3 +150,10 @@ Although physics interpolation can be as useful in 2D as in 3D, there are some s
 Pixel perfect 2D games where the texels of sprites can be large on screen often utilize snapping to keep objects aligned to a pixel grid. When sprites move off a precise grid, you can get artifacts as fractional relative differences between sprites give a jiggling effect as they move.
 
 Physics interpolation by nature involves fractional positions, and can throw objects off such a grid, resulting in these unwanted artifacts. So in many cases it can be better to disable physics interpolation in such games and use other approaches to deal with varying frame rates and hardware.
+
+## Internet Multiplayer Games
+Another category of games where you may choose not to use the in-built physics interpolation is multiplayer games.
+
+Multiplayer games often receive tick or timing based information from other players or a server and must display them. The problem with packets received via the internet is that the timing and order in which they arrive can be quite different to when they were sent. The client machines often have to unscramble the packets, reorder them and make some sensible guess at how the scene should be displayed in a smooth manner.
+
+The client machines are therefore not in control of timing, and the concept of physics ticks on the clients may not be the same as in a single player game. The interpolation needs can therefore be quite different, and in many cases this is better handled by a custom solution depending on the game.
