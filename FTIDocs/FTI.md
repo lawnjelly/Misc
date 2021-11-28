@@ -25,7 +25,7 @@ This works but there is a problem - physics (and game logic, which is often also
 This can be extremely problematic for quality assurance purposes, especially for AAA games where problems of this sort can cost many millions of dollars.
 
 ### Lock the tick rate, but use interpolation to smooth frames in between physics ticks
-This has become one of the two most popular approaches to dealing with the problem, and is automatically supported by Godot (although is optional).
+This has become one of the most popular approaches to dealing with the problem, and is automatically supported by Godot (although is optional).
 
 We have established that the most desirable physics / game logic arrangement for consistency and predictability is a physics tick rate that is fixed at design time. The problem is the discrepancy between the physics position recorded, and where we "want" a physics object to be on a frame to give smooth motion.
 
