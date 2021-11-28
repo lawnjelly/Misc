@@ -80,5 +80,24 @@ The first step is to turn on physics interpolation in `project_settings/physics/
 ### Move (almost) all game logic from _process to _physics_process
 The most fundamental requirement (which you may be doing already) is to make sure your scripts are running on the physics tick rather than the rendered frame. This means in most cases you should be putting code, for input, AI etc in `_physics_process` (which runs at a physics tick) rather than `_process` (which runs on a rendered frame). 
 
+This ensures that you are applying movements etc to objects on physics ticks rather than rendered frames, and ensures all this will run the same whatever machine the game is run on. You can leave what happens on the _rendered frames_ to the physics interpolation, it will deal with that.
 
+### Choose a physics tick rate
+This is something that you may have never changed before, but when using physics interpolation, the rendering is decoupled from physics, and you can choose something that makes sense for your game.
+
+As a rough guide:
+
+#### Low tick rates (10-30)
+* Give better CPU performance
+* Add some delay to input
+* Physics may not behave as well, except in simple scenarios
+* Great for turn based games, strategy or RPGs
+
+#### Medium tick rates (30-60)
+* Gives good physics behaviour in complex scenes
+* Good for first person games
+
+#### High tick rates (60+)
+* Good when physics behaviour is crucial to gameplay, especially with fast moving objects
+* Racing games often use high tick rates
 
