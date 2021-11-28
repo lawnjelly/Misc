@@ -17,6 +17,12 @@ The sphere will appear as a small pink spherical object in the editor window (yo
 
 Although you can change the position of the sphere using the Occluder Node transform in the inspector, this moves _the entire array_ of spheres. When you want to use multiple spheres in one occluder, the handles do this job. In order to allow positioning in 3D, the gizmo will only move the 3D position in the two principal axes depending on the viewpoint in the editor. This is easier for you to get the hang of by trying it out than by explanation.
 
+There is one more handy function in the editor when using multiple spheres. If you click the `Center Node` toolbar button it will recalculate the local positions of the spheres relative to the average of the entire node, and change the transform of the Occluder Node. This is a handy convenience function to make it easier to place them.
+
+At runtime the spheres can be switched on and off changing the Occluder node visibility, and the Node can be moved and scaled and rotated etc.
+
+A common use case for occluder spheres is providing occlusion on mountainous / hilly terrain. By placing spheres inside mountains you can prevent trees, plants, building and objects rendering behind mountains. With some creativity they can also be used for moving objects such as large spacecraft, planets etc.
+
 
 
 
