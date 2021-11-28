@@ -13,7 +13,7 @@ This jump can be seen in other combinations of tick / frame rate as glitches, or
 
 ## What can we do about this discrepancy?
 ### Lock the tick / frame rate together?
-The most obvious solution is to get rid of the problem, by ensuring there is a physics tick that coincides with every frame. This used to be the approach on old consoles and fixed hardware computers. If you know that every player will be using the hardware, you can ensure it is fast enough to render at e.g. 50fps, and you will be sure it will work great for everybody.
+The most obvious solution is to get rid of the problem, by ensuring there is a physics tick that coincides with every frame. This used to be the approach on old consoles and fixed hardware computers. If you know that every player will be using the same hardware, you can ensure it is fast enough to render at e.g. 50fps, and you will be sure it will work great for everybody.
 
 Modern games are often no longer made for fixed hardware. You will often be planning to release on desktop computers, mobiles and more, all of which have huge variation in performance, as well as different monitor refresh rates. We need to come up with a better way of dealing with the problem.
 
