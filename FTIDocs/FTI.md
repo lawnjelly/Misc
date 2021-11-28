@@ -157,3 +157,6 @@ Another category of games where you may choose not to use the in-built physics i
 Multiplayer games often receive tick or timing based information from other players or a server and must display them. The problem with packets received via the internet is that the timing and order in which they arrive can be quite different to when they were sent. The client machines often have to unscramble the packets, reorder them and make some sensible guess at how the scene should be displayed in a smooth manner.
 
 The client machines are therefore not in control of timing, and the concept of physics ticks on the clients may not be the same as in a single player game. The interpolation needs can therefore be quite different, and in many cases this is better handled by a custom solution depending on the game.
+
+## Conclusion
+Although physics interpolation may not be suitable in _every_ case, it should however be the first option you try, especially for 3D games. In many cases it is a no-brainer - it involves very little specific coding or changes, and will often offer a _vastly_ better experience for end users, giving professional fluid gameplay on a wide variety of hardware.
