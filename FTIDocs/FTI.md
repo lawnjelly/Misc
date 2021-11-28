@@ -121,7 +121,18 @@ Although in many cases a Camera can use the automatic interpolation just like an
 #### Camera movement
 Viewers are very sensitive to camera movement. A camera that realigns slightly every, say 1/10th of a second at 10tps tick rate can sometimes be noticeable, and you may want to instead do the interpolation every frame yourself.
 
+An example is to use the `look_at` function in the Camera every frame in `_process`. But there is a further problem. Given a target Node, if we use the traditional `get_global_transform()` to decide where the Camera should look, this transform will only give us the transform _at the current physics tick_. This is _not_ what we want, as the Camera will jump about on each physics tick as the target moves.
+
+What we really want to focus the Camera on, is not the position of the target on the physics tick, but the _interpolated_ position. We can do this using the `get_global_transform_interpolated()` function.
+
+#### get_global_transform_interpolated()
+When physics interpolation is active, and you need to update a Node in `_process`, you will often want to use this function instead of the traditional `get_global_transform()` function. The difference is subtle, but generally, if you want something to display visually, the interpolated transform is what you will want. If however you want to apply game logic (which would normally be applied in `_physics_process`), you will normally want the physics position, which is what is returned and set by the standard functions `get_transform()`, `set_transform()` and `get_global_transform()`.
+
 #### Mouse look
-Mouse look is a very common way of controlling Cameras. But there is a problem. Unlike keyboard
+Mouse look is a very common way of controlling Cameras. But there is a problem. Unlike keyboard input, the mouse is not polled at each physics tick. New mouse move events come in continuously, and the Camera will be expected to react and follow these on the next frame.
+
+In this situation it can be better to disable physics interpolation for the Camera node (using `set_physics_interpolated()`) and directly apply the mouse input to the rotation in the camera `_process` function, rather than `_physics_process`.
+
+Often you will want to 
 
 
