@@ -12,7 +12,7 @@ There are two problems here:
 
 The solution we prefer to use for these problems is the "minimum reproduction project".
 
-# Minimum Reproduction Project
+### Minimum Reproduction Projects
 
 Strictly speaking, by definition, a minimum reproduction project is a project that demonstrates the bug, and does _nothing else_. It contains no superfluous scenes, nodes, gdscript, addons, textures, models, animations, sounds etc.
 
