@@ -14,7 +14,7 @@ The solution we prefer to use for these problems is the "minimal reproduction pr
 
 ## Minimal Reproduction Projects
 
-Strictly speaking, by definition, a minimal reproduction project is a project that demonstrates the bug, and does _nothing else_. It contains no superfluous scenes, nodes, gdscript, addons, textures, models, animations, sounds etc.
+Strictly speaking, by definition, a minimal reproduction project is a project that demonstrates the bug, and does _nothing else_. The easiest to work with MRPs contain no superfluous scenes, nodes, gdscript, addons, textures, models, animations, sounds etc.
 
 This follows the adage "perfection is achieved not when there is nothing more to add, but when the is nothing left to take away".
 
