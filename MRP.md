@@ -20,8 +20,6 @@ This follows the adage "perfection is achieved not when there is nothing more to
 
 Ideally _there should be nothing present in your project that we could remove_, such that the bug would still exhibit.
 
-### Try not to include features that show off your skills, but that do not contribute to the bug report.
-* There can be a temptation to show off your skills. This is absolutely not the time to do it. In general the less flashy the MRP, the better.
 * The best MRPs are a few Kb, and contain e.g. a scene tree with a single node that demonstrates the problem, and nothing else.
 * Try not to include elaborate control schemes for cameras / players, unless this is necessary to show the bug.
 * If a mesh shows a bug, show us the bug in a mesh with 8 vertices, rather than 2000.
