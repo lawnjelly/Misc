@@ -28,8 +28,9 @@ Ideally _there should be nothing present in your project that we could remove_, 
 * Don't include animations if they are not part of the bug.
 
 ## Why do engine developers prefer minimum reproduction projects?
-* Primarily, the time of developers who are familiar with the engine is limited, and it is better for everyone that they spend it fixing bugs / adding features rather than trying to understand / simplify over elaborate issue projects. Time spent not fixing the bug is time wasted.
+* Primarily, it is much easier to work out what is going on in a minimum reproduction project.
 * A medium sized project which seems simple to you (because of familiarity) could take hours for a third party to understand, time which may not be available.
+* The time of developers who are familiar with the engine is limited, and it is better for everyone that they spend it fixing bugs / adding features rather than trying to understand / simplify over elaborate issue projects. Time spent not fixing the bug is time wasted.
 * In many cases non-minimum projects will result in your issue being treated as low priority, and as a result may be less likely to be fixed.
 
 ## In most cases you should not simply package the project that you are working on as an MRP.
