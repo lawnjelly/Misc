@@ -1,4 +1,4 @@
-## Issue reporting and Reproducing Issues
+# Issue reporting and Reproducing Issues
 
 In order to identify and solve bugs, rather than just a description of the problem, the engine developers need an example project that they can debug to see what is going wrong.
 
@@ -12,7 +12,7 @@ There are two problems here:
 
 The solution we prefer to use for these problems is the "minimum reproduction project".
 
-### Minimum Reproduction Projects
+## Minimum Reproduction Projects
 
 Strictly speaking, by definition, a minimum reproduction project is a project that demonstrates the bug, and does _nothing else_. It contains no superfluous scenes, nodes, gdscript, addons, textures, models, animations, sounds etc.
 
