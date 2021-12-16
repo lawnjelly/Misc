@@ -1,5 +1,21 @@
 # Minimum Reproduction Projects
 
+In order to identify and solve bugs, rather than just a description of the problem, the engine developers need an example project that they can debug to see what is going wrong.
+
+Normally you will discover a bug when working on your own project, which may be large and complex.
+
+There are two problems here:
+(1) You may not want to post your work in progress game into a github issue. It may not be open source, and you may not want critical eyes looking over something that is a work in progress. This is totally understandable.
+(2) If you did post your entire project, it would likely contain a whole load of code / assets that had nothing to do with the bug, but came along for the ride. This can make it incredibly difficult for the engine developers to work with.
+
+
+
+
+
+
+
+
+
 A minimum reproduction project is a project that demonstrates the bug, but does nothing else. It should contain no superfluous scenes, nodes, gdscript, addons, textures, models, animations, sounds etc.
 
 Ideally _there should be nothing present in your project that we could remove_, such that the bug would still exhibit.
