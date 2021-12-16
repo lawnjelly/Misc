@@ -25,7 +25,7 @@ Ideally _there should be nothing present in your project that we could remove_, 
 * The best MRPs are a few Kb, and contain e.g. a scene tree with a single node that demonstrates the problem, and nothing else.
 * Try not to include elaborate control schemes for cameras / players, unless this is necessary to show the bug.
 * If a mesh shows a bug, show us the bug in a mesh with 8 vertices, rather than 2000.
-* Don't include animations if they are not part of the bug.
+* Try not to include animations if they are not part of the bug.
 
 ## Why do engine developers prefer minimum reproduction projects?
 * Primarily, it is much easier to work out what is going on in a minimum reproduction project.
