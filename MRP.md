@@ -14,9 +14,9 @@ The solution we prefer to use for these problems is the "minimum reproduction pr
 
 # Minimum Reproduction Project
 
-Strictly speaking, by definition, a minimum reproduction project is a project that demonstrates the bug, but does _nothing else_. It should contain no superfluous scenes, nodes, gdscript, addons, textures, models, animations, sounds etc.
+Strictly speaking, by definition, a minimum reproduction project is a project that demonstrates the bug, and does _nothing else_. It contains no superfluous scenes, nodes, gdscript, addons, textures, models, animations, sounds etc.
 
-This follows the adage, that "perfection is achieved not when there is nothing more to add, but when the is nothing left to take away".
+This follows the adage "perfection is achieved not when there is nothing more to add, but when the is nothing left to take away".
 
 Ideally _there should be nothing present in your project that we could remove_, such that the bug would still exhibit.
 
@@ -44,9 +44,9 @@ Or, if you are not sure what is causing it:
 
 * Copy your existing project (folders) to a new location.
 * Load it up in the IDE.
-* Begin removing nodes. Each time check whether the bug still exhibits (and use undo / keep backups).
+* Begin removing nodes. Each time check whether the bug still exhibits (use undo / keep backups to help with this).
 * Keep removing features, until you have the simplest possible project. This is your MRP.
 
 ## Engine development is a shared endeavour between engine developers and game developers.
 
-This does require some time spent on your part - but recognise that Godot is developed as a _partnership_ between game developers and engine developers. We each depend on one another and by helping each other, where possible, it enables us all to do more. Good bug reports with good MRPs are invaluable contributions and can often go 9/10ths of the way towards fixing a bug.
+This does require some time spent on your part - but recognise that Godot is developed as a _partnership_ between engine developers and game developers. We each depend on one another and by helping each other, where possible, it enables us all to do more. Good bug reports with good MRPs are invaluable contributions and can often go 9/10ths of the way towards fixing a bug.
