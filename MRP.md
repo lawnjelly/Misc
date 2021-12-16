@@ -27,7 +27,7 @@ Ideally _there should be nothing present in your project that we could remove_, 
 
 ## Why do engine developers prefer minimal reproduction projects?
 * Primarily, it is much easier to work out what is going on in a minimal reproduction project.
-* A medium sized project which seems simple to you (because of familiarity) could take hours for a third party to understand, time which may not be available.
+* A medium sized project which seems simple to you (because of familiarity) could take hours for a third party to understand.
 * The time of developers who are familiar with the engine is limited, and it is better for everyone that they spend it fixing bugs / adding features rather than trying to understand / simplify over elaborate issue projects. Time spent not fixing the bug is time wasted.
 * In many cases non-minimal projects will result in your issue being treated as low priority, and as a result may be less likely to be fixed.
 
