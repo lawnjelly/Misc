@@ -5,35 +5,33 @@ In order to identify and solve bugs, rather than just a description of the probl
 Normally you will discover a bug when working on your own project, which may be large and complex.
 
 There are two problems here:
-(1) You may not want to post your work in progress game into a github issue. It may not be open source, and you may not want critical eyes looking over something that is a work in progress. This is totally understandable.
-(2) If you did post your entire project, it would likely contain a whole load of code / assets that had nothing to do with the bug, but came along for the ride. This can make it incredibly difficult for the engine developers to work with.
 
+1) You may not want to post your work in progress game into a github issue. It may not be open source, and you may not want critical eyes looking over something that is a work in progress. This is totally understandable.
 
+2) If you did post your entire project, it would likely contain a whole load of code / assets that had nothing to do with the bug, but came along for the ride. This can make it incredibly difficult for the engine developers to work with.
 
+The solution we prefer to use for these problems is the "minimum reproduction project".
 
+Strictly speaking, by definition, a minimum reproduction project is a project that demonstrates the bug, but does _nothing else_. It should contain no superfluous scenes, nodes, gdscript, addons, textures, models, animations, sounds etc.
 
-
-
-
-
-A minimum reproduction project is a project that demonstrates the bug, but does nothing else. It should contain no superfluous scenes, nodes, gdscript, addons, textures, models, animations, sounds etc.
+This follows the adage, that "perfection is achieved not when there is nothing more to add, but when the is nothing left to take away".
 
 Ideally _there should be nothing present in your project that we could remove_, such that the bug would still exhibit.
 
-
-### DO NOT include features that show off your skills, but that do not contribute to the bug report.
-* This is absolutely not the time to show off your skills. In general the less flashy the MRP, the better it is.
-* The best MRPs are a few Kb, and contain e.g. a scene tree with a single node that demonstrates the problem, and NOTHING ELSE.
-* Do not include elaborate control schemes for cameras / players, unless this is necessary to show the bug.
+### Try not to include features that show off your skills, but that do not contribute to the bug report.
+* There can be a temptation to show off your skills. This is absolutely not the time to do it. In general the less flashy the MRP, the better.
+* The best MRPs are a few Kb, and contain e.g. a scene tree with a single node that demonstrates the problem, and nothing else.
+* Try not to include elaborate control schemes for cameras / players, unless this is necessary to show the bug.
 * If a mesh shows a bug, show us the bug in a mesh with 8 vertices, rather than 2000.
+* Don't include animations if they are not part of the bug.
 
-## Why do engine developers want only minimum reproduction projects?
-* Primarily, the time of developers who are familiar with the engine is limited, and it is better for all of us that they spend it fixing bugs / adding features rather than trying to understand / simplify over elaborate issue projects. Time spent not fixing the bug is time wasted.
-* A medium sized project which seems simple to you (because of familiarity) could take hours for a third party to understand, time which we do not have available.
-* In practice in most cases non-minimum projects will result in your issue being ignored, and not fixed.
+## Why do engine developers prefer minimum reproduction projects?
+* Primarily, the time of developers who are familiar with the engine is limited, and it is better for everyone that they spend it fixing bugs / adding features rather than trying to understand / simplify over elaborate issue projects. Time spent not fixing the bug is time wasted.
+* A medium sized project which seems simple to you (because of familiarity) could take hours for a third party to understand, time which may not be available.
+* In many cases non-minimum projects will result in your issue being treated as low priority, and as a result may be less likely to be fixed.
 
-## DO NOT simply package your project that you are working on as an MRP.
-You can do a lot of the job of bug fixing for us.
+## In most cases you should not simply package the project that you are working on as an MRP.
+You can do a lot of the job of bug fixing before an engine developer sets eyes on it.
 
 1) Make a note of what is going wrong
 2) Try and identifying the area that is causing the problem
