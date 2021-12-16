@@ -29,8 +29,8 @@ Ideally _there should be nothing present in your project that we could remove_, 
 * Primarily, it is much easier to work out what is going on in a minimal reproduction project.
 * A medium sized project which seems simple to you (because of familiarity) could take hours for a third party to understand.
 * The time of developers who are familiar with the engine is limited, and it is better for everyone that they spend it fixing bugs / adding features rather than trying to understand / simplify over elaborate issue projects. Time spent not fixing the bug is time wasted.
-* In many cases non-minimal projects will result in your issue being treated as low priority, and as a result may be less likely to be fixed.
-
+* Issues with non-minimal projects may take longer to get fixed - simply because developers will tend to work on issues that are easier to reproduce first.
+ 
 ## Don't simply send the project that you are working on as an MRP
 You can do a lot of the job of bug fixing before an engine developer sets eyes on it.
 
