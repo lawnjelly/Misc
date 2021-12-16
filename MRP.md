@@ -10,11 +10,11 @@ There are two problems here:
 
 2) If you did post your entire project, it would likely contain a whole load of code / assets that had nothing to do with the bug, but came along for the ride. This can make it incredibly difficult for the engine developers to work with.
 
-The solution we prefer to use for these problems is the "minimum reproduction project".
+The solution we prefer to use for these problems is the "minimal reproduction project".
 
-## Minimum Reproduction Projects
+## Minimal Reproduction Projects
 
-Strictly speaking, by definition, a minimum reproduction project is a project that demonstrates the bug, and does _nothing else_. It contains no superfluous scenes, nodes, gdscript, addons, textures, models, animations, sounds etc.
+Strictly speaking, by definition, a minimal reproduction project is a project that demonstrates the bug, and does _nothing else_. It contains no superfluous scenes, nodes, gdscript, addons, textures, models, animations, sounds etc.
 
 This follows the adage "perfection is achieved not when there is nothing more to add, but when the is nothing left to take away".
 
@@ -27,11 +27,11 @@ Ideally _there should be nothing present in your project that we could remove_, 
 * If a mesh shows a bug, show us the bug in a mesh with 8 vertices, rather than 2000.
 * Try not to include animations if they are not part of the bug.
 
-## Why do engine developers prefer minimum reproduction projects?
-* Primarily, it is much easier to work out what is going on in a minimum reproduction project.
+## Why do engine developers prefer minimal reproduction projects?
+* Primarily, it is much easier to work out what is going on in a minimal reproduction project.
 * A medium sized project which seems simple to you (because of familiarity) could take hours for a third party to understand, time which may not be available.
 * The time of developers who are familiar with the engine is limited, and it is better for everyone that they spend it fixing bugs / adding features rather than trying to understand / simplify over elaborate issue projects. Time spent not fixing the bug is time wasted.
-* In many cases non-minimum projects will result in your issue being treated as low priority, and as a result may be less likely to be fixed.
+* In many cases non-minimal projects will result in your issue being treated as low priority, and as a result may be less likely to be fixed.
 
 ## Don't simply send the project that you are working on as an MRP
 You can do a lot of the job of bug fixing before an engine developer sets eyes on it.
