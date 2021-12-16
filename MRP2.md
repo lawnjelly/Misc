@@ -36,13 +36,15 @@ You can do a lot of the job of bug fixing before an engine developer sets eyes o
 1) Make a note of what is going wrong
 2) Try and identifying the area that is causing the problem
 
-You have a choice, you can either try and reproduce the nodes concerned in a new project (which is often easiest).
+Now you have a choice, you can either try and reproduce the nodes concerned in a new project (which is often easiest).
+
 Or, if you are not sure what is causing it:
-* Copy your existing project (folders) to a new location
-* load it up in the IDE
-* begin removing nodes. Each time check whether the bug still exhibits.
+
+* Copy your existing project (folders) to a new location.
+* Load it up in the IDE.
+* Begin removing nodes. Each time check whether the bug still exhibits (and use undo / keep backups).
 * Keep removing features, until you have the simplest possible project. This is your MRP.
 
-## Engine development is a shared endeavour between engine developers and users.
+## Engine development is a shared endeavour between engine developers and game developers.
 
-This does require some time spent on your part - but recognise that Godot is developed as a _partnership_ between users and engine developers. We each depend on one another and by helping each other, where possible, it enables us all to do more. Good bug reports with good MRPs are invaluable contributions and can often go 9/10ths of the way towards fixing a bug.
+This does require some time spent on your part - but recognise that Godot is developed as a _partnership_ between game developers and engine developers. We each depend on one another and by helping each other, where possible, it enables us all to do more. Good bug reports with good MRPs are invaluable contributions and can often go 9/10ths of the way towards fixing a bug.
