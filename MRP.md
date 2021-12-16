@@ -33,7 +33,7 @@ Ideally _there should be nothing present in your project that we could remove_, 
 * The time of developers who are familiar with the engine is limited, and it is better for everyone that they spend it fixing bugs / adding features rather than trying to understand / simplify over elaborate issue projects. Time spent not fixing the bug is time wasted.
 * In many cases non-minimum projects will result in your issue being treated as low priority, and as a result may be less likely to be fixed.
 
-## Don't simply send the project that you are working on as an MRP.
+## Don't simply send the project that you are working on as an MRP
 You can do a lot of the job of bug fixing before an engine developer sets eyes on it.
 
 1) Make a note of what is going wrong
@@ -48,6 +48,6 @@ Or, if you are not sure what is causing it:
 * Begin removing nodes. Each time check whether the bug still exhibits (use undo / keep backups to help with this).
 * Keep removing features, until you have the simplest possible project. This is your MRP.
 
-## Engine development is a shared endeavour.
+## Engine development is a shared endeavour
 
 This does require some time spent on your part - but recognise that Godot is developed as a _partnership_ between engine developers and game developers. We each depend on one another and by helping each other, where possible, it enables us all to do more. Good bug reports with good MRPs are invaluable contributions and can often go 9/10ths of the way towards fixing a bug.
