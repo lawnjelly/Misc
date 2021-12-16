@@ -45,7 +45,7 @@ Or, if you are not sure what is causing it:
 
 * Copy your existing project (folders) to a new location.
 * Load it up in the IDE.
-* Begin removing nodes, script, resources etc. Each time check whether the bug still exhibits (use undo / keep backups to help with this).
+* Begin removing nodes, functions, scripts, resources etc. Each time check whether the bug still exhibits (use undo / keep backups to help with this).
 * Keep removing features, until you have the simplest possible project. This is your MRP.
 
 ## Engine development is a shared endeavour
