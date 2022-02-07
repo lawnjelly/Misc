@@ -12,3 +12,10 @@ You are not restricted to 4 points, you can create many points, but note that:
 * In general, the less edges (and thus points), the faster the polygon will work at runtime. A polygon with 6 edges will have to make twice the calculations of a polygon with 3 edges. In most cases 4 is a good number.
 
 ### Holes
+Real world game levels don't always have large continuous areas that should be occluded. Often walls will have a door or windows, caves will have an entrance, etc. In some cases we have to make do by placing several Occluder polgons around such an opening, but Occluder polygons have one more trick up their sleeve - they can have "holes".
+
+In the inspector you will notice that as well as a set of points for the polygon, the polgon has a set of points for a single "hole". If you add 3 or 4 to your polygon, you will see they appear in the editor as smaller handles. You can drag these around just like the polygon handles, to form a convex hole.
+
+The hole can be totally within the polygon (such as a window), abutting the edge (like a door) or crossing the edge of the polygon completely. The way the hole works is that the culling follows a simple rule:
+* If the object to be culled is totally hidden by the polygon, it then looks to see whether it can be seen _through_ the hole. If the object touches the hole, it is not culled, but if hidden by the polygon and not seen through the hole it is culled.
+
