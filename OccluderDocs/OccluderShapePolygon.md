@@ -39,4 +39,12 @@ This is one of the secrets of the pros. A good level design is not just about wh
 * When in a building with multiple floors, place an occluder polygons between each floor, with a hole for where the staircase transitions between them. This can potentially cull out entire floors and greatly improve performance.
 * Don't be afraid to extend your occluder polygons far past where they need to go to catch more objects - for instance far into the ground or sky
 
+### Using Occluder polygons dynamically
+Like all geometric occluders, polygons are not just for use on static (non-moving) geometry. You can place them on moving objects. You can even change the relative position of the points in realtime.
 
+Some guidelines:
+* There is a slight cost to moving polygons, the points of the polygons must be transformed on the CPU each time their transform changes.
+
+This is not something to worry excessively about, even CPUs are reasonably fast at transforming points, and generally polygons have very few points compared to rendered geometry. But it is something to consider, if you wanted to create e.g. 10,000 simultaneous spaceships all with occluder polys.
+
+* Changing the transform of the polygon Node (e.g. by moving the parent object) is cheaper than changing the points themselves, use the former rather than the latter wherever possible.
