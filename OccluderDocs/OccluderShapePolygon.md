@@ -28,3 +28,15 @@ The main limitation of holes is that there can only be one per polygon. If you h
 * Use two or more OccluderPolygons.
 
 Remember if using more than one polygon, they are allowed to overlap, and you should use this to your advantage.
+
+### How many Occluder polys are needed?
+This very much depends on your game level, but generally you can start getting a good benefit from 3 or 4 well placed polygons. After that it is totally up to you how much time you want to spend.
+Placing occluders is a bit of an art form, and you will get better at it and learn new tricks the more you work with them.
+
+Some ideas:
+* Build your levels to take advantage of occlusion.
+This is one of the secrets of the pros. A good level design is not just about what the gameplay demands, it should also be built with occlusion in mind.
+* When in a building with multiple floors, place an occluder polygons between each floor, with a hole for where the staircase transitions between them. This can potentially cull out entire floors and greatly improve performance.
+* Don't be afraid to extend your occluder polygons far past where they need to go to catch more objects - for instance far into the ground or sky
+
+
