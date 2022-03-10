@@ -126,6 +126,7 @@ Although in many cases a Camera can just use automatic interpolation just like a
 
 This is because viewers are very sensitive to camera movement. A camera that realigns slightly every, say 1/10th of a second at 10tps tick rate will often be noticeable, and you can get a much smoother result by moving the Camera each frame in `_process`, and following an interpolated target.
 
+### Manual Camera interpolation
 #### Get that Camera off the Player!
 The very first step when performing manual Camera interpolation should be to move the Camera from being a child of e.g. a player, to making sure it is specified in _global space_, with no moving nodes above it. Technically this is because it is really easy for feedback to occur between the movement of a parent node and the movement of the Camera, which has to compensate for interpolation.
 
@@ -133,7 +134,7 @@ You don't have to fully understand this, but you should change to this model of 
 
 ![](camera_worldspace.png)
 
-### Manual Camera Interpolation
+#### Typical example
 A typical example of a custom approach is to use the `look_at` function in the Camera every frame in `_process()` to look at a target node (for example the player).
 
 But there is a problem. Given a target Node, if we use the traditional `get_global_transform()` to decide where the Camera should look, this transform will only give us the transform _at the current physics tick_. This is _not_ what we want, as the Camera will jump about on each physics tick as the target moves. Even though the Camera may be updated each frame, this does not help give smooth motion if the _target_ is only changing each physics tick.
@@ -141,7 +142,7 @@ But there is a problem. Given a target Node, if we use the traditional `get_glob
 #### get_global_transform_interpolated()
 What we really want to focus the Camera on, is not the position of the target on the physics tick, but the _interpolated_ position, i.e. the position at which the target will be rendered. We can do this using the `get_global_transform_interpolated()` function. This acts exactly like `get_global_transform()` but it gives you the _interpolated_ transform (during a `_process()` call).
 
-#### Example Manual Camera Interpolation
+#### Example manual Camera script
 Here is an example of a simple fixed Camera which follows an interpolated target:
 ```
 extends Camera
