@@ -148,7 +148,7 @@ func _ready() -> void:
 	# Find the target node
 	_target = get_node("../Player")
 	
-	# Turn off automatic physics interpolation,
+	# Turn off automatic physics interpolation for the Camera,
 	# we will be doing this manually
 	set_physics_interpolated(false)
 
