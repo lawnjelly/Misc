@@ -170,6 +170,4 @@ The client machines are therefore not in control of timing, and the concept of p
 Although physics interpolation may not be suitable in _every_ case, it should however be the first option you try, especially for 3D games. In many cases it is a no-brainer - it involves very little specific coding or changes, and will often offer a _vastly_ better experience for end users, giving professional fluid gameplay on a wide variety of hardware.
 
 # Tips
-* Even if you intend to run physics at 60tps, in order to thoroughly test your interpolation and get the smoothest gameplay, it can be a good idea to temporarily set the physics tick rate to a low value such as 10tps.
-
-This will enable you to easily see cases where you should be calling `reset_physics_interpolation()`, or where you should be using your own custom interpolation on e.g. a Camera.
+* Even if you intend to run physics at 60tps, in order to thoroughly test your interpolation and get the smoothest gameplay, it is highly recommended to temporarily set the physics tick rate to a low value such as 10tps. The gameplay may not work perfectly, but it should enable you to easily see cases where you should be calling `reset_physics_interpolation()`, or where you should be using your own custom interpolation on e.g. a Camera. Once you have these cases fixed, you can set the physics tick rate back to the desired setting.
