@@ -158,7 +158,7 @@ func _process(delta: float) -> void:
 	var tr : Transform = _target.get_global_transform_interpolated()
 	
 	# Provide some delayed smoothed lerping towards the target position 
-	_target_pos = lerp(_target_pos, tr.origin, delta)
+	_target_pos = lerp(_target_pos, tr.origin, min(delta, 1.0))
 	
 	# Fixed camera position, but it will follow the target
 	look_at(_target_pos, Vector3(0, 1, 0))
