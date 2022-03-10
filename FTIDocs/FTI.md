@@ -171,3 +171,4 @@ Although physics interpolation may not be suitable in _every_ case, it should ho
 
 # Tips
 * Even if you intend to run physics at 60tps, in order to thoroughly test your interpolation and get the smoothest gameplay, it is highly recommended to temporarily set the physics tick rate to a low value such as 10tps. The gameplay may not work perfectly, but it should enable you to easily see cases where you should be calling `reset_physics_interpolation()`, or where you should be using your own custom interpolation on e.g. a Camera. Once you have these cases fixed, you can set the physics tick rate back to the desired setting.
+* If you are unsure of whether to use physics interpolation, the answer should usually be a resounding "yes". Your players will thank you for this. Although your game may currently look correct _on your machine_, using physics interpolation assures that it will work great for everybody.
