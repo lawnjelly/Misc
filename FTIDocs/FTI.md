@@ -142,6 +142,8 @@ But there is a problem. Given a target Node, if we use the traditional `get_glob
 #### get_global_transform_interpolated()
 What we really want to focus the Camera on, is not the position of the target on the physics tick, but the _interpolated_ position, i.e. the position at which the target will be rendered. We can do this using the `get_global_transform_interpolated()` function. This acts exactly like `get_global_transform()` but it gives you the _interpolated_ transform (during a `_process()` call).
 
+**Note:** `get_global_transform_interpolated()` should only be used once or twice for special cases such as Cameras. It should **not** be used all over the place in your code (both for performance reasons, and to give correct gameplay). In most cases your game logic should be in `_physics_process()` and should be calling `get_global_transform()`, which will give the current physics transform, which is usually what you will want for gameplay code.
+
 #### Example manual Camera script
 Here is an example of a simple fixed Camera which follows an interpolated target:
 ```
