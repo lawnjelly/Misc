@@ -136,16 +136,15 @@ Although physics interpolation may not be suitable in _every_ case, it should ho
 
 # Tips
 * Even if you intend to run physics at 60tps, in order to thoroughly test your interpolation and get the smoothest gameplay, it is highly recommended to temporarily set the physics tick rate to a low value such as 10tps. The gameplay may not work perfectly, but it should enable you to easily see cases where you should be calling `reset_physics_interpolation()`, or where you should be using your own custom interpolation on e.g. a Camera. Once you have these cases fixed, you can set the physics tick rate back to the desired setting.
-* If you are unsure of whether to use physics interpolation, the answer should usually be a resounding "yes". Your players will thank you for this. Although your game may currently look correct _on your machine_, using physics interpolation assures that it will work great for everybody.
 
 # Advanced
 
 Although simply turning on physics interpolation, and a few calls to `reset_physics_interpolation()` will be all that are necessary for a gentle beginner introduction to physics interpolation, it is possible to go one step further, and make your game not just better, but "perfect". These advanced instructions are for those of you who want the best possible results.
 
 ### Exceptions to automatic physics interpolation
-Even when you have physics interpolation switched on, there will be some situations where you will want to disable interpolation for a Node (or branch of the SceneTree). This is possible with the `set_physics_interpolated()` function which is present in all Nodes. If you for example, set this interpolated flag to false for a Node, all the children will recursively also be affected. This means you can easily disable interpolation for an entire subscene.
+Even when you have physics interpolation switched on, there will be some situations where you would benefit from disabling automatic interpolation for a Node (or branch of the SceneTree), and have the finer control of performing interpolation manually. This is possible using the `set_physics_interpolated()` function which is present in all Nodes. If you for example, set this interpolated flag to false for a Node, all the children will recursively also be affected. This means you can easily disable interpolation for an entire subscene.
 
-It you turn off the `interpolated` flag for a node, this usually means you intend to do some kind of special interpolation for that node yourself. The most common situation where you may want to do your own interpolation is Cameras.
+The most common situation where you may want to perform your own interpolation is Cameras.
 
 ## Cameras
 Although in many cases a Camera can just use automatic interpolation just like any other node, for best results, especially at low physics tick rates, it is recommended that you take a manual approach to Camera interpolation.
