@@ -110,9 +110,11 @@ You can always change the tick rate as you develop, it is as simple as changing 
 ### Call reset_physics_interpolation when teleporting objects large distances
 Although 99% of the time interpolation is what you want between two physics ticks, there is one situation in which it may _not_ be what you want. That is when you are initially placing objects, or moving them to a new location, when you do not want a smooth motion between the two, but an instantaneous move.
 
-The solution to this is quite simple, each Node has a `reset_physics_interpolation()` function which you can call after setting the position / transform. The rest is done for you automatically.
+The solution to this is quite simple, each Node has a `reset_physics_interpolation()` function which you can call _after_ setting the position / transform. The rest is done for you automatically.
 
 Even if you forget to call this, it is not usually a problem in most situations (especially at high tick rates), and is something you can easily leave to the polishing phase of your game. The worst that will happen is seeing a streaking motion for a frame or so when you move them - you will know when you need it!
+
+Note: It is important to call `reset_physics_interpolation()` _after_ setting the new position, rather than before, otherwise you may still see the unwanted streaking motion.
 
 ## Exceptions
 Even when you have physics interpolation switched on, there will be some situations where you will want to disable interpolation for a Node (or branch of the SceneTree). This is possible with the `set_physics_interpolated()` function which is present in all Nodes. If you for example, set this interpolated flag to false for a Node, all the children will recursively also be affected. This is usually what you want as you can easily disable interpolation for an entire subscene.
