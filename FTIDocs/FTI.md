@@ -116,6 +116,29 @@ Even if you forget to call this, it is not usually a problem in most situations 
 
 Note: It is important to call `reset_physics_interpolation()` _after_ setting the new position, rather than before, otherwise you may still see the unwanted streaking motion.
 
+## Special considerations for 2D
+Although physics interpolation can be as useful in 2D as in 3D, there are some special situations where you may choose not to use physics interpolation.
+
+### Snapping and pixel perfect retro games
+Pixel perfect 2D games where the texels of sprites can be large on screen often utilize snapping to keep objects aligned to a pixel grid. When sprites move off a precise grid, you can get artifacts as fractional relative differences between sprites give a jiggling effect as they move.
+
+Physics interpolation by nature involves fractional positions, and can throw objects off such a grid, resulting in these unwanted artifacts. So in many cases it can be better to disable physics interpolation in such games and use other approaches to deal with varying frame rates and hardware.
+
+## Internet Multiplayer Games
+Another category of games where you may choose not to use the in-built physics interpolation is multiplayer games.
+
+Multiplayer games often receive tick or timing based information from other players or a server and must display them. The problem with packets received via the internet is that the timing and order in which they arrive can be quite different to when they were sent. The client machines often have to unscramble the packets, reorder them and make some sensible guess at how the scene should be displayed in a smooth manner.
+
+The client machines are therefore not in control of timing, and the concept of physics ticks on the clients may not be the same as in a single player game. The interpolation needs can therefore be quite different, and in many cases this is better handled by a custom solution depending on the game.
+
+## Conclusion
+Although physics interpolation may not be suitable in _every_ case, it should however be the first option you try, especially for 3D games. In many cases it is a no-brainer - it involves very little specific coding or changes, and will often offer a _vastly_ better experience for end users, giving professional fluid gameplay on a wide variety of hardware.
+
+# Tips
+* Even if you intend to run physics at 60tps, in order to thoroughly test your interpolation and get the smoothest gameplay, it is highly recommended to temporarily set the physics tick rate to a low value such as 10tps. The gameplay may not work perfectly, but it should enable you to easily see cases where you should be calling `reset_physics_interpolation()`, or where you should be using your own custom interpolation on e.g. a Camera. Once you have these cases fixed, you can set the physics tick rate back to the desired setting.
+* If you are unsure of whether to use physics interpolation, the answer should usually be a resounding "yes". Your players will thank you for this. Although your game may currently look correct _on your machine_, using physics interpolation assures that it will work great for everybody.
+
+# Advanced
 ## Exceptions
 Even when you have physics interpolation switched on, there will be some situations where you will want to disable interpolation for a Node (or branch of the SceneTree). This is possible with the `set_physics_interpolated()` function which is present in all Nodes. If you for example, set this interpolated flag to false for a Node, all the children will recursively also be affected. This means you can easily disable interpolation for an entire subscene.
 
@@ -190,25 +213,3 @@ There are many permutations and variations of Camera types, but it should be cle
 
 ### Why can any Node have physics interpolation disabled, why not just Cameras?
 Although Cameras are the most common example, there are a number of cases when you may wish other nodes to control their own interpolation, or be non-interpolated. Consider another example, a player in a top view game whose rotation is controlled by mouse look. Disabling physics rotation allows the player rotation to match the mouse in realtime.
-
-## Special considerations for 2D
-Although physics interpolation can be as useful in 2D as in 3D, there are some special situations where you may choose not to use physics interpolation.
-
-### Snapping and pixel perfect retro games
-Pixel perfect 2D games where the texels of sprites can be large on screen often utilize snapping to keep objects aligned to a pixel grid. When sprites move off a precise grid, you can get artifacts as fractional relative differences between sprites give a jiggling effect as they move.
-
-Physics interpolation by nature involves fractional positions, and can throw objects off such a grid, resulting in these unwanted artifacts. So in many cases it can be better to disable physics interpolation in such games and use other approaches to deal with varying frame rates and hardware.
-
-## Internet Multiplayer Games
-Another category of games where you may choose not to use the in-built physics interpolation is multiplayer games.
-
-Multiplayer games often receive tick or timing based information from other players or a server and must display them. The problem with packets received via the internet is that the timing and order in which they arrive can be quite different to when they were sent. The client machines often have to unscramble the packets, reorder them and make some sensible guess at how the scene should be displayed in a smooth manner.
-
-The client machines are therefore not in control of timing, and the concept of physics ticks on the clients may not be the same as in a single player game. The interpolation needs can therefore be quite different, and in many cases this is better handled by a custom solution depending on the game.
-
-## Conclusion
-Although physics interpolation may not be suitable in _every_ case, it should however be the first option you try, especially for 3D games. In many cases it is a no-brainer - it involves very little specific coding or changes, and will often offer a _vastly_ better experience for end users, giving professional fluid gameplay on a wide variety of hardware.
-
-# Tips
-* Even if you intend to run physics at 60tps, in order to thoroughly test your interpolation and get the smoothest gameplay, it is highly recommended to temporarily set the physics tick rate to a low value such as 10tps. The gameplay may not work perfectly, but it should enable you to easily see cases where you should be calling `reset_physics_interpolation()`, or where you should be using your own custom interpolation on e.g. a Camera. Once you have these cases fixed, you can set the physics tick rate back to the desired setting.
-* If you are unsure of whether to use physics interpolation, the answer should usually be a resounding "yes". Your players will thank you for this. Although your game may currently look correct _on your machine_, using physics interpolation assures that it will work great for everybody.
