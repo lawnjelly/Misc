@@ -117,19 +117,21 @@ Even if you forget to call this, it is not usually a problem in most situations 
 Note: It is important to call `reset_physics_interpolation()` _after_ setting the new position, rather than before, otherwise you may still see the unwanted streaking motion.
 
 ## Exceptions
-Even when you have physics interpolation switched on, there will be some situations where you will want to disable interpolation for a Node (or branch of the SceneTree). This is possible with the `set_physics_interpolated()` function which is present in all Nodes. If you for example, set this interpolated flag to false for a Node, all the children will recursively also be affected. This is usually what you want as you can easily disable interpolation for an entire subscene.
+Even when you have physics interpolation switched on, there will be some situations where you will want to disable interpolation for a Node (or branch of the SceneTree). This is possible with the `set_physics_interpolated()` function which is present in all Nodes. If you for example, set this interpolated flag to false for a Node, all the children will recursively also be affected. This means you can easily disable interpolation for an entire subscene.
 
 It you turn off the `interpolated` flag for a node, this usually means you intend to do some kind of special interpolation for that node yourself. The most common situation where you may want to do your own interpolation is Cameras.
 
 ### Cameras
-Although in many cases a Camera can use the automatic interpolation just like any other node, in some cases this can be undesirable.
+Although in many cases a Camera can just use automatic interpolation just like any other node, in some cases this can be undesirable.
 
 #### Camera movement
 Viewers are very sensitive to camera movement. A camera that realigns slightly every, say 1/10th of a second at 10tps tick rate can sometimes be noticeable, and you may want to instead do the interpolation every frame yourself.
 
-An example is to use the `look_at` function in the Camera every frame in `_process`. But there is a further problem. Given a target Node, if we use the traditional `get_global_transform()` to decide where the Camera should look, this transform will only give us the transform _at the current physics tick_. This is _not_ what we want, as the Camera will jump about on each physics tick as the target moves.
+An example of a custom approach is to use the `look_at` function in the Camera every frame in `_process` to look at a target node (for example the player).
 
-What we really want to focus the Camera on, is not the position of the target on the physics tick, but the _interpolated_ position. We can do this using the `get_global_transform_interpolated()` function.
+But there is a further problem. Given a target Node, if we use the traditional `get_global_transform()` to decide where the Camera should look, this transform will only give us the transform _at the current physics tick_. This is _not_ what we want, as the Camera will jump about on each physics tick as the target moves. Even though the Camera may be updated each frame, this does not help give smooth motion if the _target_ is only changing each physics tick.
+
+What we really want to focus the Camera on, is not the position of the target on the physics tick, but the _interpolated_ position, i.e. the position at which the target will be rendered. We can do this using the `get_global_transform_interpolated()` function.
 
 #### get_global_transform_interpolated()
 When physics interpolation is active, and you need to update a Node in `_process`, you will often want to use this function instead of the traditional `get_global_transform()` function. The difference is subtle, but generally, if you want something to display visually, the interpolated transform is what you will want. If however you want to apply game logic (which would normally be applied in `_physics_process`), you will normally want the physics position, which is what is returned and set by the standard functions `get_transform()`, `set_transform()` and `get_global_transform()`.
