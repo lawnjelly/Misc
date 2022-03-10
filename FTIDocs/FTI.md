@@ -134,14 +134,14 @@ But there is a further problem. Given a target Node, if we use the traditional `
 What we really want to focus the Camera on, is not the position of the target on the physics tick, but the _interpolated_ position, i.e. the position at which the target will be rendered. We can do this using the `get_global_transform_interpolated()` function.
 
 #### get_global_transform_interpolated()
-When physics interpolation is active, and you need to update a Node in `_process`, you will often want to use this function instead of the traditional `get_global_transform()` function. The difference is subtle, but generally, if you want something to display visually, the interpolated transform is what you will want. If however you want to apply game logic (which would normally be applied in `_physics_process`), you will normally want the physics position, which is what is returned and set by the standard functions `get_transform()`, `set_transform()` and `get_global_transform()`.
+When physics interpolation is active, on the rare occasions you need to update a Node in `_process`, you will often want to use this interpolated function instead of the traditional `get_global_transform()` function. The difference is subtle, but generally, if you want something to display visually, the interpolated transform is what you will want. If however you want to apply game logic (which would normally be applied in `_physics_process`), you will normally want the physics position, which is what is returned and set by the standard functions `get_transform()`, `set_transform()` and `get_global_transform()`.
 
 #### Mouse look
-Mouse look is a very common way of controlling Cameras. But there is a problem. Unlike keyboard input, the mouse is not polled at each physics tick. New mouse move events come in continuously, and the Camera will be expected to react and follow these on the next frame.
+Mouse look is a very common way of controlling Cameras. But there is a problem. Unlike keyboard input, the mouse is not polled at each physics tick. New mouse move events come in continuously, and the Camera will be expected to react and follow these on the next frame, rather than waiting until the next physics tick.
 
 In this situation it can be better to disable physics interpolation for the Camera node (using `set_physics_interpolated()`) and directly apply the mouse input to the rotation in the camera `_process` function, rather than `_physics_process`.
 
-Often you will want to use a combination of interpolation and non-interpolation:
+Sometimes, especially with Cameras, you will want to use a combination of interpolation and non-interpolation:
 
 * A first person camera may position the camera at a player location (perhaps using `get_global_transform_interpolated()`), but control the Camera rotation from mouse look _without_ interpolation.
 * A third person camera may similarly determine the look at (target location) of the camera using `get_global_transform_interpolated()`, but position the camera using mouse look _without_ interpolation.
@@ -168,3 +168,8 @@ The client machines are therefore not in control of timing, and the concept of p
 
 ## Conclusion
 Although physics interpolation may not be suitable in _every_ case, it should however be the first option you try, especially for 3D games. In many cases it is a no-brainer - it involves very little specific coding or changes, and will often offer a _vastly_ better experience for end users, giving professional fluid gameplay on a wide variety of hardware.
+
+# Tips
+* Even if you intend to run physics at 60tps, in order to thoroughly test your interpolation and get the smoothest gameplay, it can be a good idea to temporarily set the physics tick rate to a low value such as 10tps.
+
+This will enable you to easily see cases where you should be calling `reset_physics_interpolation()`, or where you should be using your own custom interpolation on e.g. a Camera.
