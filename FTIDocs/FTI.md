@@ -133,6 +133,37 @@ But there is a further problem. Given a target Node, if we use the traditional `
 
 What we really want to focus the Camera on, is not the position of the target on the physics tick, but the _interpolated_ position, i.e. the position at which the target will be rendered. We can do this using the `get_global_transform_interpolated()` function.
 
+Here is an example of a simple fixed Camera which follows an interpolated target:
+```
+extends Camera
+
+# Node that the camera will follow
+var _target
+
+# We will smoothly lerp to follow the target
+# rather than follow exactly
+var _target_pos : Vector3 = Vector3()
+
+func _ready() -> void:
+	# Find the target node
+	_target = get_node("../Player")
+	
+	# Turn off automatic physics interpolation,
+	# we will be doing this manually
+	set_physics_interpolated(false)
+
+
+func _process(delta: float) -> void:
+	# Find the current interpolated transform of the target
+	var tr : Transform = _target.get_global_transform_interpolated()
+	
+	# Provide some delayed smoothed lerping towards the target position 
+	_target_pos = lerp(_target_pos, tr.origin, delta)
+	
+	# Fixed camera position, but it will follow the target
+	look_at(_target_pos, Vector3(0, 1, 0))
+```
+
 #### get_global_transform_interpolated()
 When physics interpolation is active, on the rare occasions you need to update a Node in `_process`, you will often want to use this interpolated function instead of the traditional `get_global_transform()` function. The difference is subtle, but generally, if you want something to display visually, the interpolated transform is what you will want. If however you want to apply game logic (which would normally be applied in `_physics_process`), you will normally want the physics position, which is what is returned and set by the standard functions `get_transform()`, `set_transform()` and `get_global_transform()`.
 
