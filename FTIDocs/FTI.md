@@ -9,6 +9,8 @@ But there is a problem here. What happens if the physics ticks do not coincide w
 
 This problem is easier to understand if we consider an extreme scenario. If you set the physics tick rate to 10 ticks per second, in a simple game with a rendered frame rate of 60fps. If we plot a graph of the physics tick against the rendered frames, you can see that the positions of objects will appear to "jump" every 1/10th of a second, rather than giving a smooth motion. When the physics calculates a new position for a new object, it is not rendered in this position for just one frame, but for 6 frames.
 
+![](FTI1.png)
+
 This jump can be seen in other combinations of tick / frame rate as glitches, or jitter, caused by this staircasing effect due to the discrepancy between physics tick time and rendered frame time.
 
 ## What can we do about this discrepancy?
@@ -32,6 +34,8 @@ We have established that the most desirable physics / game logic arrangement for
 The answer turns out to be simple, but can be a little hard to get your head around at first.
 
 Instead of keeping track of just the current position of a physics object in the engine, we keep track of both the current position of the object, and the _previous position_ in the previous physics tick.
+
+![](FTI2.png)
 
 Why do we need the previous position (in fact the entire transform, including rotation and scaling)? Well by using a little maths magic we can interpolate what the position and rotation of the object would be between those two points.
 
