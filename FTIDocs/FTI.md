@@ -122,10 +122,16 @@ Even when you have physics interpolation switched on, there will be some situati
 It you turn off the `interpolated` flag for a node, this usually means you intend to do some kind of special interpolation for that node yourself. The most common situation where you may want to do your own interpolation is Cameras.
 
 ### Cameras
-Although in many cases a Camera can just use automatic interpolation just like any other node, in some cases this can be undesirable.
+Although in many cases a Camera can just use automatic interpolation just like any other node, for best results, especially at low physics tick rates, it is recommended that you take a manual approach to Camera interpolation.
 
-#### Camera movement
-Viewers are very sensitive to camera movement. A camera that realigns slightly every, say 1/10th of a second at 10tps tick rate can sometimes be noticeable, and you may want to instead do the interpolation every frame yourself.
+This is because viewers are very sensitive to camera movement. A camera that realigns slightly every, say 1/10th of a second at 10tps tick rate will often be noticeable, and you can get a much smoother result by moving the Camera each frame in `_process`, and following an interpolated target.
+
+#### Manual Camera Interpolation - Get that Camera off the Player!
+The very first step when performing manual Camera interpolation should be to move the Camera from being a child of e.g. a player, to making sure it is specified in _global space_, with no moving nodes above it. Technically this is because it is really easy for feedback to occur between the movement of a parent node and the movement of the Camera, which has to compensate for interpolation.
+
+You don't have to fully understand this, but you should change to this model of positioning the Camera independently on its own branch, rather than being a child of a moving object.
+
+![](camera_worldspace.png)
 
 An example of a custom approach is to use the `look_at` function in the Camera every frame in `_process` to look at a target node (for example the player).
 
