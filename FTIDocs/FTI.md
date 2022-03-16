@@ -1,5 +1,11 @@
 # Physics Interpolation
 
+## Quick Start Guide
+* Turn on physics interpolation: `project_settings/physics/common/physics_interpolation`
+* Make sure you move objects and run your game logic in `physics_process()` rather than `process()`
+* Be sure to call `reset_physics_interpolation()` on nodes _after_ you first position them, to prevent "streaking"
+
+## Introduction
 ### Physics ticks and rendered frames
 One key concept to understand in Godot is the distinction between physics ticks (sometimes referred to as iterations or physics frames), and rendered frames.
 
