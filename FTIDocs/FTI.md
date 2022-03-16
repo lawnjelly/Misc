@@ -1,6 +1,6 @@
 # Physics Interpolation
 
-## Quick Start Guide
+### Quick Start Guide
 * Turn on physics interpolation: `project_settings/physics/common/physics_interpolation`
 * Make sure you move objects and run your game logic in `physics_process()` rather than `process()`
 * Be sure to call `reset_physics_interpolation()` on nodes _after_ you first position them, to prevent "streaking"
@@ -143,6 +143,7 @@ Although physics interpolation may not be suitable in _every_ case, it should ho
 
 # Tips
 * Even if you intend to run physics at 60tps, in order to thoroughly test your interpolation and get the smoothest gameplay, it is highly recommended to temporarily set the physics tick rate to a low value such as 10tps. The gameplay may not work perfectly, but it should enable you to easily see cases where you should be calling `reset_physics_interpolation()`, or where you should be using your own custom interpolation on e.g. a Camera. Once you have these cases fixed, you can set the physics tick rate back to the desired setting.
+* The other great advantage to testing at low tick rate is you can often notice other game systems that are synchronized to the physics tick and creating glitches which you may want to work around. Typical examples include setting animation blend values, which you may want to set in `process()` and possibly interpolate manually.
 
 # Advanced
 
