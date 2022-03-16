@@ -4,6 +4,7 @@
 * Turn on physics interpolation: `project_settings/physics/common/physics_interpolation`
 * Make sure you move objects and run your game logic in `physics_process()` rather than `process()`
 * Be sure to call `reset_physics_interpolation()` on nodes _after_ you first position them, to prevent "streaking"
+* Temporarily try setting `project_settings/physics/common/physic_fps` to 10 to see the difference with and without interpolation
 
 ## Introduction
 ### Physics ticks and rendered frames
