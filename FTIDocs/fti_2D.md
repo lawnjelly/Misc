@@ -10,6 +10,8 @@ As such I will mainly discuss differences that are specific to 2D.
 * In 3D, physics interpolation is performed **independently** on the *global transform* of each 3D instance.
 * In 2D by contrast, physics interpolation is performed on the *local transform* of each 2D instance.
 
+![](physics_interpolation_mode.png)
+
 This has some implications:
 * In 3D, it is easy to turn interpolation on and off at the level of each `Spatial`, via the `physics_interpolation_mode` property in the Inspector, which can be set to `ON`, `OFF`, or `INHERITED`.
 * However this means that in 3D, pivots that occur in the scene tree (due to parent child relationships) can only be approximately interpolated over the physics tick. In most cases this will not matter, but in some situations the interpolation can look slightly "off".
