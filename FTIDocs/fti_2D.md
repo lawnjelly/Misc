@@ -1,6 +1,7 @@
 # 2D Physics Interpolation (preliminary docs)
 
-In general everything in the existing docs applies:
+In general everything in the existing docs applies, make sure to read the "quick start guide" if you are new to physics interpolation:
+
 https://docs.godotengine.org/en/3.6/tutorials/physics/interpolation/index.html
 
 As such I will mainly discuss differences that are specific to 2D.
