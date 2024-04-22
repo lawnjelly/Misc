@@ -14,7 +14,7 @@ There have been a *lot* of changes in 3.6, so as always with beta versions we ad
 
 ## Highlights
 
-Although beta 1, beta 2, beta 3 and beta 4 contained many 2D features, beta 5 adds a number of 3D features to balance things out and improve performance:
+Although beta 1, beta 2, beta 3 and beta 4 contained many 2D features, beta 5 adds a number of 3D features so there is something for everyone:
 
 ### Tighter Shadow Culling
 https://github.com/godotengine/godot/pull/84745
