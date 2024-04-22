@@ -49,9 +49,12 @@ Ansraer adds support for ORM materials, which is a standard format where occlusi
 ### Vertex cache optimization
 https://github.com/godotengine/godot/pull/86339
 
-If you look in mesh import options for meshes (e.g. obj, dae) you will find a new option for "vertex cache optimization".
-This is an ancient technique to rearrange mesh indices to take advantage of caching on the GPU, in order to speed up rendering of high poly models. GPUs have changed quite a bit since this technique was originally introduced, but testing suggests it still provides performance benefit on low end GPUs (although there may be no change to performance on high end GPUs).
-This defaults to on, but can be switched off per mesh if required. In order to take advantage with an already completed game, simply delete the hidden ".godot" folder within your project (which contains imported data), and this data will be recreated next time you open the editor.
+In the mesh import options (e.g. obj, dae) you will find a new setting for "vertex cache optimization".
+This is an ancient technique to speed up rendering of high poly meshes. It works by rearranging mesh indices in order to take advantage of vertex caching on the GPU.
+
+GPUs have admittedly changed quite a bit since this technique was originally introduced, but testing indicates it still provides significant performance benefit on low end GPUs (although there may be no change to performance on high end GPUs, it is still worth doing so that your low end users will benefit).
+
+In order to take advantage of vertex cache optimization in an already completed project, simply delete the hidden ".godot" folder (which contains imported data), and this imported data (including optimized meshes) will be recreated next time you open the editor.
 
 ### View Selected Mesh Stats
 https://github.com/godotengine/godot/pull/88207
