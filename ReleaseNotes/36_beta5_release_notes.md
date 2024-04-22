@@ -2,17 +2,15 @@
 
 It has been a while since our last beta, and admittedly 3.6 seems to have been in development *for ever* (beta 1 was over a year ago!).
 
-There are fewer developers working on 3.x branch, and Remi's time has been largely monopolized by the huge growth in contributors to 4.x, and the consequent increase in his workload. For this reason we have been trying to get maintainers more actively involved in release management, which is allowing enthusiasts to take on more of the work and get everything running in a more efficient manner.
+There are fewer developers now working on 3.x branch, and Remi's time has been largely monopolized by the huge growth in contributors to 4.x, and the consequent increase in his workload. For this reason we have been trying to get maintainers more actively involved in release management, which is allowing enthusiasts to take on more of the work and get everything running in a more efficient manner.
 
 This is great news for Godot 3, as it means in the future we will be more efficiently be able to address bugs, improve performance, and add new features, to keep Godot 4's baby brother as a force to be reckoned with.
 
-This beta represents feature freeze for 3.6.
-
-The major features are merged, and we will now concentrate on bug fixing until we reach stable. Any new features will now be scheduled for 3.7.
+This beta represents feature freeze for 3.6. We will now concentrate on bug fixing until we reach stable. Any new features will be scheduled for 3.7.
 
 ### Caution
 
-There have been a *lot* of changes in 3.6, so as always with beta versions we advise you to make a copy of your project before loading in beta 5, just in case there are problems.
+There have been a *lot* of changes in 3.6, so as always with beta versions we advise you to work on a copy of your project when loading in beta 5, just in case there are problems.
 
 ## Highlights
 
