@@ -54,6 +54,11 @@ GPUs have admittedly changed quite a bit since this technique was originally int
 
 In order to take advantage of vertex cache optimization in an already completed project, simply delete the hidden ".godot" folder (which contains imported data), and this imported data (including optimized meshes) will be recreated next time you open the editor.
 
+## 2D
+Fixes to physics interpolation, and hierarchical culling, as well as performance increases.
+
+## Editor
+
 ### View Selected Mesh Stats
 https://github.com/godotengine/godot/pull/88207
 
@@ -61,8 +66,10 @@ The 3D view menu now offers a new (long overdue) option, "view selected mesh sta
 
 This is incredibly useful information for diagnosing performance and checking imported meshes, and use in conjunction with mesh merging and LOD.
 
-## 2D
-Fixes to physics interpolation, and hierarchical culling, as well as performance increases.
+### SceneTree dock's Filter
+https://github.com/godotengine/godot/pull/67347
+
+Now supports multiple terms, filter by type or group.
 
 ### Credits
 Many thanks to all the contributors who have been continuing to work on 3.x branch.
