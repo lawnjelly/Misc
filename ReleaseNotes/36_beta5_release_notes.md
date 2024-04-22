@@ -64,3 +64,8 @@ This is incredibly useful information for diagnosing performance and checking im
 ## 2D
 Fixes to physics interpolation, and hierarchical culling, as well as performance increases.
 
+### Credits
+Many thanks to all the contributors who have been continuing to work on 3.x branch.
+
+Special mention must go to timothyqiu, thousandships, and Calinou who have really stepped up as regular 3.x reviewers as well as working on their own PRs, and of course Remi who has been instrumental in managing and reviewing.
+
