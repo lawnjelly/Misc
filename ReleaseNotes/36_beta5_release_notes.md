@@ -42,7 +42,7 @@ As well as allowing you to optimize existing maps and moving objects, this also 
 ### ORM Materials
 https://github.com/godotengine/godot/pull/76023
 
-Ansraer adds support for ORM materials, which is a standard format where occlusion, roughness and metallic are combined into a single texture. This means these standard PBR textures can be used without modification, rendering performance will likely be increased where they are used (compared to the old workflow).
+Ansraer adds support for ORM materials, which is a standard format where occlusion, roughness and metallic are combined into a single texture. This means these standard PBR textures can be used without modification, and rendering performance will likely be increased where they are used (compared to the old workflow).
 
 ### Vertex cache optimization
 https://github.com/godotengine/godot/pull/86339
