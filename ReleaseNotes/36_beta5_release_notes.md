@@ -1,4 +1,4 @@
-Dev snapshot: Godot 3.6 beta 5
+# Dev snapshot: Godot 3.6 beta 5
 
 It has been a while since our last beta, and admittedly 3.6 seems to have been in development *for ever* (beta 1 was over a year ago!).
 
@@ -34,6 +34,7 @@ The new LOD node provides simple but powerful LOD capabilities, allowing the eng
 
 ### Mesh Merging
 https://github.com/godotengine/godot/pull/61568
+
 https://docs.godotengine.org/en/3.6/tutorials/3d/merge_groups.html
 
 Two years in the making, Godot 3.6 now offers a comprehensive system for mesh merging, both at design time and at runtime. OpenGL can be severely bottlenecked by drawcalls and state changes when drawing lots of objects. Now you can blast through these barriers and potentially render any number of similar objects in a single drawcall.
@@ -59,8 +60,6 @@ The 3D view menu now offers a new (long overdue) option, "view selected mesh sta
 
 This is incredibly useful information for diagnosing performance and checking imported meshes, and use in conjunction with mesh merging and LOD.
 
-
-Of course beta 5 also includes 2 improvements:
-
+## 2D
 Fixes to physics interpolation, and hierarchical culling, as well as performance increases.
 
