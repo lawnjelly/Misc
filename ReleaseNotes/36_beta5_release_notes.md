@@ -28,6 +28,8 @@ This happens automatically.
 ### Discrete Level of Detail (LOD)
 https://github.com/godotengine/godot/pull/85437
 
+![alt text](img/lod_node_scene.webp)
+
 The new LOD node provides simple but powerful LOD capabilities, allowing the engine to automatically change visual representation of objects based on the distance from the camera. An example would be simplifying trees in the distance in open world games.
 
 ### Mesh Merging
