@@ -37,6 +37,8 @@ https://github.com/godotengine/godot/pull/61568
 
 https://docs.godotengine.org/en/3.6/tutorials/3d/merge_groups.html
 
+![alt text](img/merge_group_house.webp)
+
 Two years in the making, Godot 3.6 now offers a comprehensive system for mesh merging, both at design time and at runtime. OpenGL can be severely bottlenecked by drawcalls and state changes when drawing lots of objects. Now you can blast through these barriers and potentially render any number of similar objects in a single drawcall.
 
 As well as allowing you to optimize existing maps and moving objects, this also makes new procedural game types possible, as thousands of procedurally placed objects can be merged at runtime so as to render efficiently (think vegetation, rocks, furniture, houses etc).
