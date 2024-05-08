@@ -64,6 +64,8 @@ Fixes to physics interpolation, and hierarchical culling, as well as performance
 ### View Selected Mesh Stats
 https://github.com/godotengine/godot/pull/88207
 
+![alt text](img/view_mesh_stats.webp)
+
 The 3D view menu now offers a new (long overdue) option, "view selected mesh stats". This will display total triangle counts, vertex counts and index counts for the selected meshes (and multimeshes).
 
 This is incredibly useful information for diagnosing performance and checking imported meshes, and use in conjunction with mesh merging and LOD.
