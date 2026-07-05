@@ -252,6 +252,50 @@ def qdump__Vector(d, value):
     except Exception as e:
         d.putValue("Vector (unparsed)")
 
+def qdump__Span(d, value):
+    try:
+        # 1. Fetch internal pointer mapping and array boundaries
+        # Update these keys ("data_ptr" and "size") if your implementation varies
+        ptr = value["_ptr"]
+        size = int(value["_len"])
+
+        # Prevent NullPointer issues if the view is initialized as empty
+        if not ptr or int(ptr) == 0 or size == 0:
+            d.putValue("empty Span")
+            d.putNumChild(0)
+            return
+
+        # 2. Protection Shield against garbage or uninitialized stack data
+        if size < 0 or size > 1000000:
+            d.putValue("Span [invalid or uninitialized size]")
+            d.putNumChild(0)
+            return
+
+        # 3. Dynamic Type Extraction: Automatically resolve "T" from Span<T>
+        # This forces Qt Creator to display sub-items as real objects instead of void* blobs
+        element_type = value.type.templateArgument(0)
+        typed_ptr = ptr.cast(element_type.pointer())
+
+        d.putValue(f"Span [size: {size}]")
+        
+        # 4. Freeze-Proof UI Safeguards
+        # Cap visual layouts to 1000 visible rows to prevent Qt Creator freezing
+        display_size = min(size, 256)
+        d.putNumChild(display_size)
+
+        if d.isExpanded() and display_size > 0:
+            with Children(d, numChild=display_size, maxNumChild=256):
+                for i in range(display_size):
+                    # Elements are rendered based on their original template type rules
+                    d.putSubItem(f"[{i}]", typed_ptr[i])
+                
+                # Append visual indicator if data streams past the safety threshold
+                if size > display_size:
+                    d.putSubItem(f"... and {size - display_size} more sliced elements", None)
+
+    except Exception as e:
+        d.putValue("Span (unparsed)")
+
 ###################### SIMD
 
 def qdump_____m128(d, value):
